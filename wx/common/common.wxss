@@ -1,0 +1,4 @@
+.list{
+  color: aqua;
+  background-color: burlywood;
+}

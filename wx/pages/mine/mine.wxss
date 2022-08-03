@@ -1,0 +1,40 @@
+.item{
+  display: flex;
+  padding: 20rpx;
+  background-color:pink;
+  align-items: center;
+}
+.text_position{
+  margin-left: 240rpx;
+  font-size: 24rpx;
+  color: gray;
+}
+.right_arrow{
+  border: solid black;
+  border-width: 0 6rpx 6rpx 0;
+  padding: 6rpx;
+  position: absolute;
+  right: 30rpx;
+  transform: rotate(-45deg);
+  /* -webkit-transform: rotate(-45deg); */
+}
+.header{
+  height: 400rpx;
+  background-color: yellowgreen;
+}
+.login-out{
+  font-size: 35rpx;
+  color: blue;
+  margin-top: 20rpx;
+}
+.root{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.touxiang{
+  width: 200rpx;
+  height: 200rpx;
+  border-radius: 50%;
+  margin-top: 50rpx;
+}

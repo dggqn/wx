@@ -1,0 +1,37 @@
+<view class="header">
+  <button wx:if="{{!userInfo}}" bindtap="login">一键登录</button>
+  <view wx:if="{{userInfo}}" class="root">
+    <image class="touxiang" src="{{userInfo.avatarUrl}}"></image>
+    <text class="nicheng">{{userInfo.nickName}}</text>
+    <text class="login-out" bindtap="loginOut">退出登录</text>
+  </view>
+</view>
+<view class="body">
+  <view class="item">
+    <text class="">我的基础信息</text>
+      <text wx:if="{{finished}}" style="color: red;font-weight: bold;" class="text_position">待完善</text>
+      <view class="right_arrow"></view>
+  </view>
+  <view class="item">
+    <text class="">我的基础信息</text>
+      <text wx:if="{{finished2}}" class="text_position">添加或修改收件地址</text>
+      <view class="right_arrow"></view>
+  </view>
+  <view class="item">
+    <text class="">我的基础信息</text>
+      <text wx:if="{{finished3}}" class="text_position">添加或修改联系人</text>
+      <view class="right_arrow"></view>
+  </view>
+  <view class="item">
+    <text class="">我的基础信息</text>
+      <view class="right_arrow"></view>
+  </view>
+  <view class="item">
+    <text class="">我的基础信息</text>
+      <view class="right_arrow"></view>
+  </view>
+  <view class="item">
+    <text class="">我的基础信息</text>
+      <view class="right_arrow"></view>
+  </view>
+</view>

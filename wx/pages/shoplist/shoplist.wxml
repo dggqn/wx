@@ -1,0 +1,5 @@
+<button bindtap="getList">数据</button>
+<view wx:for="{{list}}" wx:key="id">
+<image src="{{item.url}}"></image>
+<text>{{item.text}}</text>
+</view>

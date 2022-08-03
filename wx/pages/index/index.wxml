@@ -1,0 +1,50 @@
+<!--index.wxml-->
+<view class="into">
+<button bindtap="start">btn1</button>
+<text>计时开始: {{n}}</text>
+<button bindtap="end">btn2</button>
+  <text bindtap="intoWorld">into</text>
+  <navigator url="/pages/record/record?name=zs&age=18">go</navigator>
+</view>
+<button open-type="getUserInfo" bindtap="handleGetUserInfo">hhh</button>
+<my-test1></my-test1>
+<view class="container">
+  <view class="userinfo">
+    <block wx:if="{{canIUseOpenData}}">
+      <view class="userinfo-avatar" bindtap="bindViewTap">
+        <open-data type="userAvatarUrl"></open-data>
+      </view>
+      <open-data type="userNickName"></open-data>
+    </block>
+    <block wx:elif="{{!hasUserInfo}}">
+      <button wx:if="{{canIUseGetUserProfile}}" bindtap="getUserProfile"> 获取头像昵称 </button>
+      <button wx:elif="{{canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+      <view wx:else> 请使用1.4.4及以上版本基础库 </view>
+    </block>
+    <block wx:else>
+      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+    </block>
+  </view>
+  <button type="primary" bindtap="btn1">+1</button>
+  <button type="primary" bindtap="btn2" data-info="{{2}}">+2</button>
+  <input type="text" value="{{msg}}" bindinput="inputchange"  />
+  <view class="usermotto" bindtap="getRecord">
+    <button class="user-motto">{{motto >= 5 ? 'Press' : ''}}</button>
+  </view>
+</view>
+<view class="image_view">
+  <image src="{{seturl}}"></image>
+  <image src="{{seturl2}}"></image>
+  <image src="{{seturl3}}"></image>
+</view>
+<view class="image_view">
+  <image src="{{seturl}}"></image>
+  <image src="{{seturl2}}"></image>
+  <image src="{{seturl3}}"></image>
+</view>
+<view class="image_view">
+  <image src="{{seturl}}"></image>
+  <image src="{{seturl2}}"></image>
+  <image src="{{seturl3}}"></image>
+</view>

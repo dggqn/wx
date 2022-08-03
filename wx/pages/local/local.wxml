@@ -1,0 +1,28 @@
+<view class="header">
+  <swiper class="swiper-container" autoplay interval="2000" circular indicator-dots indicator-color="white" indicator-active-color="gray">
+  <swiper-item>
+    <image src="https://pic.3gbizhi.com/2019/1004/20191004022220800.jpeg"></image>
+  </swiper-item>
+  <swiper-item>
+    <image src="http://img.mm4000.com/file/5/cf/b52b962167.jpg"></image>
+  </swiper-item>
+  <swiper-item>
+    <image src="http://img.mm4000.com/file/8/e8/9571f515a7.jpg"></image>
+  </swiper-item>
+</swiper>
+</view>
+<view class="body">
+  <navigator class="view" wx:for="{{menu}}" wx:key="index" url="/pages/shoplist/shoplist?id={{index}}&name={{item.id}}">
+    <image class="image" src="{{item.url}}"></image>
+    <text class="text">{{item.id}}</text>
+  </navigator>
+</view>
+<view class="footer">
+  <view>
+    <text>商家推荐</text>
+  </view>
+  <view>
+    <text>交友论坛</text>
+  </view>
+</view>
+<navigator open-type="navigateBack">后退</navigator> 

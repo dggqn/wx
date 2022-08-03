@@ -1,0 +1,54 @@
+/* pages/list/list.wxss */
+@import "../../common/common.wxss";
+.father{
+  background-color: white;
+  display: flex;
+  justify-content: space-evenly;
+}
+.father view{
+  width: 100px;
+  height: 100px;
+  line-height: 100px;
+  text-align: center;
+}
+.son1{
+  background-color: red;
+}
+.son2{
+  background-color: greenyellow;
+}
+.son3{
+  background-color: blue;
+}
+.mother{
+  margin: auto;
+  margin-top: 50px;
+  width: 300px;
+  height: 120px;
+  border: 1px blue solid;
+}
+.mother view{
+  width: 300px;
+  height: 100px;
+  line-height: 100px;
+  text-align: center;
+}
+.swiper-container{
+  border: solid 10px blue;
+  height: 150px;
+  margin-top: 50px;
+}
+.item{
+  height: 100%;
+  line-height: 150px;
+  text-align: center;
+}
+swiper-item:nth-child(1) .item{
+  background-color: powderblue;
+}
+swiper-item:nth-child(2) .item{
+  background-color: pink;
+}
+swiper-item:nth-child(3) .item{
+  background-color: purple;
+}

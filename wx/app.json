@@ -1,0 +1,58 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/logs/logs",
+    "pages/record/record",
+    "pages/list/list",
+    "pages/local/local",
+    "pages/shoplist/shoplist",
+    "pages/home/home",
+    "pages/gift/gift",
+    "pages/mine/mine",
+    "components/test/test"
+  ],
+  "window": {
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#2b4b6b",
+    "navigationBarTitleText": "DX小程序",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#efefef",
+    "onReachBottomDistance": 50
+  },
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "index",
+        "iconPath": "/img/编辑.png",
+        "selectedIconPath": "/img/编辑 (1).png"
+      },
+      {
+        "pagePath": "pages/list/list",
+        "text": "list",
+        "iconPath": "/img/订单.png",
+        "selectedIconPath": "/img/订单 (1).png"
+      },
+      {
+        "pagePath": "pages/home/home",
+        "text": "首页",
+        "iconPath": "/img/订单.png",
+        "selectedIconPath": "/img/订单 (1).png"
+      },
+      {
+        "pagePath": "pages/gift/gift",
+        "text": "礼品卡",
+        "iconPath": "/img/订单.png",
+        "selectedIconPath": "/img/订单 (1).png"
+      },
+      {
+        "pagePath": "pages/mine/mine",
+        "text": "我的",
+        "iconPath": "/img/订单.png",
+        "selectedIconPath": "/img/订单 (1).png"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

@@ -1,0 +1,9 @@
+<!--pages/audio/audio.wxml-->
+<view class="container">
+<button bindtap="backMain">导航至主页</button>
+  <button bindtap='record'>开始录音</button>
+  <button bindtap='upload'>开始上传</button>  
+  <text>pages/audio/audio.wxml</text>
+</view>
+
+<navigator open-type="navigateBack">走</navigator>

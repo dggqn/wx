@@ -1,0 +1,61 @@
+<!--Q-->
+<block>
+  <view class="father">
+  <view class="son1 son">
+    <text selectable>{{turn.toUpper(a)}}</text>
+  </view>
+  <view class="son2 son">
+    <text selectable>{{turn.toUpper(b)}}</text>
+  </view>
+  <view class="son3 son">
+    <text selectable>{{turn.toUpper(c)}}</text>
+  </view>
+</view>
+<scroll-view class="mother" scroll-y>
+  <view class="son1 son">
+    <rich-text nodes="<h1 style='color:black;'>{{a+b+c}}</h1>"></rich-text>
+  </view>
+  <view class="son2 son">
+    <text>{{a+b+c}}</text>
+  </view>
+  <view class="son3 son">
+    <text>{{a+b+c}}</text>
+  </view>
+</scroll-view>
+<swiper class="swiper-container" indicator-dots indicator-color="white"
+indicator-active-color="gray" autoplay interval="1000" circular>
+<!-- 第一个图 -->
+  <swiper-item>
+  <view class="item">
+    <image src="/img/焦德贤_411282199901084517.jpg" mode="scaleToFill"></image>
+  </view>
+  </swiper-item>
+  <!-- 第二个图 -->
+  <swiper-item>
+    <view class="item">B</view>
+  </swiper-item>
+  <!-- 第三个图 -->
+  <swiper-item>
+    <view class="item">C</view>
+  </swiper-item>
+</swiper>
+</block>
+<view class="list" wx:for="{{arr1}}" wx:key="index">
+  索引是：{{index}} 当前项是: {{item}}
+</view>
+<view class="list" wx:for="{{userList}}" wx:key="id">
+  索引是：{{index}} 当前项是: {{item.name}}
+</view>
+<button bindtap="sendRequest">请求</button>
+
+<view>{{count}}</view>
+<view>{{m2.toLower(country)}}</view>
+<button bindtap="add">+1</button>
+<wxs module="turn">
+  module.exports.toUpper = function(str){
+    return str.toUpperCase()
+  }
+</wxs>
+<wxs src="../../utils/tools.wxs" module="m2">
+
+</wxs>
