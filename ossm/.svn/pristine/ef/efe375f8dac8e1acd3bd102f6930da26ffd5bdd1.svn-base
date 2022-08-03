@@ -1,0 +1,115 @@
+<!--pages/applyPages/signInvoiceDetail/signInvoiceDetail.wxml-->
+<view class="sign-detail-container container flex-column">
+    <!-- 状态 -->
+    <view class="public-apply-detail-top flex-align-items-center">
+        <view class="detail-top-l flex-1">
+            <view class="top-l-status">{{orderBaseInfo.statusName}}</view>
+            <view class="top-l-tip">{{orderBaseInfo.supplierName}} 派送</view>
+        </view>
+        <view class="detail-top-r flex-1">
+            <view class="top-r-id">ID:{{orderBaseInfo.ordersNo}}</view>
+            <view class="top-r-date">创建日期：{{orderBaseInfo.createTime}}</view>
+        </view>
+    </view>
+
+    <!-- 领取步骤 -->
+    <view class="collar-steps flex-align-items-center">
+        <view class="step-box flex-1">
+            <view class="step">1</view>
+            <view class="step-text ellipsis-one">扫描耗材清单/资产编码</view>
+        </view>
+        <view class="step-box flex-1">
+            <view class="step">2</view>
+            <view class="step-text">清点物品</view>
+        </view>
+        <view class="step-box flex-1">
+            <view class="step">3</view>
+            <view class="step-text">确认签收</view>
+        </view>
+    </view>
+
+    <view class="sign-detail-main flex-1 overflow-auto">
+        <!-- 物流详情 -->
+        <view class="delivery-info">
+            <view class="delivery-top">
+                物流详情
+            </view>
+            <view class="delivery-detail flex">
+                <view class="detail-l flex-1">
+                    <view class="detail-status">
+                        供应商({{orderBaseInfo.supplierName}})已经将货物发出,
+                        {{orderBaseInfo.thirdPartyName?'物流公司:'+orderBaseInfo.thirdPartyName+',':''}}
+                        {{orderBaseInfo.thirdPartyNo?'快递单号:'+orderBaseInfo.thirdPartyNo+',':''}}
+                        请保持手机畅通
+                    </view>
+<!--                    <view class="detail-time">12月19日0:00-12月24日23:59</view>-->
+                </view>
+                <view class="detail-r">
+
+                </view>
+            </view>
+            <!--
+            <view class="address-info-box">
+                <view class="address-info flex-align-items-center">
+                    <view class="address-info-l">
+                        <text class="iconfont iconzengjia_huaban1"></text>
+                    </view>
+                    <view class="address-info-c flex-1">
+                        <view class="person">
+                            <text class="name">章三  </text>
+                            <text class="tel">1311311331  </text>
+                            <text class="default">默认</text>
+                        </view>
+                        <view class="address-detail">
+                            上海是  浦东新区  陶飞国际广场
+                        </view>
+                    </view>
+                    <view class="address-info-l">
+                        <text class="iconfont iconyoujiantou-new-01"></text>
+                    </view>
+                </view>
+            </view>
+            -->
+        </view>
+        <!-- tab -->
+        <view class="main-tabs">
+            <text class="tab active" data-tab="consumables" bindtap="changeDetailTab">耗材（{{consumablesList.length}}）</text>
+        </view>
+        <!-- 耗材列表 -->
+        <view class="consum-container" hidden="{{showDetailTab!='consumables'}}" wx:if="{{consumablesList.length>0}}">
+            <view class="public-consum-item {{consumablesList[0].statusCode=='received'?'consum-has-sign-item':''}}">
+                <view class="item-title flex">
+                    <text class="flex-1">耗材明细</text>
+                    <text>总数量：{{consumablesTotalCount}}</text>
+                </view>
+                <view class="item-content">
+                    <view class="content-title flex">
+                        <view class="content-name flex-1">物品名称</view>
+                        <view class="content-spec">单位</view>
+                        <view class="content-num">数量</view>
+                        <view class="content-num">签收数量</view>
+                    </view>
+                    <view class="content-list" wx:for="{{consumablesList}}" wx:key="index">
+                        <view class="list-item flex">
+                            <view class="content-name flex-1">{{item.name}}</view>
+                            <view class="content-spec">{{item.stockUnit}}</view>
+                            <view class="content-num">{{item.totalCount}}</view>
+                            <view class="content-num">{{item.receiveCount}}</view>
+                        </view>
+                    </view>
+<!--                    <view class="content-btn" wx:if="{{orderBaseInfo.statusCode=='wait_receive' && consumablesList[0].statusCode=='wait_receive'}}">-->
+<!--                        <text class="operate-btn" bindtap="cancelConsumDetail">取消领用</text>-->
+<!--                    </view>-->
+                </view>
+            </view>
+        </view>
+    </view>
+    <!-- 底部按钮 -->
+    <view class="collar-bottom" wx:if="{{orderBaseInfo.statusCode=='wait_receive'}}">
+        <view class="bottom-operates flex">
+            <view class="flex-1 operate-r" wx:if="{{consumablesTotalCount>0 && canSignFlag}}" hidden="{{showDetailTab!='consumables'}}"
+                  bindtap="goReceipt">去签收</view>
+            <view class="flex-1 operate-r" wx:if="{{!canSignFlag}}" bindtap="showDetailMsg">{{msg}}</view>
+        </view>
+    </view>
+</view>

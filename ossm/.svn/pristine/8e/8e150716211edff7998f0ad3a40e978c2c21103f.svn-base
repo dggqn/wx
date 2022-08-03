@@ -1,0 +1,149 @@
+<!--pages/applyPages/signInvoiceDetail/signInvoiceDetail.wxml-->
+<view class="sign-detail-container container flex-column">
+    <!-- 状态 -->
+    <view class="public-apply-detail-top flex-align-items-center">
+        <view class="detail-top-l flex-1">
+            <view class="top-l-status">{{orderBaseInfo.statusName}}</view>
+            <view class="top-l-tip" wx:if="{{orderBaseInfo.receiptType.code=='receive'}}">{{orderBaseInfo.stockroomName}} 领取</view>
+            <view class="top-l-tip" wx:if="{{orderBaseInfo.receiptType.code=='deliver'}}">{{orderBaseInfo.supplierName}} 派送</view>
+        </view>
+        <view class="detail-top-r flex-1">
+            <view class="top-r-id">ID:{{orderBaseInfo.ordersNo}}</view>
+            <view class="top-r-date">创建日期：{{orderBaseInfo.createTime}}</view>
+        </view>
+    </view>
+
+    <view class="sign-detail-main flex-1 overflow-auto">
+        <!-- 物流详情 -->
+        <view class="delivery-info" wx:if="{{orderBaseInfo.receiptType.code=='deliver'}}">
+            <view class="delivery-top">
+                物流详情
+            </view>
+            <view class="delivery-detail flex">
+                <view class="detail-l flex-1">
+                    <view class="detail-status flex">
+                        <!-- {{orderBaseInfo.thirdPartyName?'物流公司:'+orderBaseInfo.thirdPartyName+',':''}}
+                        {{orderBaseInfo.thirdPartyNo?'快递单号:'+orderBaseInfo.thirdPartyNo+',':''}} -->
+                        <view><image class="location-img" src="{{aliyunBaseImgUrlPre}}images/location-img.png" mode="widthFix"></image></view>
+                        <view class="flex-direction-between details-box">
+                            <view class="flex">
+                                <view class="logistics-name">张三峰</view>
+                                <view class="logistics-phono">18028924893</view>
+                                <view wx:if="true" class="tips">默认</view>
+                            </view>
+                            <view class="logistics-address">
+                                <text>上海市 浦东新区 陆家嘴 陆家嘴 陆家嘴100号</text>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <!-- tab -->
+        <view class="main-tabs">
+            <text class="tab {{showDetailTab=='consumables'?'active':''}}" data-tab="consumables" bindtap="changeDetailTab">耗材（{{consumablesList.length}}）</text>
+            <text class="tab {{showDetailTab=='fixed'?'active':''}}" data-tab="fixed" bindtap="changeDetailTab">资产（{{fixedList.length}}）</text>
+        </view>
+        <!-- 耗材列表 -->
+        <view class="consum-container" hidden="{{showDetailTab!='consumables'}}"> <!-- wx:if="{{consumablesList.length>0}}" -->
+            <view class="item-title flex">
+                    <text class="flex-1">耗材明细</text>
+                    <text>签收总数：{{consumablesTotalCount}}</text>
+            </view>
+            <view class="public-consum-item {{consumablesList[0].statusCode=='receipted'?'consum-has-sign-item':''}}">
+                <view class="public-assets-list">
+                    <!-- wx:for="{{fixedList}}" wx:key="index" -->
+                <view class="list-item" style="margin:0">
+                    <view class="item-title flex-space-between">
+                        <view class="flex-1 title-name">{{'申请数量: 5'}}</view>
+                        <view wx:if="{{index%2 === 0}}" class="title-tips blue">已签收</view>
+                        <view wx:else class="title-tips violet">已取消</view>
+                        <!-- <view class="title-num" wx:if="{{item.assetBarcode}}">资产编号: {{item.assetBarcode}}</view> -->
+                    </view>
+                    <!-- {{item.statusCode=='receipted'?'assets-has-sign-item':''}} -->
+                    <view class="item-content  flex">
+                        <view class="content-img img-box">
+                            <image mode="aspectFit" src="{{item.displayImgUrl}}"></image>
+                        </view>
+                        <view class="content-detail flex-1 flex-direction-between">
+                            <view>
+                                <text class="type">{{'联想笔记本电脑联想笔记本电脑联想笔记本电脑电脑电脑电脑'}}</text>
+                            </view>
+                            <view>
+                              <view class="flex">
+                                  <view class="separate">规格:</view>
+                                  <view><text>pro123456789</text></view>
+                              </view>
+                              <view class="flex content-detail-m-t">
+                                  <view class="separate">单位:</view>
+                                  <view><text>台</text></view>
+                              </view>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="content-btn-box">
+                        <button class="content-btn" data-type="consumables" bindtap="jumpSeleteType">申请售后</button>
+                    </view>
+                </view>
+            </view>
+                <!-- <view class="item-content">
+                    <view class="content-title flex">
+                        <view class="content-name flex-1">物品名称</view>
+                        <view class="content-spec">规格</view>
+                        <view class="content-num">领用数量</view>
+                        <view class="content-num">签收数量</view>
+                    </view>
+                    <view class="content-list" wx:for="{{consumablesList}}" wx:key="index">
+                        <view class="list-item flex">
+                            <view class="content-name flex-1">{{item.name}}</view>
+                            <view class="content-spec">{{item.specificationName}}</view>
+                            <view class="content-num">{{item.totalCount}}</view>
+                            <view class="content-num">{{item.receiveCount}}</view>
+                        </view>
+                    </view>
+                </view> -->
+            </view>
+        </view>
+        <!-- 资产容器 -->
+        <view class="assets-container" hidden="{{showDetailTab!='fixed'}}" wx:if="{{fixedList.length>0}}">
+            <view class="public-assets-total flex">
+                <view class="flex-1">资产明细</view>
+                <view>签收总数：{{fixedTotalCount}}</view>
+            </view>
+            <view class="public-assets-list">
+                <view class="list-item" wx:for="{{fixedList}}" wx:key="index">
+                    <view class="item-title flex-space-between">
+                        <view class="flex-1 title-name">{{'资产ID:3825732852389532'}}</view>
+                        <view wx:if="{{index%2 === 0}}" class="title-tips blue">已签收</view>
+                        <view wx:else class="title-tips violet">已取消</view>
+                        <!-- <view class="title-num" wx:if="{{item.assetBarcode}}">资产编号: {{item.assetBarcode}}</view> -->
+                    </view>
+                    <!-- {{item.statusCode=='receipted'?'assets-has-sign-item':''}} -->
+                    <view class="item-content  flex">
+                        <view class="content-img img-box">
+                            <image mode="aspectFit" src="{{item.displayImgUrl}}"></image>
+                        </view>
+                        <view class="content-detail flex-1 flex-direction-between">
+                          <view>
+                              <text class="type">{{'联想笔记本电脑联想笔记本电脑联想笔记本电脑电脑电脑电脑'}}</text>
+                          </view>
+                          <view>
+                          <view class="flex">
+                            <view class="separate">规格:</view>
+                            <view><text>pro123456789</text></view>
+                          </view>
+                          <view class="flex content-detail-m-t">
+                            <view class="separate">单位:</view>
+                            <view><text>台</text></view>
+                          </view>
+                          </view>
+                        </view>
+                    </view>
+                    <view class="content-btn-box">
+                        <button class="content-btn" data-type="assets" bindtap="jumpSeleteType">申请售后</button>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

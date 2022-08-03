@@ -1,0 +1,157 @@
+<!--pages/repair/RepairmanPage/RepairOrder/RepairOrder.wxml-->
+<view class="container overflow-auto">
+  <view class="repair-declare-top">
+    <!-- tab切换 -->
+    <!-- 
+     <view class="top-tabs flex-align-items-center">
+      <view data-tab='1' class="tab flex-1 {{tab=='1'?'active':''}}" bindtap="changeTab">
+        <text>待接单</text>
+        <text wx:if="{{tab==='1'}}" class="bottom-line"></text>
+      </view>
+      <view data-tab='2' class="tab flex-1 {{tab=='2'?'active':''}}" bindtap="changeTab">
+        <text>已接单</text>
+        <text wx:if="{{tab==='2'}}" class="bottom-line"></text>
+      </view>
+    </view>
+    -->
+  </view>
+
+  <!-- 待接单 -->
+  <view class="apply-repair-list" wx:if="{{tab == '1'}}">
+    <view class="repair-list-box">
+      <view class="list-item" wx:for="{{repairList}}" wx:key="index" bindtap="goDetail" data-itemDetail="{{item}}">
+        <view wx:if="{{item.status=='1'}}" class="item-status">待分配</view>
+        <view wx:if="{{item.status=='2'}}" class="item-status">待接受</view>
+        <view wx:if="{{item.status=='3'}}" class="item-status">已接受</view>
+        <view wx:if="{{item.status=='5'}}" class="item-status-accept">已完成</view>
+        <view class="item-title">编号：{{item.taskId}}</view>
+        <view class="item-detail flex">
+          <view class="item-detail-img img-box">
+            <image class="img" src="{{aliyunBaseImgUrlPre}}images/default.png"></image>
+            <!-- <image class="img" src="{{item.displayImgUrl}}"></image> -->
+          </view>
+          <view class="item-detail-box flex-1">
+            <view class="detail-type">
+              <text class="type-l">维修资产：</text>
+              <text class="type-r">{{item.assetsName}}</text>
+            </view>
+            <view class="detail-type">
+              <text class="type-l">维修地址：</text>
+              <text class="type-r">{{item.taskPostion}}</text>
+            </view>
+            <view class="detail-type">
+              <text class="type-l">报修时间：</text>
+              <text class="type-r">2022-3-17{{item.createTime}}</text>
+            </view>
+            <view class="detail-problem">
+              <text class="problem-l">问题：</text>
+              <text class="problem-r">{{item.taskDescription}}</text>
+            </view>
+          </view>
+        </view>
+        <block wx:if="{{item.status=='1'}}">
+          <view class="item-operate" catchtap="goDetail" data-itemDetail="{{item}}">
+            <text class="operate-btn">去分配</text>
+          </view>
+        </block>
+        <block wx:if="{{item.status=='2' && item.userId  &&  item.userId == userInfo.userId}}">
+          <view class="item-operate" catchtap="">
+            <text class="operate-btn">待接受</text>
+          </view>
+        </block>
+        <block wx:if="{{item.status=='3'}}">
+          <view class="item-operate" catchtap="">
+            <text class="operate-btn">待完成</text>
+          </view>
+        </block>
+      </view>
+    </view>
+  </view>
+
+  <!-- 已接单 -->
+
+  <!-- <view class="apply-repair-list" wx:if="{{tab == '2'}}">
+    <view class="repair-list-box">
+      <view class="list-item" wx:for="{{repairList}}" wx:key="index" bindtap="goDetail" data-itemDetail="{{item}}">
+        <view wx:if="{{item.status=='3'}}" class="item-status-accept">处理中</view>
+        <view wx:if="{{item.status=='5'}}" class="item-status-ok">已完成</view>
+        <view wx:else class="item-status">待处理</view>
+        <view class="item-title">编号：{{item.taskId}}</view>
+        <view class="item-detail flex">
+          <view class="item-detail-img img-box">
+            <image class="img" src="{{aliyunBaseImgUrlPre}}images/default.png"></image>
+          </view>
+          <view class="item-detail-box flex-1">
+            <view class="detail-type">
+              <text class="type-l">维修资产：</text>
+              <text class="type-r">{{item.assetsName}}</text>
+            </view>
+            <view class="detail-type">
+              <text class="type-l">维修地址：</text>
+              <text class="type-r">{{item.taskPostion}}</text>
+            </view>
+            <view class="detail-type">
+              <text class="type-l">报修时间：</text>
+              <text class="type-r">2022-3-17{{item.createTime}}</text>
+            </view>
+            <view class="detail-problem">
+              <text class="problem-l">问题：</text>
+              <text class="problem-r">{{item.taskDescription}}</text>
+            </view>
+          </view>
+        </view>
+        <block wx:if="{{item.status=='5'}}">
+          <view class="item-operate" catchtap="">
+            <text class="operate-btn">已完成</text>
+          </view>
+        </block>
+        <block wx:else>
+          <view class="item-operate" catchtap="goDetail" data-itemDetail="{{item}}">
+            <text class="operate-btn">去处理</text>
+          </view>
+        </block>
+      </view>
+    </view>
+  </view> -->
+
+  <!-- <view class="repair-declare-apply" wx:if="{{tab == '2'}}">
+    <view class="member-top">
+      <view class="member-title">设置</view>
+      <view class="member-list">
+        <van-cell-group inset >
+          <van-cell title="添加维修员" border="true">
+            <van-icon slot="right-icon" name="plus"  class="custom-icon"/>
+          </van-cell>
+          <van-cell title="是否自动派分任务" label="自动分派给所有维修员">
+            <van-switch checked="{{ checked }}" size="18px" active-color="#5766DE" checked="true"/>
+          </van-cell>
+        </van-cell-group>
+      </view>
+    </view>
+    <view class="member-main">
+      <view class="member-title">维修员列表</view>
+      <view class="member-list">
+        <view class="item-center flex-align-items-center" wx:for="{{5}}">
+          <view class="center-l flex-1 flex">
+            <view class="center-l-head img-box">
+              <image src="https://img2.baidu.com/it/u=4213528812,2252736552&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500" class="img"></image>
+            </view>
+            <view class="center-detail flex-1 flex-shink-1">
+              <view class="detail-t">
+                <text class="detail-status">李扬</text>
+              </view>
+              <view class="detail-intro">
+                联系电话 : 18362561665
+              </view>
+            </view>
+          </view>
+          <view class="center-r">
+            <view class="">
+              <van-checkbox value="{{ checked }}" bind:change="onChange"></van-checkbox>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view> -->
+</view>

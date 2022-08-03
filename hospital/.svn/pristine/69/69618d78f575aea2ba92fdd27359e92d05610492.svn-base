@@ -1,0 +1,271 @@
+<!--miniprogram/pages/applyPages/applyRes/applyRes.wxml-->
+<view class="container flex-column">
+  <view class="apply-res-top flex-align-items-center">
+    <view class="top-search flex-1">
+      <input class="search-ipt" placeholder="搜索物品" placeholder-class="placeholder-style"
+             bindinput="keywordChange" bindconfirm="initCurrentAndSelectModelList" value="{{queryCond.keyword}}">
+        <text class="iconfont iconsousuo-icon-01" bindtap="initCurrentAndSelectModelList"></text>
+      </input>
+    </view>
+    <view class="top-action-sheet">
+      <text bindtap="applyTemplate"><text class="iconfont icon1-01"></text>申领模板</text>
+    </view>
+    <view class="top-action-sheet" bindtap="showCategeryPop">
+      {{categoryName}}<text class="iconfont iconxiajiantou-new-01"></text>
+    </view>
+  </view>
+  <!-- 列表 -->
+  <view class="flex-1 public-list-box">
+    <view class="public-list" style="padding: 0">
+    <scroll-view class="scroll-view" scroll-y="true" bindscrolltolower="bindscrolltolower">
+        <!-- <view class="list-item-title">
+          <text>我的收藏</text>
+        </view> -->
+        <view class="list-item flex" wx:for="{{modelList}}" wx:key='index'>
+          <view class="item-img img-box">
+            <image class="img" mode="aspectFit" src="{{item.displayImgUrl?item.displayImgUrl:aliyunBaseImgUrlPre+'images/default.png'}}"></image>
+          </view>
+          <view class="item-detail flex-1 flex-column">
+            <view class="detail-top">
+              <view class="detail-name">{{item.name}}</view>
+              <view class="detail-num">{{item.specificationName}}</view>
+            </view>
+            <view class="detail-bottom">
+              <view class="choose-norm flex-align-items-center">
+                <view class="flex-1 choose-norm-unit">单位：{{item.stockUnit}}</view>
+                <view class="choose-norm-btn img-box"
+                data-model="{{item}}" bindtap="chooseSpecPopup">
+                  <image src="{{aliyunBaseImgUrlPre}}images/add-btn.png"></image>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </scroll-view>
+    </view>
+  </view>
+  <!-- 购物车 -->
+  <view class="add-car-box {{applyListShow?'large-index':''}}">
+    <view class="car-tag">{{applyList.length}}</view>
+    <view class="add-car flex">
+      <view class="car-has flex-1">
+        <view class="car-img" bindtap="showApplyListPop">
+          <view class="car-img-box img-box">
+            <image class="img" src="{{aliyunBaseImgUrlPre}}images/car-logo.png"></image>
+          </view>
+        </view>
+        <text>已选{{applyList.length}}件</text>
+      </view>
+      <view class="car-upload" bindtap="goApply">去提交</view>
+    </view>
+  </view>
+  <!-- 购物车列表弹窗 -->
+  <van-popup
+    show="{{ applyListShow }}"
+    position="bottom"
+    round="true"
+    bind:click-overlay="closeApplyList"
+  >
+    <view class="car-list-container flex-column">
+      <view class="tip clearfix">
+        <text class="f-l">已选物品（{{applyList.length}}）</text>
+        <text class="f-r clear-car" bindtap="clearCar">清空</text>
+      </view>
+      <view class="car-list flex-1 overflow-auto">
+        <view class="list-item flex" wx:for="{{applyList}}" wx:key="index">
+          <view class="item-img img-box">
+            <image mode="aspectFit" src="{{item.displayImgUrl}}"></image>
+          </view>
+          <view class="item-r flex-1">
+            <view class="item-title ellipsis-two">{{item.name}}</view>
+            <view class="item-spec">
+              <view class="spec ellipsis-one">{{item.specificationName}}</view>
+            </view>
+            <view class="item-remark"></view>
+            <view class="item-num flex">
+              <view class="flex-1"></view>
+              <view class="item-num-r flex-align-items-center">
+                <view class="item-num-cut img-box"
+                      data-minvalue="0" data-path="applyList.{{index}}.totalCount" data-arrayremovevalue="0" data-count="-1" bindtap="commomCountChange">
+                  <image class="img" src="{{aliyunBaseImgUrlPre}}images/cut-btn.png"/>
+                </view>
+                <input type="number" class="item-num-ipt" style="width: 90rpx"
+                       value="{{item.totalCount}}" data-path="applyList.{{index}}.totalCount"
+                       data-minvalue="0" bindinput="viewValueChange" data-arrayremovevalue="0"
+                />
+                <view class="item-num-add img-box"
+                      data-minvalue="0" data-path="applyList.{{index}}.totalCount" data-arrayremovevalue="0" data-count="1" bindtap="commomCountChange">
+                  <image class="img" src="{{aliyunBaseImgUrlPre}}images/add-btn.png"/>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </van-popup>
+  <!-- 选择规格 -->
+  <van-popup
+    show="{{ chooseSpecShow }}"
+    position="bottom"
+    round="true"
+    bind:click-overlay="closeChooseSpec"
+  >
+    <view class="spec-container flex-column">
+      <text class="iconfont iconguanbi-new-01" bindtap="closeSpecModal"></text>
+      <view class="spec-detail flex-1 overflow-auto">
+        <view class="detail-top flex-align-items-center">
+          <view class="top-img img-box">
+            <image class="img" mode="aspectFit" src="{{aimModel.displayImgUrl?aimModel.displayImgUrl:aliyunBaseImgUrlPre+'images/default.png'}}"></image>
+          </view>
+          <view class="top-name flex-1">
+            <view>{{aimModel.name}}</view>
+            <view class="top-unit">单位：{{aimModel.stockUnit}}</view>
+          </view>
+        </view>
+        <view class="spec-item">
+          <view class="item-title">规格型号</view>
+          <view class="item-detail">
+            <text class="item-select active">{{aimModel.specificationName}}</text>
+          </view>
+        </view>
+        <view class="spec-item">
+          <view class="item-title">描述</view>
+          <view class="item-detail" style="word-wrap:break-word;word-break:normal;color:#9090A8">
+            {{aimModel.description}}
+          </view>
+        </view>
+        <view class="spec-item">
+          <view class="item-title">备注</view>
+          <view class="item-detail">
+            <textarea class="remark-textarea" value="{{aimModel.remark}}" auto-height data-path="aimModel.remark" bindinput="viewValueChange"></textarea>
+          </view>
+        </view>
+      </view>
+      <view class="choose-num flex-align-items-center">
+        <view class="choose-num-l flex-1">申领数量:</view>
+        <view class="choose-num-r flex-align-items-center">
+          <view class="choose-num-cut img-box">
+            <image class="img" src="{{aliyunBaseImgUrlPre}}images/cut-btn.png" data-count="-1" bindtap="aimModelCountChange"/>
+          </view>
+          <input type="number" class="choose-num-ipt" value="{{aimModel.totalCount}}" data-path="aimModel.totalCount" data-minvalue="1" bindinput="viewValueChange" style="width: 100rpx"/>
+          <view class="choose-num-add img-box">
+            <image class="img" src="{{aliyunBaseImgUrlPre}}images/add-btn.png" data-count="1" bindtap="aimModelCountChange"/>
+          </view>
+        </view>
+      </view>
+      <view class="confirm-btn" bindtap="confirmChoose">确定</view>
+    </view>
+  </van-popup>
+  <!-- 申领模板 -->
+  <van-popup
+    show="{{ applyTemplateShow }}"
+    position="bottom"
+    round="true"
+    bind:click-overlay="closeApplyTemplate"
+  >
+    <view class="template-container flex-column">
+      <view class="template-top flex">
+        <view class="flex-1">请选择申领模板</view>
+        <view class="close-btn img-box" bindtap="closeApplyTemplate">
+          <image class="img" src="{{aliyunBaseImgUrlPre}}images/close-btn.png"></image>
+        </view>
+      </view>
+      <view class="template-detail flex-1 overflow-auto">
+        <view class="detail-item {{item.choose?'choose':''}}" wx:for="{{templateList}}" wx:key="index">
+          <van-swipe-cell right-width="{{ 63 }}">
+            <view class="detail-content flex-align-items-center" data-index="{{index}}" bindtap="changeTemplate">
+              <view class="detail-content-l flex-1">
+                <view class="content-title">{{item.templateName}}</view>
+                <view class="content-num">{{item.detailCount}}项申领项</view>
+              </view>
+              <view class="detail-content-r">
+                <view class="choose-box">
+                  <text class="iconfont {{item.choose?'iconbianzu16-01':'iconbianzu8-01'}}"></text>
+                </view>
+              </view>
+            </view>
+            <view slot="right" class="detail-item-del" data-index="{{index}}" bindtap="deleteTemplate">
+              删除
+            </view>
+          </van-swipe-cell>
+        </view>
+      </view>
+      <view class="template-bottom bottom-large-btn" bindtap="selecedTemplate">
+        确定
+      </view>
+    </view>
+  </van-popup>
+
+  <!--  商品分类查询-->
+  <van-popup
+          show="{{ categoryPopShow }}"
+          position="right"
+          bind:click-overlay="closeCategoryPopup"
+          custom-style="width: 80%; height: 100%"
+  >
+  <view class="category-query-container flex-column">
+    <view class="category-query-top">
+      <view class="category-query-top-search">
+        <input class="search-ipt" placeholder="搜索分类"
+               value="{{categorySearchKey}}" data-path="categorySearchKey"
+               bindinput="viewValueChange" bindconfirm="filterCategery">>
+          <text class="iconfont iconsousuo-icon-01" bindtap="filterCategery"></text>
+        </input>
+      </view>
+      <view class="category-query-top-sort">
+        <view wx:for="{{headCategoryNodeList}}" wx:for-item="category" wx:key="index"
+              class="category-item {{activeQuery===category.entityId?'active-item':''}}"
+              data-category="{{category}}"
+              bindtap="changeCategoryId">
+          {{category.name}}
+        </view>
+      </view>
+    </view>
+    <view class="query-list flex-1 overflow-auto">
+      <view class="list-sort" wx:for="{{categoryNodeList}}" wx:for-item="category" wx:key="index"
+            wx:if="{{!category.hidden && category.productionCount>0}}"
+      >
+        <view class="sort-title" bindtap="closeOrOpenCategory" data-index="{{index}}">{{category.name}}</view>
+        <!-- <view class="sort-content" hidden="{{category.close}}"> -->
+        <view class="sort-content">
+          <view class="category-item {{activeQuery===category.entityId?'active-item':''}}"
+                wx:for="{{category.subCategoryList}}"
+                wx:for-item="subCategory"
+                wx:key="index"
+                wx:if="{{!subCategory.hidden && subCategory.productionCount>0}}"
+                data-category="{{subCategory}}" bindtap="changeCategoryId"
+          >
+            {{subCategory.name}}
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  </van-popup>
+<!--  商品分类查询-->
+<!--  <van-popup-->
+<!--    show="{{ categoryPopShow }}"-->
+<!--    position="right"-->
+<!--    bind:click-overlay="closeCategoryPopup"-->
+<!--    custom-style="width: 80%; height: 100%"-->
+<!--  >-->
+<!--    <view class="spec-query-container overflow-auto">-->
+<!--      <view class="spec-query-top-search">-->
+<!--        <input class="search-ipt" placeholder="搜索分类"-->
+<!--               value="{{categorySearchKey}}" data-path="categorySearchKey"-->
+<!--               bindinput="viewValueChange" bindconfirm="filterCategery">-->
+<!--          <text class="iconfont iconsousuo-icon-01" bindtap="filterCategery"></text>-->
+<!--        </input>-->
+<!--      </view>-->
+<!--      <view class="query-list">-->
+<!--        <view class="query-list-item {{item.productionCount>0?'has-data':''}} {{activeQuery===item.entityId?'active-item':''}}"-->
+<!--              wx:for="{{categoryList}}"-->
+<!--              wx:key="index" wx:if="{{!item.hidden && item.productionCount>0}}"-->
+<!--              data-category="{{item}}" bindtap="changeCategoryId">-->
+<!--          {{item.name}}-->
+<!--        </view>-->
+<!--      </view>-->
+<!--    </view>-->
+<!--  </van-popup>-->
+</view>

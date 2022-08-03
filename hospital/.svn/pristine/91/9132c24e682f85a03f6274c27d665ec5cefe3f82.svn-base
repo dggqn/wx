@@ -1,0 +1,71 @@
+page{
+  --cell-value-color:#30304C;
+  background-color: #F4F7FF;
+}
+.header-nav{
+  padding: 12rpx;
+  background-color: #d8d9fe;
+}
+.nav-item{
+  width: 357rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+  text-align: center;
+  font-size: 30rpx;
+  color: #1C3A62;
+  border-radius: 4rpx;
+}
+.nav-item-active{
+  background-color: #6C66FA;
+  color: #fff;
+}
+.cell-value{
+  color: #1C3A62;
+  background-color: red;
+}
+.state{
+  padding: 0 12rpx;
+  float: right;
+  width: 72rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+  color: #ffff;
+  font-size: 24rpx;
+  border-radius: 8rpx;
+}
+.green{
+  background-color: #5EA1F2;
+}
+.red{
+  background-color: #c26257;
+}
+.cell-img-box{
+  width: 100%;
+}
+.cell-img-box .img{
+  width: 100%;
+}
+.assets-details-operation{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: flex-end;
+  padding: 22rpx 30rpx;
+  width: calc( 100% - 60rpx);
+  background-color: #fff;
+}
+.assets-details-operation .btn{
+  padding: 18rpx 56rpx;
+  margin: 0 0 0 28rpx;
+  line-height: 1;
+  background-color: #FFFFFF;
+  color: #715FFF;
+}
+.assets-details-operation .btn::after{
+  border: 2rpx solid #715FFF;
+}
+.assets-details-operation .blue{
+  background-color: #6C66FA;
+  color: #fff;
+}

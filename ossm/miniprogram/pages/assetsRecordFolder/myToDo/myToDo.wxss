@@ -1,0 +1,62 @@
+@import '../assetsRecord/assetsRecord.wxss';
+.assets-record-nav .nav-item{
+  padding: 18rpx 40rpx;
+}
+.assets-record-nav .nav-item-active::after{
+  left: 40%;
+  width: 20%;
+}
+.backlog-list{
+  padding: 0 30rpx;
+}
+.backlog-item{
+  margin-bottom: 35rpx;
+  background-color: #fff;
+  border-radius: 20rpx;
+}
+.backlog-item .header{
+  padding: 28rpx;
+}
+.backlog-item .header .img{
+    width: 80rpx;
+    height: 80rpx;
+    border-radius: 50%;
+}
+.backlog-item .header .title{
+  margin-left: 16rpx;
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #30304C;
+}
+.backlog-item .content{
+  padding: 0 28rpx 8rpx 28rpx;
+  font-size: 24rpx;
+  border-bottom: 1rpx solid #D6D6E7;
+}
+.backlog-item .content-item-l{
+  width: 168rpx;
+  color: #9090A8;
+}
+.backlog-item .content-item{
+  margin-bottom: 12rpx;
+}
+.backlog-item .content-item-r{
+  width: 466rpx;
+  color: #1C3A62;
+}
+.backlog-item .footer{
+  padding: 20rpx 30rpx;
+  font-size: 24rpx;
+}
+.backlog-item .footer .footer-l{
+  color: #9090A8;
+}
+.backlog-item .footer .footer-l .time{
+  margin-top: 4rpx;
+}
+.backlog-item .footer .footer-r{
+  padding: 10rpx 20rpx;
+  border: 2rpx solid #D6D6E7;
+  color: #9090A8;
+  border-radius: 4rpx;
+}

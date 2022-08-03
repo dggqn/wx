@@ -1,0 +1,177 @@
+<!--pages/repair/repairDetail/repairDetail.wxml-->
+<view class="container overflow-auto">
+  <!-- 状态 -->
+  <view class="public-apply-detail-top flex-align-items-center">
+    <view class="detail-top-l flex-1">
+      <block wx:if="{{detailData.status < 3 }}">
+        <view class="top-l-status">待处理</view>
+        <view class="top-l-tip">请您耐心等待报修单受理</view>
+      </block>
+      <block wx:if="{{detailData.status == 3}}">
+        <view class="top-l-status">已受理</view>
+        <view class="top-l-tip">等待维修员维修</view>
+      </block>
+      <block wx:if="{{detailData.status == 5}}">
+        <view class="top-l-status">已完成</view>
+        <view class="top-l-tip">等待您的评价</view>
+      </block>
+    </view>
+    <view class="detail-top-r flex-1">
+      <view class="top-r-id">
+        <!-- ID:{{detailData.taskId}} -->
+      </view>
+      <view class="top-r-date">创建日期：{{detailData.createTime}}</view>
+    </view>
+  </view>
+  <!-- 步骤 -->
+  <view class="step-container">
+    <view class="step-box flex-align-items-center">
+      <view class="step-item flex-1 flex-align-items-center active-step">
+        <view class="step-item-dot"></view>
+      </view>
+      <view class="step-item flex-1 flex-align-items-center {{detailData.status >1 ? 'active-step':''}}">
+        <view class="step-item-dot"></view>
+      </view>
+      <view class="step-item flex-1 flex-align-items-center {{detailData.status >2 ? 'active-step':''}}">
+        <view class="step-item-dot"></view>
+      </view>
+      <view class="step-item flex-1 flex-align-items-center {{detailData.status >4 ? 'active-step':''}}">
+        <view class="step-item-dot"></view>
+      </view>
+    </view>
+    <view class="step-detail flex">
+      <view class="detail-item flex-1 {{detailData.status <6 ? 'active-detail':''}}">
+        <view class="detail-item-intro">分配任务</view>
+        <!-- <view class="detail-item-time">{{detailData.createTime}}</view> -->
+      </view>
+      <view class="detail-item flex-1 {{detailData.status >1 ? 'active-detail':''}}">
+        <view class="detail-item-intro">维修员待接单</view>
+        <!-- <view class="detail-item-time">2022/03/16</view> -->
+      </view>
+      <view class="detail-item flex-1 {{detailData.status >2 ? 'active-detail':''}}">
+        <view class="detail-item-intro">维修员已接单</view>
+        <!-- <view class="detail-item-time">2022/03/16</view> -->
+      </view>
+      <view class="detail-item flex-1 {{detailData.status >4 ? 'active-detail':''}}">
+        <view class="detail-item-intro">维修完成</view>
+        <view class="detail-item-time"></view>
+      </view>
+    </view>
+  </view>
+  <!-- 步骤End -->
+  <view class="repair-main">
+    <!-- 维修资产 -->
+    <view  wx:if="{{detailData.assetsName}}" class="repair-title">维修资产</view>
+    <view  wx:if="{{detailData.assetsName}}"class="repair-assets flex-align-items-center">
+      <text class="assets-name flex-1">{{detailData.assetsName}}</text>
+      <!-- <text class="assets-num">资产编号 H29BC2398</text> -->
+    </view>
+    
+    <!-- 维修部门-->
+    <view class="repair-title">维修部门</view>
+    <view class="contact-person">
+      <view class="contact-person-item flex flex-align-items-baseline">
+        <view class="flex-1">部门</view>
+        <view  style="flex-grow:2">
+          <view class="flex-2" >
+            {{detailData.deptName}}
+          </view>
+        </view>
+      </view>
+    </view>
+    <!-- 问题及描述 -->
+    <view class="repair-title">问题及描述</view>
+    <view class="repair-reasons">
+      <view class="text-desc">
+        <text>{{detailData.description}}</text>
+      </view>
+      <view class="img-desc flex" wx:if="{{detailData.fileList}}">
+        <view class="img-desc-item img-box" bindtap='clickImg' data-id="0">
+          <image src="{{detailData.fileList[0].url}}"></image>
+        </view>
+        <view class="img-desc-item img-box" bindtap='clickImg' data-id="1">
+          <image src="{{detailData.fileList[1].url}}"></image>
+        </view>
+        <view class="img-desc-item img-box" bindtap='clickImg' data-id="2">
+          <image src="{{detailData.fileList[2].url}}"></image>
+        </view>
+      </view>
+    </view>
+    <!-- 联系人 -->
+    <view class="repair-title">联系人</view>
+    <view class="contact-person">
+      <view class="contact-person-item flex">
+        <view class="flex-1">姓名</view>
+        <view>{{detailData.linkman}}</view>
+      </view>
+      <view class="contact-person-item flex">
+        <view class="flex-1">电话</view>
+        <view>{{detailData.linktel}}</view>
+      </view>
+      <view class="contact-person-item flex">
+        <view class="flex-1">地址</view>
+        <view>{{detailData.position}}</view>
+      </view>
+    </view>
+   <!-- 报修单历史信息 -->
+   
+    <view class="list-item" wx:for="{{hisData}}" wx:key="index" data-itemDetail="{{item}}">
+      <view class="repair-title" wx:if="{{item.status=='2'}}">任务分配</view>
+      <view class="repair-title" wx:if="{{item.status=='3'}}">任务接受</view>
+      <view class="repair-title" wx:if="{{item.status=='4'}}">任务驳回</view>
+      <view class="repair-title" wx:if="{{item.status=='5'}}">任务完成</view>
+      <view class="repair-title" wx:if="{{item.status=='6'}}">任务关闭</view>
+      <view class="repair-title" wx:if="{{item.status=='7'}}">任务评价</view>
+      <view class="contact-person">
+        <view class="contact-person-item flex">
+          <view class="flex-1"   wx:if="{{item.status=='2'}}">分配者</view>
+          <view class="flex-1"   wx:if="{{item.status=='4'}}">驳回者</view>
+          <view class="flex-1"   wx:if="{{item.status=='6'}}">关闭者</view>
+          <view class="flex-1"   wx:if="{{item.status=='7'}}">评价者</view>
+          <view class="flex-1"   wx:if="{{item.status=='3'|| item.status=='5'}}">维修员</view>
+          <view >{{item.createUname}}</view>
+        </view>
+        <view class="contact-person-item flex">
+          <view class="flex-1"  wx:if="{{item.status=='2'}}">分配时间</view>
+          <view class="flex-1"  wx:if="{{item.status=='3'}}">接受时间</view>
+          <view class="flex-1"  wx:if="{{item.status=='4'}}">驳回时间</view>
+          <view class="flex-1"  wx:if="{{item.status=='5'}}">完成时间</view>
+          <view class="flex-1"  wx:if="{{item.status=='6'}}">关闭时间</view>
+          <view class="flex-1"  wx:if="{{item.status=='7'}}">评价时间</view>
+          <view>{{item.createTime}}</view>
+        </view>
+        <view class="contact-person-item flex"  wx:if="{{item.comment && (item.status=='4'||item.status=='5'||item.status=='7'||item.status=='6')}}">
+          <view class="flex-2 flex"  wx:if="{{item.status=='4'}}">驳回原因</view>
+          <view class="flex-2 flex"  wx:if="{{item.status=='5'}}">维修情况</view>
+          <view class="flex-2 flex"   wx:if="{{item.status=='6'}}">关闭理由</view>
+          <view class="flex-2 flex"  wx:if="{{item.status=='7'}}">评价内容</view>
+          <view class="flex-comment">{{item.comment}}</view>
+        </view>
+        <view class="img-desc flex" wx:if="{{item.fileList && (item.status=='4'||item.status=='5'||item.status=='7'||item.status=='6')}}">
+          <view class="img-desc-item img-box" bindtap='clickImg' data-id="0">
+            <image src="{{item.fileList[0].url}}"></image>
+          </view>
+          <view class="img-desc-item img-box" bindtap='clickImg' data-id="1">
+            <image src="{{item.fileList[1].url}}"></image>
+          </view>
+          <view class="img-desc-item img-box" bindtap='clickImg' data-id="2">
+            <image src="{{item.fileList[2].url}}"></image>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view  wx:if="{{detailData.status=='2'}}">
+    <view class="bottom-large-btn" bindtap="goDetail">
+      <text class="operate-btn">接受任务</text>
+    </view>
+  </view>
+  <view  wx:if="{{detailData.status=='3'||detailData.status=='4'}}">
+    <view class="bottom-large-btn" bindtap="goDetail">
+      <text class="operate-btn">完成任务</text>
+    </view>
+    <!-- <view class="bottom-large-btn" bindtap="goRemark">
+      <text class="operate-btn">完成任务</text>
+    </view> -->
+  </view>
+</view>

@@ -1,0 +1,11 @@
+<!--components/dropDown/dropDown.wxml-->
+<view class="drop-down-box" wx:if="{{show}}">
+  <view class="arrow"></view>
+  <view 
+  class="drop-down-item" 
+  data-code="{{item.code}}"
+  data-name="{{item.name}}"
+  wx:for="{{list}}" wx:key="index"
+  bindtap="clickItem"
+  >{{item.name}}</view>
+</view>

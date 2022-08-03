@@ -1,0 +1,10 @@
+<!--pages/applyPages/scanSignEmpty/scanSignEmpty.wxml-->
+<view class="container public-sign-detail-bg">
+  <view class="empty-box">
+    <view class="emppty-content">
+      <view class="empty-img-box">
+      </view>
+      <view class="empty-tip">未找到相关领用物品</view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,96 @@
+<view class="assets-record-nav flex-between-center">
+  <view
+    class="nav-item {{navActive==='recipients'?'nav-item-active':''}}"
+    data-type="recipients"
+    bindtap="flagClass"
+  >领用记录</view>
+
+  <view
+    class="nav-item {{navActive==='change'?'nav-item-active':''}}"
+    data-type="change"
+    bindtap="flagClass"
+  >变更记录</view>
+
+  <view
+    class="nav-item {{navActive==='scrap'?'nav-item-active':''}}"
+    data-type="scrap"
+    bindtap="flagClass"
+  >报废记录</view>
+</view>
+
+<van-dropdown-menu class="sort-dropdown" wx:if="{{navActive==='change'}}">
+    <van-dropdown-item value='{{type}}' options="{{assetsSortOption}}" bind:change="changeType" />
+</van-dropdown-menu>
+
+<view class="main" wx:if="{{navActive === 'change'}}">
+  <view class="assets-record-info box-shadow" wx:for="{{list}}" wx:key="index">
+    <view class="info-header flex-between-center">
+      <text>{{item.realnameC}}发起的资产变更</text>
+      <text>{{item.createTime}}</text>
+    </view>
+    <view class="flex czh-steps-vertical-box">
+      <view class="czh-steps-vertical flex-column">
+          <view class="czh-steps-vertical-item flex">
+              <image class="img" src="{{item.avatarO}}"></image>
+              <view class="introduce">
+                <view class="introduce-item1">{{item.realnameO}}</view>
+                <view class="introduce-item2">{{item.departNameO}}</view>
+              </view>
+          </view>
+          <view class="line" style="height:24rpx"></view>
+          <view class="czh-steps-vertical-item flex">
+            <image class="img" src="{{item.avatarR}}"></image>
+            <view class="introduce">
+                <view class="introduce-item1">{{item.realnameR}}</view>
+                <view class="introduce-item2">{{item.departNameR}}</view>
+              </view>
+          </view>
+      </view>
+      <view class="assets-record-info-r flex-1">
+          <view class="title ellipsis-two">{{item.modelName}}</view>
+          <view class="assets-id">
+            <text>资产ID：</text>
+            <text>{{item.assetBarcode}}</text>
+          </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="empty-box" wx:if="{{list.length <= 0}}">
+    <image class="empty-img" src="{{aliyunBaseImgUrlPre}}images/empty.png"></image>
+    <view class="empty-tip">暂无变更记录</view>
+  </view>
+</view>
+<view class="main" wx:if="{{navActive === 'recipients'}}">
+  <collarRecords id="collarRecords"></collarRecords>
+</view>
+<view class="main" wx:if="{{navActive === 'scrap'}}">
+  <view class="public-list"> 
+    <view class="list-item flex" wx:for="{{list}}" wx:key="index" data-snno="{{item.assetBarcode}}" bindtap="jumpDetails">
+<!--      <view class="item-status">{{item.statusName}}</view>-->
+      <view class="item-img img-box">
+        <image class="img" mode="aspectFit" src="{{item.displayImgUrl}}"></image>
+      </view>
+
+      <view class="item-detail flex-1 flex-column">
+        <view class="detail-top">
+          <view class="detail-name ellipsis-two">{{item.modelName}}</view>
+        </view>
+        <view class="detail-num flex list-item-unit">
+          <view class="limt">规格：</view>
+          <view class="ellipsis-one limt-font">{{item.specificationName}}</view>
+        </view>
+        <view class="flex list-item-unit">
+          <view class="limt">单位：</view>
+          <view>{{item.stockUnit}}</view>
+        </view>
+      </view>
+
+      <view class="flex-center"><text class="iconfont iconyoujiantou-new-01"></text></view>
+    </view>
+  </view>
+  <view class="empty-box" wx:if="{{list.length <= 0}}" style="margin-top:100rpx">
+    <image class="empty-img" src="{{aliyunBaseImgUrlPre}}images/empty.png"></image>
+    <view class="empty-tip">暂无报废记录</view>
+  </view>
+</view>

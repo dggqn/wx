@@ -1,0 +1,25 @@
+<!--pages/login/login.wxml-->
+<view class="container" wx:if='!isLogined'>
+  <view>
+    <view style="padding-left: 56rpx;padding-top: 96rpx;font-size: 28rpx;">申领物品·管理资产·高效协同</view>
+    <view style="padding-left: 56rpx;padding-bottom: 120rpx;font-size: 54rpx;color: #6C66FA;">后勤管理从未如此智慧</view>
+  </view>
+  <view>
+    <image style="width: 100%;" src="{{aliyunBaseImgUrlPre}}images/login-center.png"></image>
+  </view>
+  <view class="logo-box">
+    <button class="login-btn" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">
+      用户登录
+    </button>
+  </view>
+  <view class="logo-info">
+    <view class="logo-text">仅限欧爽普通员工用户办理</view>
+  </view>
+  <view class="logo-bottom">
+    <image src="{{aliyunBaseImgUrlPre}}images/logo-small.png" style="width: 40rpx;height: 40rpx;vertical-align:middle"></image>
+    <view class="logo-text">{{hospitalName}}</view>
+  </view>
+
+
+  <sog-user-info-dialog class="wxc-dialog" wx:if="{{showUserInfoDialog}}"  bind:myevent=''></sog-user-info-dialog>
+</view>

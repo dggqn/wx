@@ -1,0 +1,49 @@
+<view class="choose-people">
+    <view class="choose-people">
+        <view class="choose-bg"></view>
+        <view class="choose-search-box flex-center">
+            <view class="choose-search">
+                <input type="text" class="search-ipt" placeholder="请输入搜索内容" bindinput="changeKeyword" bindblur="search">
+                    <text class="iconfont iconsousuo-icon-01"></text>
+                </input>
+                <text></text>
+            </view>
+        </view>
+        <van-radio-group value="{{ radio }}" bind:change="onChange">
+            <view class="choose-people-list">
+                <view class="list-container" wx:for="{{userList}}" wx:key="index" data-item="{{ item }}">
+                    <view class="list-items-name" wx:if="{{item.departName!==userList[index-1].departName}}">
+                        <text>{{item.departName}}</text>
+                    </view>
+                    <view class="people-list">
+                        <view class="list-item flex-space-between" >
+                            <view class="item-l flex-between-center">
+                                <view class="flex-align-items-center">
+                                    <image mode="widthFix" src="https://hospital-assets-image-public.oss-cn-shanghai.aliyuncs.com/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/%E5%AE%89%E5%AD%9A/images/range5-default.png"></image>
+                                    <text class="items-name">{{item.realname}}</text>
+                                </view>
+                                <text class="items-phono">{{item.phone}}</text>
+                            </view>
+                            <view class="item-r flex-center">
+                                <van-radio shape="square" name="{{index}}"></van-radio>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+
+            </view>
+        </van-radio-group>
+        <view class="choose-btn">
+            <button bindtap="confirm" class="btn box-shadow" disabled="{{userList.length === 0 || radio === null}}">确认</button>
+        </view>
+    </view>
+
+  <!-- 搜索不到数据时显示 -->
+  <view wx:if="{{userList === null || userList.length < 1}}">
+    <view class="nothing-img-box">
+        <image class="img" src="https://hospital-assets-image-public.oss-cn-shanghai.aliyuncs.com/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/%E4%B8%8A%E6%B5%B7%E7%AC%AC%E5%9B%9B%E4%BA%BA%E6%B0%91%E5%8C%BB%E9%99%A2/images/empty.png"></image>
+        <view class="font">没有匹配结果</view>
+    </view>
+  </view>
+</view>
+<view class="removeFixed"></view>

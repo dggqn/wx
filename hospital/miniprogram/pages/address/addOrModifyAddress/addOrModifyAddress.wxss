@@ -1,0 +1,40 @@
+/* miniprogram/pages/address/addOrModifyAddress/addOrModifyAddress.wxss */
+.address-container .address-cell-group {
+  border-top: 1rpx solid #E7E7F2;
+  padding-left: 30rpx;
+  box-sizing: border-box;
+  background: #fff;
+}
+.address-cell-group .address-cell {
+  border-bottom: 1rpx solid #E7E7F2;
+  font-size: 28rpx;
+  padding: 30rpx 0;
+}
+.address-cell-group .address-cell .cell-name {
+  min-width: 120rpx;
+  margin-right: 32rpx;
+}
+.address-cell-group .address-cell .cell-edit {
+  position: relative;
+}
+.address-cell-group .address-cell .cell-edit .textarea {
+  height: 100rpx;
+}
+.address-cell-group .address-cell .cell-edit .iconyoujiantou-new-01 {
+  position: absolute;
+  right: 30rpx;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.address-cell-group .address-cell .cell-edit .switch {
+  margin-right: 30rpx;
+}
+.address-btn {
+  width: 100%;
+  height: 96rpx;
+  font-size: 28rpx;
+  text-align: center;
+  line-height: 96rpx;
+  color: #fff;
+  background: #6C66FA;
+}

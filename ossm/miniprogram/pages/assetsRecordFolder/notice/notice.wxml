@@ -1,0 +1,44 @@
+<view class="notice-header flex-align-items-center">
+  <view class="top-search flex-1">
+    <input class="search-ipt" placeholder="搜索通知标题或通知内容" bindinput="inputKeyword" bindblur="search" placeholder-class="placeholder-style">
+    <text class="iconfont iconsousuo-icon-01" bindtap="search"></text>
+    </input>
+  </view>
+  <view class="all-type flex-align-items-center">
+    <van-dropdown-menu class="sort-dropdown1">
+      <van-dropdown-item value='{{0}}' options="{{assetsSortOption}}" bind:change="sort" />
+    </van-dropdown-menu>
+  </view>
+</view>
+
+<view>
+  <view class="click-read">
+    <text class="iconfont iconpin"></text>
+    <text>标记全部已读</text>
+  </view>
+</view>
+
+<view class="notice-list">
+  <view class="notice-item" wx:for="{{[1,2,3]}}" wx:key="*this">
+      <!-- 
+        审批通知状态为同意时： blue
+        审批通知状态为拒绝时： cyan-shallow
+        审批通知状态为变更时： cyan-deep
+      -->
+      <view 
+        class="notice-item-l flex-center {{index===0?'blue':''}} {{index===1?'cyan-shallow':''}} {{index===2?'cyan-deep':''}}"
+      >
+        <view class="font">审批通知</view>
+      </view>
+      <view class="notice-item-r">
+        <view class="title">已同意</view>
+        <view class="tips">张三同意了审批：儿科李易峰发起的资产变更申请</view>
+        <view class="flex-between-center footer">
+          <view class="time">2020/05/30 14:03</view>
+          <view class="state {{index%2 === 0 ? 'unread':'read'}}">
+            {{ndex%2 === 0 ? '已读':'未读'}}
+          </view>
+        </view>
+      </view>
+  </view>
+</view>

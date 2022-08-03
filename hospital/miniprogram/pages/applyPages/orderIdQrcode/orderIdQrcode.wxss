@@ -1,0 +1,72 @@
+
+.container{
+    padding-top: 30rpx;
+}
+.code-box{
+    margin: 0 30rpx;
+    background: #fff;
+    border-radius: 16rpx;
+    box-shadow:3px 3px 14px 0px rgba(126,145,195,0.2);
+    text-align: center;
+    padding-top: 60rpx;
+    padding-bottom: 45rpx;
+}
+.code-box .person-info {
+    justify-content: center;
+}
+.code-box .person-info .person-info-head{
+    width: 110rpx;
+    height: 110rpx;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 12rpx;
+}
+.code-box .person-info .person-info-name{
+    font-size: 36rpx;
+    color: #30304C;
+    font-weight: 500;
+    margin-right: 12rpx;
+}
+.code-box .person-info .person-info-type{
+    font-size: 24rpx;
+    padding: 4rpx 12rpx;
+    color: #6C66FA;
+    border: 1rpx solid #6C66FA;
+    border-radius: 4rpx;
+}
+.code-box .work-info{
+    margin-top: 30rpx;
+    line-height: 42rpx;
+    padding-left: 205rpx;
+    text-align: left;
+}
+.code-box .work-info .work-info-item{
+    font-size: 30rpx;
+    padding: 4rpx 0;
+}
+.code-box .work-info .work-info-item .item-label{
+    color: #9494C3;
+}
+.code-box .work-info .work-info-item .item-value{
+    color: #30304C;
+}
+
+.code-box .qr-code-info{
+    margin-top: 40rpx;
+}
+.code-box .qr-code-info .qr-code-box{
+    width: 340rpx;
+    height: 340rpx;
+    margin: 0 auto;
+    border-radius: 16rpx;
+}
+.code-box .qr-code-info .qr-code-tip {
+    font-size: 28rpx;
+    color: #30304C;
+    margin-top: 32rpx;
+}
+.code-box .qr-code-info .qr-code-refresh {
+    font-size: 24rpx;
+    color: #30304C;
+    margin-top: 21rpx;
+}

@@ -1,0 +1,43 @@
+<!--pages/repair/RepairmanPage/MemberList/MemberList.wxml-->
+<view class="container overflow-auto">
+  <!-- 状态 -->
+  <view class="public-apply-detail-top flex-align-items-center">
+    <view class="detail-top-l flex-1">
+      <view class="top-l-status">待分配</view>
+      <view class="top-l-tip">请您指定前往处理的维修员</view>
+    </view>
+  </view>
+  <view class="member-main">
+    <view class="member-title">维修员列表</view>
+    <view class="member-list">
+      <van-checkbox-group value="{{ checked }}" bind:change="onChange">
+        <block wx:for="{{repairList}}" wx:key="entityId">
+          <view class="item-center flex-align-items-center">
+            <view class="center-l flex flex-1">
+              <view class="center-l-head img-box">
+                <image src="https://img2.baidu.com/it/u=4213528812,2252736552&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500" class="img"></image>
+              </view>
+              <view class="center-detail flex-1 flex-shink-1">
+                <view class="detail-t">
+                  <text class="detail-status">{{item.realname}}</text>
+                </view>
+                <view class="detail-intro">
+                  联系电话 : {{item.phone}}
+                </view>
+              </view>
+            </view>
+            <view class="center-r">
+              <view class="">
+                <van-checkbox name="{{item.entityId}}" label-position="left" class="">
+                </van-checkbox>
+              </view>
+            </view>
+          </view>
+        </block>
+      </van-checkbox-group>
+    </view>
+  </view>
+  <view class="bottom-large-btn" bindtap="appoint">
+    <text class="operate-btn">确认分配</text>
+  </view>
+</view>

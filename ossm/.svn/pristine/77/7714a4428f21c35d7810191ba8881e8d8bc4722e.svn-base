@@ -1,0 +1,63 @@
+<!--pages/repair/repairFeedback/repairFeedback.wxml-->
+<view class="container">
+  <view class="feedback-box overflow-auto">
+    <view class="feedback-tip">
+      为了更好地提升维修质量，请您对本次维修服务作出评价！
+    </view>
+    <view class="slect-title">设备问题是否解决:</view>
+    <view class="select-solve flex">
+      <view class="solve-item flex-align-items-center" bindtap="isOK" data-ok="1">
+        <text class="iconfont iconbianzu8-01" wx:if="{{isSolve == 0}}"></text>
+        <text class="iconfont iconbianzu16-01" wx:else></text>
+        <text>已解决</text>
+      </view>
+      <view class="solve-item flex-align-items-center" bindtap="isOK" data-ok="0">
+        <text class="iconfont iconbianzu8-01" wx:if="{{isSolve == 1}}"></text>
+        <text class="iconfont iconbianzu16-01" wx:else></text>
+        <text>未解决</text>
+      </view>
+    </view>
+    <view class="slect-title">服务满意度:</view>
+    <view class="range-box flex" wx:if="false">
+      <view class="range-item img-box" bindtap="chooseSatisfaction" data-code="0">
+        <image class="img" src="{{aliyunBaseImgUrlPre}}images/range1-selected.png" wx:if="{{isSelected == 0}}"></image>
+        <image class="img" src="{{aliyunBaseImgUrlPre}}images/range1-default.png" wx:else></image>
+      </view>
+      <view class="range-item img-box" bindtap="chooseSatisfaction" data-code="1">
+        <image class="img" src="{{aliyunBaseImgUrlPre}}images/range2-selected.png" wx:if="{{isSelected == 1}}"></image>
+        <image class="img" src="{{aliyunBaseImgUrlPre}}images/range2-default.png" wx:else></image>
+      </view>
+      <view class="range-item img-box" bindtap="chooseSatisfaction" data-code="2">
+        <image class="img" src="{{aliyunBaseImgUrlPre}}images/range3-selected.png" wx:if="{{isSelected == 2}}"></image>
+        <image class="img" src="{{aliyunBaseImgUrlPre}}images/range3-default.png" wx:else></image>
+      </view>
+      <view class="range-item img-box" bindtap="chooseSatisfaction" data-code="3">
+        <image class="img" src="{{aliyunBaseImgUrlPre}}images/range4-selected.png" wx:if="{{isSelected == 3}}"></image>
+        <image class="img" src="{{aliyunBaseImgUrlPre}}images/range4-default.png" wx:else></image>
+      </view>
+      <view class="range-item img-box" bindtap="chooseSatisfaction" data-code="4">
+        <image class="img" src="{{aliyunBaseImgUrlPre}}images/range5-selected.png" wx:if="{{isSelected == 4}}"></image>
+        <image class="img" src="{{aliyunBaseImgUrlPre}}images/range5-default.png" wx:else></image>
+      </view>
+      <view class="range-intro">
+        <text>{{SatisfactionText}}</text>
+        <!-- <text>不满意</text>
+        <text>一般</text>
+        <text>满意</text>
+        <text>很满意</text> -->
+      </view>
+    </view>
+
+    <view class="slect-title">不满意原因:</view>
+    <view class="not-approve-reasons">
+      <block wx:for="{{issueTextList}}" wx:key='code'>
+        <text class="reason-item {{item.active?'active':''}}" bindtap="chooseIssue" data-item="{{item}}">{{item.text}}</text>
+      </block>
+
+    </view>
+    <textarea class="not-approve-textarea" placeholder="必填，请补充您不满意的原因" bindinput="issueTextareaChange" value="{{issueTextarea}}"></textarea>
+    <view class="upload-box">
+      <text class="upload-btn {{haveValue == 'true'?'btn-color-active':'btn-color-disabled'}}">提交</text>
+    </view>
+  </view>
+</view>

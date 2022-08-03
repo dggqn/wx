@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "collarRecords":"../../collarRecords/collarRecords"
+  },
+  "navigationBarTitleText": "资产记录",
+  "navigationBarTextStyle": "black",
+  "navigationBarBackgroundColor": "#FFFFFF"
+}

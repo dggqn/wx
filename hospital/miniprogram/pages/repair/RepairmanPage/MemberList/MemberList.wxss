@@ -1,0 +1,71 @@
+/* pages/repair/RepairmanPage/MemberList/MemberList.wxss */
+.member-title {
+  margin: 28rpx 0;
+}
+
+.member-main {
+  padding: 0 30rpx;
+  padding-bottom: 30rpx;
+}
+
+.member-list {
+  background: #fff;
+  border-radius: 16rpx;
+}
+
+.item-center {
+  padding: 30rpx;
+}
+
+.item-center .center-l .center-l-head {
+  width: 80rpx;
+  height: 80rpx;
+  margin-right: 20rpx;
+  border-radius: 40rpx;
+  overflow: hidden;
+}
+
+.item-center .center-detail .detail-status {
+  color: #5766DE;
+  font-size: 28rpx;
+  font-weight: 600;
+}
+
+.item-center .center-detail .detail-num {
+  font-size: 24rpx;
+  color: #9090A8;
+}
+
+.item-center .center-detail .detail-intro {
+  color: #363651;
+  font-size: 24rpx;
+  margin-top: 8rpx;
+}
+
+.item-center .center-r .detail-operate {
+  font-size: 24rpx;
+  color: #9090A8;
+  border-radius: 4rpx;
+  /* background: #6C66FA; */
+}
+
+.item-bottom {
+  font-size: 24rpx;
+  border-top: 1rpx solid #eee;
+  padding: 0 30rpx;
+  padding-top: 12rpx;
+  padding-bottom: 20rpx;
+  color: #9090A8;
+}
+
+.bottom-large-btn {
+  width: 100%;
+  height: 96rpx;
+  background: #6C66FA;
+  text-align: center;
+  line-height: 96rpx;
+  font-size: 28rpx;
+  color: #fff;
+  position: fixed;
+  bottom: 0rpx;
+}

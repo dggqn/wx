@@ -1,0 +1,125 @@
+<!--pages/applyPages/signInvoiceDetail/signInvoiceDetail.wxml-->
+<view class="sign-detail-container container flex-column">
+    <!-- 状态 -->
+    <view class="public-apply-detail-top flex-align-items-center">
+        <view class="detail-top-l flex-1">
+            <view class="top-l-status">{{orderBaseInfo.statusName}}</view>
+            <view class="top-l-tip">{{orderBaseInfo.stockroomName}} 领取</view>
+        </view>
+        <view class="detail-top-r flex-1">
+            <view class="top-r-id">ID:{{orderBaseInfo.ordersNo}}</view>
+            <view class="top-r-date">创建日期：{{orderBaseInfo.createDate}}</view>
+        </view>
+    </view>
+
+    <!-- 领取步骤 -->
+    <view class="collar-steps flex-align-items-center" hidden="{{showDetailTab!='consumables'}}">
+        <view class="step-box flex-1">
+            <view class="step">1</view>
+            <view class="step-text">出示领用二维码</view>
+        </view>
+        <view class="step-box flex-1">
+            <view class="step">2</view>
+            <view class="step-text">清点物品</view>
+        </view>
+        <view class="step-box flex-1">
+            <view class="step">3</view>
+            <view class="step-text">出示身份二维码</view>
+        </view>
+    </view>
+    <view class="collar-steps flex-align-items-center" hidden="{{showDetailTab!='fixed'}}">
+        <view class="step-box flex-1">
+            <view class="step">1</view>
+            <view class="step-text">扫描资产编码</view>
+        </view>
+        <view class="step-box flex-1">
+            <view class="step">2</view>
+            <view class="step-text">清点物品</view>
+        </view>
+        <view class="step-box flex-1">
+            <view class="step">3</view>
+            <view class="step-text">确认签收</view>
+        </view>
+    </view>
+
+    <view class="sign-detail-main flex-1 overflow-auto">
+        <!-- tab -->
+        <view class="main-tabs">
+            <text class="tab {{showDetailTab=='consumables'?'active':''}}" data-tab="consumables" wx:if="{{consumablesList.length>0}}" bindtap="changeDetailTab">耗材（{{consumablesList.length}}）</text>
+            <text class="tab {{showDetailTab=='fixed'?'active':''}}" data-tab="fixed" wx:if="{{fixedList.length>0}}" bindtap="changeDetailTab">资产（{{fixedList.length}}）</text>
+        </view>
+        <!-- 耗材列表 -->
+        <view class="consum-container" hidden="{{showDetailTab!='consumables'}}" wx:if="{{consumablesList.length>0}}">
+            <view class="public-consum-item {{consumablesList[0].statusCode=='received'?'consum-has-sign-item':''}}">
+                <view class="item-title flex">
+                    <text class="flex-1">耗材明细</text>
+                    <text>领取总数：{{consumablesTotalCount}}</text>
+                </view>
+                <view class="item-content">
+                    <view class="content-title flex">
+                        <view class="content-name flex-1">物品名称</view>
+                        <view class="content-spec word-break">单位</view>
+                        <view class="content-num">领用数量</view>
+                        <view class="content-num">签收数量</view>
+                    </view>
+                    <view class="content-list" wx:for="{{consumablesList}}" wx:key="index">
+                        <view class="list-item flex">
+                            <view class="content-name flex-1">{{item.name}}</view>
+                            <view class="content-spec word-break">{{item.stockUnit}}</view>
+                            <view class="content-num">{{item.totalCount}}</view>
+                            <view class="content-num">{{item.receiveCount}}</view>
+                        </view>
+                    </view>
+                    <!-- <view class="content-btn" wx:if="{{orderBaseInfo.statusCode=='wait_receive' && consumablesList[0].statusCode=='wait_receive'}}">
+                        <text class="operate-btn" bindtap="cancelConsumDetail">取消领用</text>
+                    </view> -->
+                </view>
+            </view>
+        </view>
+        <!-- 资产容器 -->
+        <view class="assets-container" hidden="{{showDetailTab!='fixed'}}" wx:if="{{fixedList.length>0}}">
+            <view class="public-assets-total flex">
+                <view class="flex-1">资产明细</view>
+                <view>领用总数：{{fixedTotalCount}}</view>
+            </view>
+            <view class="public-assets-list">
+                <view class="list-item" wx:for="{{fixedList}}" wx:key="index">
+                    <view class="item-title flex">
+                        <view class="flex-1 title-name ellipsis-one">{{item.name}}</view>
+                        <view class="title-num" wx:if="{{item.assetBarcode}}">资产编号: {{item.assetBarcode}}</view>
+                    </view>
+                    <view class="item-content {{item.statusCode=='received'?'assets-has-sign-item':''}} flex">
+                        <view class="content-img img-box">
+                            <image mode="aspectFit" src="{{item.displayImgUrl}}"></image>
+                        </view>
+                        <view class="content-detail flex-1 flex-column">
+                            <view class="detail-top">
+                                <view>
+                                    <text class="type">{{item.specificationName}}</text>
+                                </view>
+                                <view>{{item.statusName}}</view>
+                                <!-- <view class="content-btn" style="margin-top: 20rpx;"
+                                      wx:if="{{orderBaseInfo.statusCode=='wait_receive' && item.statusCode=='wait_receive'}}">
+                                    <text class="operate-btn" data-index="{{index}}" bindtap="cancelFixedDetail">取消领用</text>
+                                </view> -->
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <!-- 底部按钮 -->
+    <view class="collar-bottom">
+        <view class="collar-time-limit" wx:if="{{orderBaseInfo.statusCode=='wait_receive'}}">
+            仓库领取，领取时限是{{orderBaseInfo.expirationTime}}
+        </view>
+        <view class="bottom-operates flex" wx:if="{{orderBaseInfo.statusCode=='wait_receive'}}">
+            <view class="flex-1 operate-l" bindtap="showOrderQrcode">领用二维码</view>
+            <view class="flex-1 operate-r" wx:if="{{fixedTotalCount>0}}" hidden="{{showDetailTab!='fixed'}}" bindtap="scanReceipt">扫码签收</view>
+<!--            <view class="flex-1 operate-r" wx:if="{{consumablesTotalCount>0}}" hidden="{{showDetailTab!='consumables'}}" bindtap="goReceipt">去签收</view>-->
+            <view class="flex-1 operate-r" wx:if="{{consumablesTotalCount>0}}" hidden="{{showDetailTab!='consumables'}}" bindtap="refresh">刷新</view>
+            <view class="flex-1 operate-l" wx:if="{{consumablesTotalCount>0}}" hidden="{{showDetailTab!='consumables'}}" bindtap="showIdentityCode">身份二维码</view>
+        </view>
+    </view>
+</view>

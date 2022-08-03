@@ -1,0 +1,42 @@
+<!--pages/applyPages/applyCalendar/applyCalendar.wxml-->
+<view class="container">
+  <view class="year-month flex">
+    <view class="year color-purple">
+      <picker mode="date" fields="year" value="{{year}}" bindchange="changeYear">
+        {{year}}年
+      </picker>
+    </view>
+    <view class="month flex-1">
+      <scroll-view scroll-x="true" class="scroll-box">
+        <text class="month-item {{currentMonth == index ? 'color-purple':''}}" wx:for="{{months}}" data-month="{{index}}" wx:key="index" bindtap="changeMonth">
+          <text>{{item}}</text>
+          <text wx:if="{{currentMonth == index}}" class="line color-purple"></text>
+        </text>
+      </scroll-view>
+    </view>
+  </view>
+  <view class="calendar-box">
+    <calendarEle id='calendar'></calendarEle>
+  </view>
+  <view class="apply-box">
+    <view class="apply-title">当日提交申领</view>
+    <view class="apply-item">
+      <view class="item-top flex">
+        <view class="item-num flex-1">ID:20116666666</view>
+        <view class="item-time">08:20</view>
+      </view>
+      <view class="item-content flex-align-items-center">
+        <view class="content-img img-box">
+          <image class="img" src="{{aliyunBaseImgUrlPre}}images/logo.png"></image>
+        </view>
+        <view class="content-intro">
+          <view class="content-status">
+            <text>已交付</text>
+            <text class="content-num">(共3件)</text>
+          </view>
+          <view class="content-tip">2个领用单已全部签收</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

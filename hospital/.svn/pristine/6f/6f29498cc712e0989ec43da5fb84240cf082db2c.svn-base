@@ -1,0 +1,182 @@
+<!--pages/index/apply/apply.wxml-->
+<view class="container">
+  <!-- 个人信息 -->
+  <view class="person-info flex">
+    <view class="person-info-l flex-1 flex" bindtap="goPersonCenter">
+      <open-data type='userAvatarUrl' class="person-head img-box">
+        <image class="img" src="{{aliyunBaseImgUrlPre}}images/logo.png"></image>
+      </open-data>
+      <view class="person-intro flex-1">
+        <view class="person-name">
+          <text>{{userInfo.realName}}</text>
+          <!-- <text class="person-type">普通用户</text> -->
+        </view>
+        <!-- <view class="person-work">{{userInfo.orgName}}</view> -->
+      </view>
+    </view>
+    <view class="work-info">
+      <view class="work-num">工号：{{userInfo.workNo}}</view>
+      <view class="work-dept">{{userDeptNames}}</view>
+    </view>
+    <view class="bulletin-container">
+      <view class="bulletin-box flex">
+        <text class="iconfont icontongzhi-new-01">
+        </text>
+        <view wx:if="{{msgList.length > 0}}" class="bulletin-l flex-1 flex-shink-1 ellipsis-one">
+          <swiper style="height:100%" autoplay circular interval="3000" vertical="true">
+            <swiper-item class="img-box" wx:for="{{msgList}}" wx:key='index' data-data="{{item}}" bindtap="goNoticeDetail">
+              <text>{{item.tittle}}</text>
+            </swiper-item>
+          </swiper>
+        </view>
+        <view wx:else class="bulletin-l flex-1 flex-shink-1 ellipsis-one" bindtap="goMore">
+          <text>暂时没有新消息</text>
+        </view>
+
+        <view class="bulletin-r" bindtap="goMore">
+          <text wx:if="{{msgList.length > 0}}" class="dot"></text>
+          <text class="iconfont iconyoujiantou-new-01"></text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!-- 广告轮播图 -->
+  <view class="swiper-box">
+    <swiper class="swiper" autoplay circular>
+      <swiper-item class="img-box" wx:for="{{bannerList}}" wx:key='index' bindtap="goBanner" data-data="{{item}}">
+        <image class="img" src="{{item.imgUrl}}"></image>
+      </swiper-item>
+      <!--      <swiper-item class="img-box">-->
+      <!--        <image class="img" src="{{aliyunBaseImgUrlPre}}images/banner.png"></image>-->
+      <!--      </swiper-item>-->
+    </swiper>
+  </view>
+  <!-- 操作栏 -->
+  <view class="operate-container">
+    <view class="operate-box flex">
+      <navigator class=" flex-1 operate-item operate-apply flex-align-items-center" url="/pages/applyPages/applyRes/applyRes">
+        <view class="operate-item-img img-box">
+          <image class="img" src="{{aliyunBaseImgUrlPre}}images/operate-apply.png"></image>
+        </view>
+        <view class="flex-1 operate-text" style="align-items: center;">
+          <view class="text-width">物品</view>
+          <view class="text-width">申领</view>
+        </view>
+      </navigator>
+
+      <!-- <navigator class="flex-1 operate-item operate-fix flex-align-items-center"
+                  url="/pages/repair/repairDeclare/repairDeclare"> -->
+      <view class="flex-1 operate-item operate-fix flex-align-items-center" bindtap="goRepair">
+        <view class="operate-item-img img-box">
+          <image class="img" src="{{aliyunBaseImgUrlPre}}images/operate-fix.png"></image>
+        </view>
+        <view class="flex-1 operate-text">
+          <view>维修</view>
+          <view>管理</view>
+        </view>
+      </view>
+      <!-- <view class="flex-1 operate-item operate-anti flex-align-items-center" bindtap="GoAntiEpidemic">
+        <view class="operate-item-img img-box">
+          <image class="img" src="{{aliyunBaseImgUrlPre}}images/operate-apply.png"></image>
+        </view>
+        <view class="flex-1 operate-text">
+          <view>应急</view>
+          <view>抗疫</view>
+        </view>
+      </view> -->
+      <!-- </navigator> -->
+      <navigator class="flex-1 operate-item operate-code flex-align-items-center" url="/pages/qrCode/qrCode">
+        <view class="operate-item-img img-box">
+          <image class="img" src="{{aliyunBaseImgUrlPre}}images/operate-code.png"></image>
+        </view>
+        <view class="flex-1 operate-text">
+          <view>二维码</view>
+          <view>名片</view>
+        </view>
+      </navigator>
+    </view>
+  </view>
+  <!-- <view class="operate-container">
+    <view class="operate-box flex">
+      <view class="flex-1 operate-item operate-anti flex-align-items-center" bindtap="GoAntiEpidemic">
+        <view class="operate-item-img img-box">
+          <image class="img" src="{{aliyunBaseImgUrlPre}}images/operate-apply.png"></image>
+        </view>
+        <view class="flex-1 operate-text">
+          <view>应急</view>
+          <view>抗疫</view>
+        </view>
+      </view>
+      <view class="flex-1 operate-item flex-align-items-center">
+
+      </view>
+      <view class="flex-1 operate-item flex-align-items-center"></view>
+    </view>
+  </view> -->
+
+  <!-- 申领单 -->
+  <view class="apply-list-container">
+    <view class="apply-list-title flex">
+      <view class="flex-1">我的申领单</view>
+      <navigator url="/pages/applyPages/hasApplyList/hasApplyList">
+        <text>更多</text>
+        <text class="iconfont iconyoujiantou-new-01"></text>
+      </navigator>
+    </view>
+    <view class="list-item" wx:for="{{applyList}}" wx:key='item'>
+      <view class="item-top flex">
+        <view class="item-id flex-1">ID:{{item.ordersNo}}</view>
+        <view class="item-time"><text class="iconfont iconshijian-01"></text>{{item.applyTimeShowStr}}</view>
+      </view>
+      <view class="item-center flex-align-items-center" data-entityid="{{item.entityId}}" bindtap="goApplyDetail">
+        <view class="center-l flex-1 flex">
+          <view class="center-l-head img-box">
+            <open-data type='userAvatarUrl' class="img"></open-data>
+          </view>
+          <view class="center-detail flex-1 flex-shink-1">
+            <view class="detail-t">
+              <!--              <text class="detail-status">{{item.statusName}}</text>-->
+              <text class="detail-status">{{item.progressDesc}}</text>
+              <!--              <text class="detail-num">(共{{item.detailCount}}项)</text>-->
+            </view>
+            <view class="detail-intro">
+              共{{item.detailCount}}项
+              <!--              {{item.progressDesc}}-->
+            </view>
+          </view>
+        </view>
+        <view class="center-r">
+          <view class="detail-operate">
+            <text>查看详情</text>
+            <text class="iconfont iconyoujiantou-new-01"></text>
+          </view>
+        </view>
+      </view>
+      <!-- 非取消进度条 -->
+      <view class="public-collor-step flex-align-items-center" wx:if="{{item.statusCode !== 'canceled'}}">
+        <view class="step-rate flex-shink-1" style="width:{{item.receiveRate}}%"></view>
+        <view class="step-num flex-shink-0">
+          {{item.receiveRate}}%
+        </view>
+      </view>
+      <!-- 已取消进度条 -->
+      <view class="public-collor-step flex-align-items-center" wx:else>
+        <view class="step-rate step-cancel-rate">
+        </view>
+      </view>
+    </view>
+    <!-- 空图片 -->
+    <view class="empty-box" wx:if="{{!isLoadingFlag && applyList.length <= 0}}">
+      <image class="empty-img" src="{{aliyunBaseImgUrlPre}}images/empty.png"></image>
+      <view class="empty-tip">暂无单据</view>
+    </view>
+  </view>
+  <!-- 扫码 -->
+  <view class="scan-box box-shadow flex-center" bindtap="scan">
+    <image class="scan" src='{{aliyunBaseImgUrlPre}}images/scan-icon.png'></image>
+  </view>
+  <!--  <view bindtap="gologin">-->
+  <!--    登录-->
+  <!--  </view>-->
+  <!-- <sog-dialog class="wxc-dialog"  bind:myevent='onShow'></sog-dialog> -->
+</view>

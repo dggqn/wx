@@ -1,0 +1,85 @@
+<!--pages/AntiEpidemicPages/AntiEpidemic-Taskdetails/AntiEpidemic-Taskdetails.wxml-->
+<view class="flex-column">
+  <view class="address-info-box">
+    <view class="address-bg linear-bg"></view>
+    <view class="address-info flex-align-items-center">
+      <!-- 填写填报人信息 -->
+      <van-cell-group inset>
+        <van-field value="{{ Submit_UserInfo.deptName}}" left-icon="wap-home-o" clearable label="科室" placeholder="请输入科室名" bind:change="deptNameChange" />
+        <van-field value="{{ Submit_UserInfo.linkman }}" left-icon="friends-o" clearable label="申领人" placeholder="请输入领取人姓名" bind:change="linkmanChange" />
+        <van-field value="{{ Submit_UserInfo.linktel }}" left-icon="phone-o" clearable label="申领人手机号" type="number" placeholder="请输入本人手机号" bind:change="linktelChange" />
+        <!-- <van-field value="{{ taskDetail.supplyName }}" left-icon="send-gift-o" clearable label="物资名称：" placeholder="" readonly="true" /> -->
+
+        <van-field wx:if="{{taskDetail.status == 1}}" value="{{ Submit_UserInfo.reAddress }}" left-icon="location-o" clearable label="收货地址" placeholder="例如楼栋号，几层几室" bind:change="addressChange" />
+
+        <van-cell title="数量">
+          <van-stepper value="{{ Submit_quantity }}" bind:change="onChange" />
+        </van-cell>
+
+          <van-field wx:if="{{taskDetail.status == 1}}" value="{{ Submit_UserInfo.reRemark }}" clearable label="备注" placeholder="（非必填）" bind:change="remarksChange" />
+
+      </van-cell-group>
+      <view class="bottom-bg"></view>
+    </view>
+  </view>
+  <!-- 任务信息 -->
+  <view class="">
+    <van-cell title="任务名：" value="{{taskDetail.name}}" />
+    <!-- <van-cell center title="任务描述" value="description-富文本"/> -->
+
+  </view>
+  <view class="spec-item">
+    <view class="item-title">任务描述：</view>
+    <view class="item-detail">
+      <rich-text nodes="{{taskDetail.description}}"></rich-text>
+    </view>
+  </view>
+  <view class="">
+    <van-cell title="物资名称：" value="{{taskDetail.supplyName}}" />
+    <van-cell title="起始时间：" value="{{taskDetail.openTime}}" />
+    <van-cell title="截至时间：" value="{{taskDetail.closeTime}}" />
+    <van-cell title="任务联系人：" icon="friends" value="{{taskDetail.linkman}}" />
+    <van-cell title="联系手机号：" icon="phone" value="{{taskDetail.linktel}}" />
+  </view>
+
+
+
+  <!-- 物品列表 -->
+  <!-- <view class="car-list-container flex-column">
+    <view class="car-list flex-1 overflow-auto">
+      <view class="list-item flex" wx:for="{{3}}" wx:key="index">
+        <view class="item-img img-box">
+          <image mode="aspectFit" src=""></image>
+        </view>
+        <view class="item-r flex-1">
+          <view class="item-title ellipsis-two">可申请物品{{item + 1}}</view>
+          <view class="item-spec">
+            <view class="spec ellipsis-one">specificationName</view>
+          </view>
+          <view class="item-remark"></view>
+          <view class="item-num flex">
+            <view class="flex-1"></view>
+            <view class="item-num-r flex-align-items-center">
+              <view class="item-num-cut img-box" data-minvalue="0" data-path="applyList.{{index}}.totalCount" data-arrayremovevalue="0" data-count="-1" bindtap="commomCountChange">
+                <image class="img" src="{{aliyunBaseImgUrlPre}}images/cut-btn.png" />
+              </view>
+              <input type="number" class="item-num-ipt" style="width: 90rpx" value="{{item.totalCount}}" data-path="applyList.{{index}}.totalCount" data-minvalue="0" bindinput="viewValueChange" data-arrayremovevalue="0" />
+              <view class="item-num-add img-box" data-minvalue="0" data-path="applyList.{{index}}.totalCount" data-arrayremovevalue="0" data-count="1" bindtap="commomCountChange">
+                <image class="img" src="{{aliyunBaseImgUrlPre}}images/add-btn.png" />
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view> -->
+
+  <view style="width: 100%;height: 130rpx;"></view>
+  <!-- 申领按钮 -->
+  <view class="confirm-update flex-align-items-center">
+    <view class="update-btn" bindtap="submitList" style="background-color: white;">填报记录</view>
+    <view class="update-btn purple-bg" bindtap="submitApplyInsert" wx:if="{{taskDetail.status == 1}}">
+      + 提交申领
+    </view>
+  </view>
+</view>

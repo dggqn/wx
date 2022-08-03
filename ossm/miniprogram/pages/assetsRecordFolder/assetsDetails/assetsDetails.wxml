@@ -1,0 +1,52 @@
+<view class="header-nav flex-between-center">
+  <view
+    class="nav-item {{navActive === 'basic'?'nav-item-active':''}}"
+    data-info="basic"
+    bindtap="flagNavClass"
+  >基本信息</view>
+  <view
+    class="nav-item {{navActive === 'management'?'nav-item-active':''}}"
+    data-info="management"
+    bindtap="flagNavClass"
+  >管理信息</view>
+</view>
+
+
+<view wx:if="{{navActive === 'basic'}}">
+  <van-cell-group>
+    <van-cell title="物品名称" value="{{assetDetail.name}}"/>
+    <van-cell title="状态">
+      <view class="state {{assetDetail.statusCode === 'in_use'?'green':'red'}}">{{assetDetail.statusName}}</view>
+    </van-cell>
+    <van-cell title="单位" value="{{assetDetail.stockUnit}}" />
+    <van-cell title="规格型号">
+        <view class="ellipsis-one">{{assetDetail.specificationName}}</view>
+    </van-cell>
+    <van-cell title="资产ID" value="{{assetDetail.assetBarcode}}" />
+    <van-cell title="序列号" value="{{assetDetail.snNo}}" />
+    <van-cell title="购入时间" value="{{assetDetail.buyingDate}}" />
+    <van-cell title="维保到期" value="{{assetDetail.guaranteeEndDate}}" />
+    <view class="cell-img-box">
+    <image class="img" mode="aspectFit" src="{{assetDetail.displayImgUrl}}"></image>
+    </view>
+  </van-cell-group>
+</view>
+
+<view wx:if="{{navActive === 'management'}}">
+  <van-cell-group>
+<!--    <van-cell title="领用来源" value="仓库领用111" />-->
+    <van-cell title="所属部门" value="{{assetDetail.ownerDeptName}}" />
+    <van-cell title="责任人" value="{{assetDetail.ownerUname}}" />
+    <van-cell title="管理员" value="{{assetDetail.manageUname}}" />
+    <van-cell title="财务编码" value="{{assetDetail.customCode}}" />
+  </van-cell-group>
+</view>
+
+<view class="assets-details-operation box-shadow">
+  <button class="btn box-shadow" data-type="change" bindtap="jumpAssetsChange"
+          wx:if="{{showChangeButton && (!assetDetail.lockFlag || assetDetail.lockFlag<=0)}}">变更</button>
+  <button class="btn box-shadow" bindtap="receiveAssets" wx:if="{{showReceiveButton}}">接收</button>
+  <button class="btn blue box-shadow" data-type="scrap" bindtap="jumpAssetsChange"
+          wx:if="{{showChangeButton && (!assetDetail.lockFlag || assetDetail.lockFlag<=0)}}">报废</button>
+</view>
+<view class="removeFixed"></view>

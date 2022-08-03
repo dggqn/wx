@@ -1,0 +1,105 @@
+<!--pages/repair/RepairmanPage/RepairOrder/RepairOrder.wxml-->
+<view class="container overflow-auto">
+  <view class="repair-declare-top">
+    <!-- tab切换 -->
+     <view class="top-tabs flex-align-items-center">
+      <view data-tab='1' class="tab flex-1 {{tab=='1'?'active':''}}" bindtap="changeTab">
+        <text>全部 ({{listcountAll}})</text>
+        <text wx:if="{{tab==='1'}}" class="bottom-line"></text>
+      </view>
+      <view wx:if="{{userLevel=='2'}}" data-tab='2' class="tab flex-1 {{tab=='2'?'active':''}}" bindtap="changeTab">
+        <text>待分配 ({{listcount2}})</text>
+        <text wx:if="{{tab==='2'}}" class="bottom-line"></text>
+      </view>
+      <view wx:if="{{userLevel=='1'}}" data-tab='3' class="tab flex-1 {{tab=='3'?'active':''}}" bindtap="changeTab">
+        <text>待接收 ({{listcount3}})</text>
+        <text wx:if="{{tab==='3'}}" class="bottom-line"></text>
+      </view>
+      <view data-tab='4' class="tab flex-1 {{tab=='4'?'active':''}}" bindtap="changeTab">
+        <text>处理中 ({{listcount4}})</text>
+        <text wx:if="{{tab==='4'}}" class="bottom-line"></text>
+      </view>
+      <view wx:if="{{userLevel=='0'}}" data-tab='5' class="tab flex-1 {{tab=='5'?'active':''}}" bindtap="changeTab">
+        <text>待评价 ({{listcount5}})</text>
+        <text wx:if="{{tab==='5'}}" class="bottom-line"></text>
+      </view>
+      <view wx:if="{{userLevel=='0'}}" data-tab='6' class="tab flex-1 {{tab=='6'?'active':''}}" bindtap="changeTab">
+        <text>已评价 ({{listcount6}})</text>
+        <text wx:if="{{tab==='6'}}" class="bottom-line"></text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 待接单 -->
+  <view class="apply-repair-list">
+    <view class="repair-list-box">
+      <view class="list-item" wx:for="{{repairList}}" wx:key="index" data-type="btninfo" bindtap="goDetail" data-itemDetail="{{item}}">
+        <view wx:if="{{item.status=='0'}}" class="item-status">草稿箱</view>
+        <view wx:if="{{item.status=='1'}}" class="item-status">待分配</view>
+        <view wx:if="{{item.status=='2'}}" class="item-status">待接受</view>
+        <view wx:if="{{item.status=='3'}}" class="item-status">待完成</view>
+        <view wx:if="{{item.status=='4'}}" class="item-status">已驳回</view>
+        <view wx:if="{{item.status=='5'}}" class="item-status">待评价</view>
+        <view wx:if="{{item.status=='6'}}" class="item-status-accept">已关闭</view>
+        <view wx:if="{{item.status=='7'}}" class="item-status-accept">已评价</view>
+        <view class="item-title">编号：{{item.taskId}}</view>
+        <view class="item-detail flex">
+          <view class="item-detail-img img-box" wx:if="{{item.imageUrl}}">
+            <image class="img" src="{{item.imageUrl}}"></image>
+          </view>
+          <view class="item-detail-img img-box" wx:else>
+            <image class="img" src="{{aliyunBaseImgUrlPre}}images/default.png"></image>
+          </view>
+          <view class="item-detail-box flex-1">
+            <view  wx:if="{{item.assetsName}}" class="detail-type">
+              <text class="type-l">维修资产：</text>
+              <text class="type-r">{{item.assetsName}}</text>
+            </view>
+            <view class="detail-type">
+              <text class="type-l">维修地址：</text>
+              <text class="type-r">{{item.position}}</text>
+            </view>
+            <view class="detail-type">
+              <text class="type-l">报修时间：</text>
+              <text class="type-r">{{item.createTime}}</text>
+            </view>
+            <view class="detail-problem">
+              <text class="problem-l">描述：</text>
+              <text class="problem-r">{{item.description}}</text>
+            </view>
+          </view>
+        </view>
+        <block wx:if="{{item.status=='0'}}">
+          <view class="item-operate" catchtap="goDetail" data-type="btn0" data-itemDetail="{{item}}">
+            <text class="operate-btn">待提交</text>
+          </view>
+        </block>
+        <block wx:if="{{item.status=='1' && userLevel=='2'}}">
+          <view class="item-operate">
+            <text class="operate-btn" catchtap="goDetail" data-type="btn1" data-itemDetail="{{item}}">待分配</text>
+            <text class="operate-btn" catchtap="goDetail" data-type="btnClose" data-itemDetail="{{item}}">关闭任务</text>
+          </view>
+        </block>
+        <block wx:if="{{item.status=='4' && userLevel=='1'}}">
+          <view class="item-operate">
+            <text class="operate-btn" catchtap="goDetail" data-type="btn4" data-itemDetail="{{item}}">去完成</text>
+          </view>
+        </block>
+        <block wx:if="{{item.status=='5'  && userLevel=='0'}}">
+          <view class="item-operate">
+            <text data-type="btn4" catchtap="goDetail" class="operate-btn" data-itemDetail="{{item}}">返修</text>
+            <text data-type="btn5" catchtap="goDetail" class="operate-btn" data-itemDetail="{{item}}">去评价</text>
+          </view>
+        </block>
+      </view>
+    </view>
+  </view>
+  <!--底部按钮的背景层-->
+  <view class="baise"></view>
+  <!--底部按钮-->
+  <view class="anniu">
+    <view class="bdstk"  bindtap="goAddDetail">
+     <text>我要报修</text> 
+    </view>
+  </view>
+</view>

@@ -1,0 +1,202 @@
+<view class="input-box" wx:if="{{!assetBarcode||keywords}}">
+  <input
+          class="ipt"
+          type="text"
+          placeholder="请输入资产ID或序列号"
+          placeholder-class="placeholder-ipt" bindinput="changeAssetBarcode" bindblur="loadAssetData"
+  ><text class="identify" bindtap="loadAssetData">识别</text></input>
+</view>
+
+
+<view wx:if="{{assetBarcode}}">
+  <view class="assetInventory">
+    <!-- 卡片 -->
+    <view class="assetInventory-card box-shadow">
+      <view class="card-header flex-between-center">
+        <text>资产ID:{{assetBarcode}}</text>
+        <text>序列号:{{assetData.snNo}}</text>
+      </view>
+
+      <view class="card-info flex">
+        <view><image class="image" src="{{assetData.displayImgUrl}}"></image></view>
+        <view class="card-info-font">
+          <view class="card-info-font-item title ellipsis-two">{{assetData.name}}</view>
+          <view class="card-info-font-item flex">
+            <view class="specifications">规格：</view>
+            <view class="content ellipsis-one">{{assetData.specificationName}}</view>
+          </view>
+          <view class="card-info-font-item flex-between-center">
+            <view>单位：{{assetData.stockUnit}}</view>
+            <view>{{assetData.checkTaskStatusName}}</view>
+            <!-- 这里文字需要三个，因为一共有四个，分别是未盘，已盘，待定 -->
+          </view>
+        </view>
+      </view>
+      <!-- 下面这里也需要更换或者隐藏，具体要问设计怎么定义的 -->
+      <view class="describe">
+        该资产{{assetData.checkTaskStatusName?assetData.checkTaskStatusName:'待盘盈'}}
+      </view>
+    </view>
+
+
+    <!-- 已盘 -->
+    <view wx:if="{{assetData.checkTaskStatusName==='已盘点' || assetData.checkTaskStatusName==='盘盈'}}">
+      <view class="asset-details flex" wx:if="{{assetData.labelPhoto}}">
+        <view class="asset-details-item">
+          <view class="title">资产标签照片</view>
+          <view><image class="img" src="{{assetData.labelPhoto}}"></image></view>
+        </view>
+        <view class="asset-details-item">
+          <view class="title">设备图片</view>
+          <view><image class="img" src="{{assetData.devicePhoto}}"></image></view>
+        </view>
+      </view>
+      <view class="sign" wx:if="{{assetData.mark}}">
+        <text>添加标记：</text>
+        <text>{{assetData.mark}}</text>
+      </view>
+    </view>
+    </view>
+    <!-- 未盘 -->
+    <view wx:if="{{assetData.checkTaskStatusName==='待盘点'||assetData.checkTaskStatusName==='待定'}}">
+      <view class="inventory-item">
+        <view class="title">资产标签照片</view>
+        <view class="content flex">
+          <view>
+            <image class="upload" mode="aspectFit" catchtap="uploadImg"  data-photo="labelPhoto" src="{{assetData.labelPhoto?assetData.labelPhoto:'https://hospital-assets-image-public.oss-cn-shanghai.aliyuncs.com/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/%E4%B8%8A%E6%B5%B7%E7%AC%AC%E5%9B%9B%E4%BA%BA%E6%B0%91%E5%8C%BB%E9%99%A2/images/uolpad.png'}}"></image>
+          </view>
+          <view class="info flex">
+            <view><image class="img" src="https://hospital-assets-image-public.oss-cn-shanghai.aliyuncs.com/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/%E4%B8%8A%E6%B5%B7%E7%AC%AC%E5%9B%9B%E4%BA%BA%E6%B0%91%E5%8C%BB%E9%99%A2/images/asssets-default-one.jpg"></image></view>
+            <view>摄像头正对标签拍照，照片中应显示完整的标签，并能清晰的看到标签编码</view>
+          </view>
+        </view>
+      </view>
+      <view class="inventory-item">
+        <view class="title">设备照片</view>
+        <view class="content flex">
+          <view>
+            <image class="upload" mode="aspectFit" catchtap="uploadImg" data-photo="devicePhoto" src="{{assetData.devicePhoto?assetData.devicePhoto:'https://hospital-assets-image-public.oss-cn-shanghai.aliyuncs.com/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/%E4%B8%8A%E6%B5%B7%E7%AC%AC%E5%9B%9B%E4%BA%BA%E6%B0%91%E5%8C%BB%E9%99%A2/images/uolpad.png'}}"></image>
+          </view>
+          <view class="info flex">
+            <view><image class="img" src="https://hospital-assets-image-public.oss-cn-shanghai.aliyuncs.com/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/%E4%B8%8A%E6%B5%B7%E7%AC%AC%E5%9B%9B%E4%BA%BA%E6%B0%91%E5%8C%BB%E9%99%A2/images/asssets-default-two.jpg"></image></view>
+            <view>正对设备粘贴标签的一面拍摄，照片中应显示整个设备以及标签</view>
+          </view>
+        </view>
+      </view>
+      <view>
+        <view class="add-lable flex-between-center">
+          <view>添加标记：</view>
+          <view class="lable-content flex">
+            <view class="lable-item {{classFlag === '标签损坏'?'lable-item-active':''}}" data-class="标签损坏" bindtap="flagClass">
+              <image wx:if="{{classFlag === '标签损坏'}}" class="angle-of-the" src="https://hospital-assets-image-public.oss-cn-shanghai.aliyuncs.com/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/%E4%B8%8A%E6%B5%B7%E7%AC%AC%E5%9B%9B%E4%BA%BA%E6%B0%91%E5%8C%BB%E9%99%A2/images/angle-of-the.png"></image>
+              <text>标签损坏</text>
+            </view>
+            <view class="lable-item {{classFlag === '标签丢失'?'lable-item-active':''}}"   data-class="标签丢失" bindtap="flagClass">
+              <image wx:if="{{classFlag === '标签丢失'}}" class="angle-of-the" src="https://hospital-assets-image-public.oss-cn-shanghai.aliyuncs.com/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/%E4%B8%8A%E6%B5%B7%E7%AC%AC%E5%9B%9B%E4%BA%BA%E6%B0%91%E5%8C%BB%E9%99%A2/images/angle-of-the.png"></image>
+              <text>标签丢失</text>
+            </view>
+          </view>
+        </view>
+        <view class="flex-end" wx:if="{{assetData.checkTaskStatusName==='待盘点'}}" bindtap="canNotShow">
+          <view>无法盘点该资产？</view>
+          <view class="border"></view>
+        </view>
+      </view>
+    </view>
+
+  <view wx:if="{{!assetData.checkTaskStatusName}}">
+    <view class="inventory-item">
+      <view class="title">资产标签照片</view>
+      <view class="content flex">
+        <view>
+          <image class="upload" mode="aspectFit" catchtap="uploadImg"  data-photo="labelPhoto" src="{{assetData.labelPhoto?assetData.labelPhoto:'https://hospital-assets-image-public.oss-cn-shanghai.aliyuncs.com/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/%E4%B8%8A%E6%B5%B7%E7%AC%AC%E5%9B%9B%E4%BA%BA%E6%B0%91%E5%8C%BB%E9%99%A2/images/uolpad.png'}}"></image>
+        </view>
+        <view class="info flex">
+          <view><image class="img" src="https://hospital-assets-image-public.oss-cn-shanghai.aliyuncs.com/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/%E4%B8%8A%E6%B5%B7%E7%AC%AC%E5%9B%9B%E4%BA%BA%E6%B0%91%E5%8C%BB%E9%99%A2/images/asssets-default-one.jpg"></image></view>
+          <view>摄像头正对标签拍照，照片中应显示完整的标签，并能清晰的看到标签编码</view>
+        </view>
+      </view>
+    </view>
+    <view class="inventory-item">
+      <view class="title">设备照片</view>
+      <view class="content flex">
+        <view>
+          <image class="upload" mode="aspectFit" catchtap="uploadImg" data-photo="devicePhoto" src="{{assetData.devicePhoto?assetData.devicePhoto:'https://hospital-assets-image-public.oss-cn-shanghai.aliyuncs.com/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/%E4%B8%8A%E6%B5%B7%E7%AC%AC%E5%9B%9B%E4%BA%BA%E6%B0%91%E5%8C%BB%E9%99%A2/images/uolpad.png'}}"></image>
+        </view>
+        <view class="info flex">
+          <view><image class="img" src="https://hospital-assets-image-public.oss-cn-shanghai.aliyuncs.com/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/%E4%B8%8A%E6%B5%B7%E7%AC%AC%E5%9B%9B%E4%BA%BA%E6%B0%91%E5%8C%BB%E9%99%A2/images/asssets-default-two.jpg"></image></view>
+          <view>正对设备粘贴标签的一面拍摄，照片中应显示整个设备以及标签</view>
+        </view>
+      </view>
+    </view>
+    <view>
+      <view class="add-lable flex-between-center">
+        <view>添加标记：</view>
+        <view class="lable-content flex">
+          <view class="lable-item {{classFlag === '标签损坏'?'lable-item-active':''}}" data-class="标签损坏" bindtap="flagClass">
+            <image wx:if="{{classFlag === '标签损坏'}}" class="angle-of-the" src="https://hospital-assets-image-public.oss-cn-shanghai.aliyuncs.com/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/%E4%B8%8A%E6%B5%B7%E7%AC%AC%E5%9B%9B%E4%BA%BA%E6%B0%91%E5%8C%BB%E9%99%A2/images/angle-of-the.png"></image>
+            <text>标签损坏</text>
+          </view>
+          <view class="lable-item {{classFlag === '标签丢失'?'lable-item-active':''}}"   data-class="标签丢失" bindtap="flagClass">
+            <image wx:if="{{classFlag === '标签丢失'}}" class="angle-of-the" src="https://hospital-assets-image-public.oss-cn-shanghai.aliyuncs.com/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/%E4%B8%8A%E6%B5%B7%E7%AC%AC%E5%9B%9B%E4%BA%BA%E6%B0%91%E5%8C%BB%E9%99%A2/images/angle-of-the.png"></image>
+            <text>标签丢失</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+
+
+
+
+
+
+  <view class="submit-inventory box-shadow" wx:if="{{!assetData.checkTaskStatusName||assetData.checkTaskStatusName==='待定'||assetData.checkTaskStatusName==='待盘点'}}">
+      <button class="btn" bindtap="submitScanAsset">确认盘点</button>
+  </view>
+  <view class="removeFixed"></view>
+
+  <van-popup show="{{ canNotShow }}" bind:close="canNotClose" bind:after-enter="canNotLoading">
+    <view class="can-not">
+      <view class="can-not-header">无法盘点的资产是否设为待定？</view>
+      <view class="can-not-lable flex">
+        <view
+                class="lable-item {{assetData.mark === '人员出差中'?'lable-item-active':''}}"
+                data-class="人员出差中"
+                bindtap="flagCanNotLable"
+        >人员出差中</view>
+        <view
+                class="lable-item {{assetData.mark === '人员离职或退休'?'lable-item-active':''}}"
+                data-class='人员离职或退休'
+                bindtap="flagCanNotLable"
+        >人员离职或退休</view>
+        <view
+                class="lable-item {{assetData.mark === '其他'?'lable-item-active':''}}"
+                data-class='其他'
+                bindtap="flagCanNotLable"
+        >其他</view>
+      </view>
+      <view class="can-not-txra">
+        <view class="can-not-txra-box">
+          <textarea
+                  wx:if="{{txraShow}}"
+                  value="{{assetData.mark}}"
+                  bindinput="inputMark"
+                  class="txra"
+                  maxlength="50"
+                  placeholder="请填写无法盘点的理由(选填)"
+                  placeholder-style="font-szie:28rpx;color:#8393A8"
+          ></textarea>
+          <view class="limit">{{assetDataMarkLength}}/50</view>
+        </view>
+      </view>
+      <view class="can-not-division"></view>
+      <view class="can-not-btn-box flex">
+        <button class="btn" bindtap="canNotClose">取消</button>
+        <view class="division"></view>
+        <button class="btn" bindtap="canNotPopupSubmit">确定</button>
+      </view>
+    </view>
+  </van-popup>
+</view>

@@ -1,0 +1,29 @@
+<!--pages/repair/repairPoint/repairPoint.wxml-->
+<view class="container overflow-auto">
+  <view class="repair-main">
+      <!-- 我要报修 -->
+    <view class="repair-declare-apply">
+    <!-- 问题及描述 -->
+    <view wx:if="{{status == '4'}}"  class="repair-title">驳回原因</view>
+    <view wx:if="{{status == '5'}}"  class="repair-title">维修情况说明</view>
+    <view wx:if="{{status == '6'}}"  class="repair-title">关闭理由</view>
+    <view class="repair-reasons">
+      <view class="text-desc">
+        <textarea class="input-reason-area" bindinput="issueTextareaChange" value="{{comment}}"></textarea>
+      </view>
+    </view>
+    <view class="declare-apply-item-title">添加图片（最多三张）</view>
+        <view class="photo-box flex-space-between">
+          <van-uploader preview-size="180rpx" file-list="{{ fileList }}"
+                    accept='image' bind:after-read="afterRead" 
+                    bind:delete="deleteImg" max-count="3">
+          </van-uploader>
+        </view>
+      </view>
+      <view class="bottom-large-btn" bindtap="goDetail">
+        <text wx:if="{{status == '4'}}" class="operate-btn">驳回</text>
+        <text wx:if="{{status == '5'}}" class="operate-btn">完成</text>
+        <text wx:if="{{status == '6'}}" class="operate-btn">关闭</text>
+      </view>
+  </view>
+</view>

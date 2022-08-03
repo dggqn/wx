@@ -1,0 +1,20 @@
+<block wx:if="{{showDialog}}">
+  <view class="dialog_mask">
+    <view class='dialog_container'>
+      <view class="dialog__title" wx:if="{{subscribeMessage.title}}" style="color: {{subscribeMessage.titleColor}}">{{subscribeMessage.title}}</view>
+      <view class="dialog__content" wx:if="{{subscribeMessage.title}}">
+        <view class='log_wrap' wx:if="{{subscribeMessage.logImage && subscribeMessage.logName}}">
+          <view class='log_wrap--log' >
+          <image src="{{subscribeMessage.logImage}}" style="width:100%;height:100%" mode="widthFIX"></image></view>
+          <view class='log_wrap--text'>{{subscribeMessage.logName}}</view>
+        </view>
+        <view class="dialog__content--text" wx:if="{{subscribeMessage.content}}" style="color: {{subscribeMessage.contentColor}}">{{subscribeMessage.content}}</view>
+      </view>
+      <view class="dialog__btns">
+        <view class="dialog__btns--cancel" bindtap="cancelCallback">拒绝</view>
+        <button class="getUserInfo_btn" lang="zh_CN" bindtap="subscribeMessage">允许</button>
+
+      </view>
+    </view>
+  </view>
+</block>

@@ -1,0 +1,52 @@
+<!--pages/collarRecords/collarRecords.wxml-->
+<view class="flex-column container">
+  <view class="collar-records-top">
+    <view class="top-search">
+      <input class="search-ipt" placeholder="请输入物品名称或编号" placeholder-class="placeholder-style" bindinput="inputKeyword" bindblur="search">
+        <text class="iconfont iconsousuo-icon-01"></text>
+      </input>
+    </view>
+  </view>
+  <view class="collar-records-center">
+    <!-- <text class="type">按类别<text class="iconfont iconshuangyoujiantoufuzhi-01"></text>
+    <dropDownEle id="type-down" bind:selectSort="chooseType"></dropDownEle>
+    </text>
+    <text class="type">按时间<text class="iconfont iconshuangyoujiantoufuzhi-01"></text>
+    </text> -->
+      <van-dropdown-menu>
+        <van-dropdown-item value='' options="{{categoryOption}}" bind:change="getCategory"/>
+        <van-dropdown-item value=''  options="{{unitOption}}" bind:change="getTime"/>
+    </van-dropdown-menu>
+  </view>
+  <view class="collar-records-list public-list-box flex-1">
+    <view class="public-list"> 
+    <!-- <van-empty image="search" description="暂无领用记录" wx:if="{{!map || map.length<=0}}"/> -->
+      <view class="empty-box" wx:if="{{!map || map.length<=0}}">
+				<image class="empty-img" src="{{aliyunBaseImgUrlPre}}images/empty.png"></image>
+				<view class="empty-tip">暂无领用记录</view>
+			</view>
+      <view class="time-list" wx:for="{{map}}" wx:for-index='key'>
+        <view class="time">{{key}}</view>
+        <view class="list-item flex" wx:for="{{map[key]}}" wx:key='modelId'>
+          <view class="item-status" wx:if="{{item.modelType=='fixed'}}">{{item.dict.assetsStatus_dictText}}</view>
+          <view class="item-img img-box">
+            <image class="img" mode="aspectFit" src="{{item.displayImgUrl?item.displayImgUrl:aliyunBaseImgUrlPre+'images/default.png'}}"></image>
+          </view>
+          <view class="item-detail flex-1 flex-column">
+            <view class="detail-top">
+              <view class="detail-name">{{item.name}}</view>
+              <view class="detail-num" wx:if="{{item.modelType=='fixed'}}">资产编号  {{item.assetBarcode}}</view>
+              <view class="detail-num" wx:else>耗材编号  {{item.assetBarcode}}</view>
+            </view>
+            <view class="detail-bottom" wx:if="{{item.modelType=='fixed'}}">
+              <view class="detail-sign-date">签收日期：{{item.receiveTime}}</view>
+            </view>
+             <view class="detail-bottom" wx:else>
+              <view class="detail-sign-date">当日领用：{{item.receiveTotal}}</view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

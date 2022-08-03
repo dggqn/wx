@@ -1,0 +1,20 @@
+<block>
+  <view class="dialog_mask">
+    <view class='dialog_container'>
+      <view class="dialog__title" wx:if="{{title}}" style="color: {{titleColor}}">{{title}}</view>
+      <view class="dialog__content" wx:if="{{title}}">
+        <view class='log_wrap' wx:if="{{logImage && logName}}">
+          <view class='log_wrap--log' >
+          <image src="{{logImage}}" style="width:100%;height:100%" mode="widthFIX"></image></view>
+          <view class='log_wrap--text'>{{logName}}</view>
+        </view>
+        <view class="dialog__content--text" wx:if="{{content}}" style="color: {{contentColor}}">{{content}}</view>
+      </view>
+      <view class="dialog__btns">
+        <view class="dialog__btns--cancel" bindtap="cancelCallback">拒绝</view>
+<!--        <button class="getUserInfo_btn" lang="zh_CN"  open-type="getUserInfo" bindgetuserinfo="handleGetUserInfo">允许</button>-->
+        <button class="getUserInfo_btn" bindtap="getUserProfile">允许</button>
+      </view>
+    </view>
+  </view>
+</block>

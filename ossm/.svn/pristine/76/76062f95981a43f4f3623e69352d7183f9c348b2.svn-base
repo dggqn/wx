@@ -1,0 +1,13 @@
+<view class="agency-header flex-between-center">
+    <view wx:for="{{tabList}}" wx:key="item" class="agency-header-item {{showTab===item.code?'active':''}}"
+          catchtap="changeTab" data-tab="{{item.code}}">
+        {{item.name}}({{item.count}})
+    </view>
+</view>
+<change wx:if="{{showTab==='change'}}"></change>
+<check wx:if="{{showTab==='check'}}"></check>
+<scrap wx:if="{{showTab==='scrap'}}"></scrap>
+
+
+
+

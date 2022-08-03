@@ -1,0 +1,155 @@
+<!--miniprogram/pages/assetsTransfer/assetsDetail/taskDetail.wxml-->
+<view class="container flex-column">
+    <view class="top-tab-box flex-align-items-center">
+        <view data-tab="baseInfo" class="tab {{tab==='baseInfo'?'active':''}}" bindtap="changeTab">基本信息</view>
+        <view data-tab="checkInfo" class="tab {{tab==='checkInfo'?'active':''}}" bindtap="changeTab">盘点信息</view>
+    </view>
+    <view class="info-box flex-1 overflow-auto">
+        <block wx:if="{{tab === 'baseInfo'}}">
+            <view class="info-item-list">
+                <view class="info-item-box">
+                    <view class="info-item flex-align-items-center">
+                        <view class="item-l flex-1">物品名称</view>
+                        <view class="item-r"> {{asset.name}} </view>
+                    </view>
+                </view>
+                <view class="info-item-box">
+                    <view class="info-item flex-align-items-center">
+                        <view class="item-l flex-1">状态</view>
+                        <view class="item-r">
+<!--                            <text class="use-status">使用中</text>-->
+                            <text class="use-status transfer" wx:if="{{asset.statusCode === 'moving' }}">{{asset.statusName}}</text>
+                            <text class="use-status" wx:else>{{asset.statusName}}</text>
+                        </view>
+                    </view>
+                </view>
+                <view class="info-item-box">
+                    <view class="info-item flex-align-items-center">
+                        <view class="item-l flex-1">单位</view>
+                        <view class="item-r"> {{asset.stockUnit}} </view>
+                    </view>
+                </view>
+                <view class="info-item-box">
+                    <view class="info-item flex-align-items-center">
+                        <view class="item-l flex-1">规格型号</view>
+                        <view class="item-r"> {{asset.specificationName}} </view>
+                    </view>
+                </view>
+                <view class="info-item-box">
+                    <view class="info-item flex-align-items-center">
+                        <view class="item-l flex-1">资产ID</view>
+                        <view class="item-r"> {{asset.assetBarcode}} </view>
+                    </view>
+                </view>
+                <view class="info-item-box">
+                    <view class="info-item flex-align-items-center">
+                        <view class="item-l flex-1">序列号</view>
+                        <view class="item-r"> {{asset.snNo}} </view>
+                    </view>
+                </view>
+                <view class="info-item-box">
+                    <view class="info-item flex-align-items-center">
+                        <view class="item-l flex-1">所属部门</view>
+                        <view class="item-r"> {{asset.ownerDeptName}} </view>
+                    </view>
+                </view>
+                <view class="info-item-box">
+                    <view class="info-item flex-align-items-center">
+                        <view class="item-l flex-1">责任人</view>
+                        <view class="item-r"> {{asset.ownerUname}} </view>
+                    </view>
+                </view>
+            </view>
+            <view class="info-img">
+                <image mode="aspectFit" src="{{asset.displayImgUrl}}"></image>
+            </view>
+        </block>
+        <block wx:if="{{tab === 'checkInfo'}}">
+            <view class="info-item-list">
+                <view class="info-item-box">
+                    <view class="info-item flex-align-items-center">
+                        <view class="item-l flex-1">盘点状态</view>
+                        <view class="item-r"> {{asset.checkTaskStatusName}} </view>
+                    </view>
+                </view>
+                <view class="info-item-box" wx:if="{{asset.checkTaskStatusName !== '未盘'}}">
+                    <view class="info-item flex-align-items-center">
+                        <view class="item-l flex-1">操作时间</view>
+                        <view class="item-r"> {{asset.updateTime}} </view>
+                    </view>
+                </view>
+                <view class="info-item-box" wx:if="{{asset.mark && asset.checkTaskStatusName !== '待定'}}">
+                    <view class="info-item flex-align-items-center">
+                        <view class="item-l flex-1">盘点标记</view>
+                        <view class="item-r"> {{asset.mark}} </view>
+                    </view>
+                </view>
+                <view class="info-item-box" wx:if="{{asset.mark && asset.checkTaskStatusName === '待定'}}">
+                    <view class="info-item flex-align-items-center">
+                        <view class="item-l flex-1">待定理由</view>
+                        <view class="item-r"> {{asset.mark}} </view>
+                    </view>
+                </view>
+                <view class="asset-details flex" wx:if="{{asset.checkTaskStatusName !== '未盘' && asset.checkTaskStatusName !== '待定'}}">
+                    <view class="asset-details-item" style="margin-right: 20rpx;">
+                        <view class="title">资产标签照片</view>
+                        <view><image mode="aspectFit" class="img" src="{{asset.labelPhoto}}"></image></view>
+                    </view>
+                    <view class="asset-details-item">
+                        <view class="title">设备图片</view>
+                        <view><image mode="aspectFit" class="img" src="{{asset.devicePhoto}}"></image></view>
+                    </view>
+                </view>
+            </view>
+        </block>
+        <view class="confirm-btn flex-align-items-center"> 
+            <button class="btn" wx:if="{{asset.checkTaskStatusName==='未盘'}}" bindtap="canNotShow">无法盘点该资产</button>
+        </view>
+    </view>
+    <view class="removeFixed"></view>
+
+    <van-popup show="{{ canNotShow }}" bind:close="canNotClose" bind:after-enter="canNotLoading">
+        <view class="can-not">
+            <view class="can-not-header">无法盘点的资产是否设为待定？</view>
+            <view class="can-not-lable flex">
+                <view
+                        class="lable-item {{asset.mark === '人员出差中'?'lable-item-active':''}}"
+                        data-class="人员出差中"
+                        bindtap="flagCanNotLable"
+                >人员出差中</view>
+                <view
+                        class="lable-item {{asset.mark === '人员离职或退休'?'lable-item-active':''}}"
+                        data-class='人员离职或退休'
+                        bindtap="flagCanNotLable"
+                >人员离职或退休</view>
+                <view
+                        class="lable-item {{asset.mark === '其他'?'lable-item-active':''}}"
+                        data-class='其他'
+                        bindtap="flagCanNotLable"
+                >其他</view>
+            </view>
+            <view class="can-not-txra">
+                <view class="can-not-txra-box">
+                    <textarea
+                            wx:if="{{txraShow}}"
+                            value="{{asset.mark}}"
+                            bindinput="inputMark"
+                            class="txra"
+                            maxlength="50"
+                            placeholder="请填写无法盘点的理由（选填）"
+                            placeholder-style="font-szie:28rpx;color:#8393A8"
+                    ></textarea>
+                    <view class="limit">{{assetMarkValue}}/50</view>
+                </view>
+            </view>
+            <view class="can-not-division"></view>
+            <view class="can-not-btn-box flex">
+                <button class="btn" bindtap="canNotClose">取消</button>
+                <view class="division"></view>
+                <button class="btn" bindtap="canNotPopupSubmit">确定</button>
+            </view>
+        </view>
+    </van-popup>
+</view>
+
+<transferDialogEle id="transferDialog" selectedRows = "{{selectedRows}}" dialogType = "{{dialogType}}" bind:submitCallback = "submitCallback"></transferDialogEle>

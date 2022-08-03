@@ -1,0 +1,17 @@
+<view class="container">
+    <view class="code-box">
+        <view class="work-info">
+            <view class="work-info-item">
+                <text class="item-label">领用码：</text>
+                <text class="item-value">{{orderId}}</text>
+            </view>
+        </view>
+        <view class="qr-code-info">
+            <canvas class="qr-code-box img-box" style="width: 200px; height: 200px;" canvas-id="orderQrcode">
+            </canvas>
+            <view class="qr-code-tip">
+                签收物品前请出示领用二维码
+            </view>
+        </view>
+    </view>
+</view>

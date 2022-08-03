@@ -1,0 +1,274 @@
+/* pages/AntiEpidemicPages/AntiEpidemic-Submit/AntiEpidemic-Submit.wxss */
+.btm130{
+  margin-bottom: 130rpx;
+}
+.address-info-box {
+  padding: 0 30rpx;
+  position: relative;
+  box-sizing: border-box;
+  background-color: white;
+}
+
+.address-info-box .address-bg {
+  width: 100%;
+  height: 150rpx;
+  border-bottom-left-radius: 50rpx;
+  border-bottom-right-radius: 50rpx;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.address-info-box .address-info {
+  margin-top: 40rpx;
+  background: #fff;
+  min-height: 190rpx;
+  width: 100%;
+  position: relative;
+  z-index: 99;
+  padding-bottom: 5rpx;
+}
+
+.address-info-box .address-info .bottom-bg {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 5rpx;
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAuQAAAA3CAMAAABzT6//AAAAllBMVEUAAAD///+AgICAgP+A//+qqqqqqv+AgL+Av7+Av/+ZmcyAgKqAqtWSkraSktuAn7+An9+OjsaOqsaAmcx0i7mLi7mLotGAlb+AldV2icSJncSAksh3mbuImcw7lP8/lv9Wo/9xsv+Cu/+mzv/X6f/vZN3vZ97xeuLzj+b1nOn1+f/4uPD83/j84Pj+9/3+/v///v////+vqzvAAAAAHnRSTlMAAQICAgMDBAQEBQYGBwcICAkJCgsLCwwMDQ0ODw8J3537AAACjUlEQVR42u3ca3OTQBSA4Vq1XEIDgYRr7N1eta3//895zhJ1C1MDTofZ4vt8ZbbrOG/PbBPg4AAAAAAAAAAAAAAAAAAAAODNfQDeFeoGrb+W+KH6CDjKBDoycztv+RGfjM+Ao9pCTe1DK7cLb+M+Eh7gKO2zjd3ufFDjkrj27Xm+7wdBCDgqCCRRbV06l8wHVP67cZnikri/y3sBOGqXuq+ZyzQ/3Bv5n8ZljLeJR+oYcJQJdJe5DvO9lb9oXBJfSN/L5TIGnCWBSuky0YMXle+J3JxVdIxHkQaerEQKOEjbTDR0neaBb04sQyLXQa5zfCFTXApP00ytAeeYNCX1JJZpvjCz/Nco/3vkeljxns5Pui5+WJ5vv3bd2ddZz/pp18daue/pgWVY5Ef+ZW+Ps3t7k4fev/Hm0b7OetZPuz6WysNQDywDItfTiuefdvc4vbL3+Hbd3eP6u339ivWsn3b9Kl62o3x3XtkTuZ7Ie79Il/Yejze9X6QH+/r9GetZP+36NNFRrqfyIZHrn51hd4/zJ3uTu94et8/29YsT1rN+2vWZjvIw1D89h0YeRst4la3zoqqbpvkCOEryrKsiX/9z5FlelLVWvuU/Ey7aauN1WeTZuMjNmTyMjuMkzTY6yrXyZgs4pzGNyyDfZOPO5ObTFfkqyIzyjZnlbeeAa7TNUhvPRn260n5OHuoo18rlWF6UZVXVgHOqqiwLPZBL42M+J2+/8dRRrpXLd/rrTZ5L6YB7JM2NJJ6axkd848m9K5j9vSvchYjZ34XI/eSY//3kPBmEGT8ZxDOemP0znjytj/k/rc97VzD7967wBi3M/w1avAsR838XIm+1BW9wBmZQNwAAAAAAAAAA/4efqeP/bywcubsAAAAASUVORK5CYII=);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+/* list */
+.update-list {
+  padding: 30rpx;
+  background: #fff;
+  margin-top: 24rpx;
+}
+
+.update-list .list-item {
+  margin-bottom: 24rpx;
+}
+
+.list-item .item-top {
+  border: 1rpx solid #C4C4D9;
+  padding: 24rpx;
+  padding-bottom: 36rpx;
+  border-bottom: 0;
+  border-radius: 4rpx 4rpx 0 0;
+  background: #FBFBFF;
+}
+
+.list-item .item-top .item-img {
+  width: 160rpx;
+  height: 160rpx;
+  margin-right: 16rpx;
+}
+
+.list-item .item-top .item-detail .item-name {
+  color: #30304C;
+  font-size: 32rpx;
+}
+
+.list-item .item-top .item-detail .item-spec {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  color: #6F6F8E;
+  font-size: 24rpx;
+  margin-top: 8rpx;
+  line-height: 33rpx;
+}
+
+.list-item .item-top .item-detail .item-remark {
+  color: #9494C3;
+  font-size: 24rpx;
+}
+
+.list-item .item-bottom {
+  height: 54rpx;
+  line-height: 54rpx;
+  background: #C4C4D9;
+  text-align: right;
+  padding: 0 30rpx;
+  color: #30304C;
+  font-size: 24rpx;
+  font-weight: 500;
+}
+
+.update-list .look-more {
+  padding-top: 8rpx;
+  text-align: center;
+  font-size: 24rpx;
+  color: #30304C;
+}
+
+/* 申领理由 */
+.apply-reason {
+  height: 120rpx;
+  margin-bottom: 24rpx;
+  background: #fff;
+}
+
+.apply-reason .reason-l {
+  width: 190rpx;
+  height: 100%;
+  text-align: center;
+  line-height: 120rpx;
+  color: #fff;
+  font-size: 28rpx;
+}
+
+.apply-reason .reason-r {
+  height: 100%;
+}
+
+.apply-reason .reason-r .reason-textarea {
+  width: 100%;
+  height: 100%;
+  padding: 30rpx;
+  font-size: 24rpx;
+  box-sizing: border-box;
+}
+
+/* 确定申领 */
+.confirm-update {
+  height: 120rpx;
+  padding: 0 30rpx;
+  background: #fff;
+  box-sizing: border-box;
+  position: fixed;
+  bottom: 0rpx;
+  justify-content: flex-end;
+  z-index: 99;
+  border-top: 1rpx solid #ebedf0;
+  width: 100%;
+}
+
+.confirm-update .update-num {
+  color: #30304C;
+  font-size: 28rpx;
+}
+
+.confirm-update .update-btn {
+  width: 208rpx;
+  height: 80rpx;
+  text-align: center;
+  line-height: 80rpx;
+  border-radius: 40rpx;
+  font-size: 28rpx;
+  
+}
+
+.address-list-box {
+  height: 900rpx;
+}
+
+.address-list-box .list-top {
+  padding: 32rpx 30rpx;
+}
+
+.address-list-box .list-center {
+  padding-bottom: 30rpx;
+}
+
+.add-address-box {
+  height: 130rpx;
+  box-shadow: 0px -6px 14px 0px rgba(126, 145, 195, 0.2);
+}
+
+.add-address-box .add-address-btn {
+  border: 1rpx solid #6C66FA;
+  color: #6C66FA;
+  font-size: 28rpx;
+  padding: 17rpx 47rpx;
+  border-radius: 60rpx;
+}
+
+.empty-box {
+  margin-top: 120rpx;
+}
+
+/* components/addressCell/addressCell.wxss */
+@import '../../../styles/base.wxss';
+@import '../../../assets/iconfont/iconfont.wxss';
+
+.address-item {
+  border-bottom: 1rpx solid #E7E7F2;
+}
+
+.address-item .item-content {
+  padding: 30rpx 0;
+}
+
+.address-item .item-content .content-l {
+  padding: 0 30rpx;
+  border-right: 1rpx solid #C4C4D9;
+}
+
+.item-content .content-l .person-info .person-name {
+  font-size: 28rpx;
+  font-weight: 500;
+  color: #1D1E30;
+  margin-right: 10rpx;
+}
+
+.item-content .content-l .person-info .default-address {
+  display: inline-block;
+  padding: 4rpx 8rpx;
+  color: #6C66FA;
+  font-size: 22rpx;
+  margin-left: 20rpx;
+  background: #F0EFFE;
+}
+
+.item-content .content-l .person-info .person-tel {
+  font-weight: 400;
+  color: #30304C;
+}
+
+.address-item .item-content .content-l .address-info {
+  margin-top: 8rpx;
+  font-size: 24rpx;
+  color: #9090A8;
+}
+
+.address-item .item-content .content-r {
+  width: 148rpx;
+  text-align: center;
+}
+
+.address-item .detail-item-del {
+  height: 100%;
+  width: 106px;
+  color: #fff;
+  background: #DB00BF;
+}
+
+.item-detail .item-spec .spec {
+  margin-right: 40rpx;
+  word-break: break-all;
+}
+
+
+.spec-item {
+  margin: 10rpx 34rpx 0rpx 34rpx;
+}
+
+.spec-item .item-title {
+  color: #30304C;
+  font-size: 32rpx;
+  margin-left: 6rpx;
+}
+
+.spec-item .item-detail {
+  background: #E7E7F2;
+  min-height: 260rpx;
+  border-radius: 30rpx;
+  padding: 20rpx 24rpx;
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 20rpx;
+}

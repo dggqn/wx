@@ -1,0 +1,223 @@
+/* miniprogram/pages/assetsTransfer/assetsDetail/assetsDetail.wxss */
+.container {
+    background: #F4F7FF;
+}
+.top-tab-box {
+    height: 94rpx;
+    padding: 0 12rpx;
+    background: #D5D9F2;
+}
+.top-tab-box .tab {
+    width: 355rpx;
+    height: 70rpx;
+    text-align: center;
+    line-height: 70rpx;
+    background: #D5D9F2;
+    color: #1C3A62;
+    border-radius: 4rpx;
+}
+.top-tab-box .tab.active {
+    background: #5C67BF;
+    color: #fff;
+}
+.img {
+    width: 320rpx;
+    height: 240rpx;
+}
+
+
+.info-box .info-item-box {
+    padding: 0 30rpx;
+    background: #fff;
+}
+.info-box .info-item-box .info-item {
+    padding: 35rpx 0;
+    border-bottom: 1rpx dashed #C4C4D9;
+    font-size: 30rpx;
+    color: #1C3A62;
+}
+.info-box .info-item-box .info-item .item-l{
+    margin-right: 30rpx;
+    white-space: nowrap;
+}
+.info-box .info-item-list .info-item-box:last-child .info-item {
+    border-bottom: 0;
+}
+.info-box .info-item-box .info-item .use-status {
+    padding: 3rpx 10rpx;
+    font-weight: 24rpx;
+    border-radius: 6rpx;
+    background: #468DA3;
+    color: #fff;
+}
+.info-box .info-item-box .info-item .use-status.transfer {
+    background: #C16257;
+}
+.info-img {
+    width: 100%;
+    background: #fff;
+}
+.info-img image {
+    width: 100%;
+}
+
+.repair-record {
+    padding: 35rpx 30rpx;
+    background: #fff;
+}
+.repair-record .repair-title {
+    font-size: 30rpx;
+    color: #1C3A62;
+    padding-bottom: 32rpx;
+}
+.record-item {
+    padding-bottom: 24rpx;
+}
+.record-item .step {
+    margin-right: 12rpx;
+    position: relative;
+}
+.record-item .step::after {
+    content: '';
+    width: 2rpx;
+    height: calc(100% + 24rpx);
+    position: absolute;
+    left: 16rpx;
+    top: 6rpx;
+    background: #BAC3CF;
+}
+.record-item:last-child {
+    padding-bottom: 0;
+}
+.record-item:last-child .step::after{
+    display: none;
+}
+.record-item .step .circle-box {
+    padding: 8rpx;
+    background: #fff;
+    position: relative;
+    z-index: 100;
+}
+.record-item .step .circle {
+    width: 16rpx;
+    height: 16rpx;
+    border: 2rpx solid #BAC3CF;
+    border-radius: 50%;
+}
+.record-item .content .time {
+    color: #1C3A62;
+    font-size: 28rpx;
+}
+.record-item .content .record {
+    background: #ECF4F7;
+    border-radius: 8rpx;
+    padding: 16rpx;
+    margin-top: 12rpx;
+}
+.record-item .content .record .desc {
+    font-size: 28rpx;
+    color: #1C3A62;
+}
+.record-item .content .record .text {
+    color: #8B9EB2;
+    margin-top: 4rpx;
+}
+
+
+
+.confirm-btn {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    padding: 0 30rpx;
+    margin-top: 20rpx;
+    width: calc( 100% - 60rpx );
+    height: 120rpx;
+    line-height: 120rpx;
+    background-color: #fff;
+}
+.confirm-btn .btn {
+    width: 546rpx;
+    height: 80rpx;
+    line-height: 80rpx;
+    font-size: 28rpx;
+    color: #fff;
+    background-color: #6C66FA;
+    border-radius: 100rpx;
+}
+.can-not{
+    width: 568rpx;
+    background-color: #fff;
+}
+.can-not-header{
+    padding: 20rpx 32rpx;
+    background-color: #6C66FA;
+    font-size: 32rpx;
+    color: #fff;
+}
+.can-not-lable{
+    padding: 0 0 29rpx 32rpx;
+    flex-wrap: wrap;
+    font-size: 24rpx;
+    color: #80B4DF;
+}
+.can-not-lable .lable-item{
+    margin-right: 32rpx;
+    margin-top: 29rpx;
+    padding: 8rpx 12rpx;
+    border:2rpx solid #80B4DF;
+    border-radius: 8rpx;
+}
+.can-not-lable .lable-item-active{
+    background-color: #80B4DF;
+    color: #fff;
+}
+.can-not-txra{
+    padding: 0 32rpx 32rpx 32rpx;
+}
+.can-not-txra .can-not-txra-box{
+    padding: 20rpx 16rpx 12rpx 20rpx;
+    background-color: #E7E7F2;
+}
+.can-not-txra .can-not-txra-box .txra{
+    width: 468rpx;
+    height: 100rpx;
+}
+.can-not-txra .can-not-txra-box .limit{
+    display: flex;
+    justify-content: flex-end;
+    font-size: 28rpx;
+    color: #8393A8;
+}
+.can-not-division{
+    height: 1rpx;
+    background-color: #C4C4D9;
+}
+.can-not-btn-box{
+    padding: 18rpx 0;
+}
+.can-not-btn-box .btn{
+    margin: 0;
+    padding: 8rpx 110rpx;
+    white-space: nowrap;
+    font-size: 32rpx;
+    color: #1C3A62;
+    background-color: inherit;
+}
+.can-not-btn-box .btn::after{
+    border: none;
+}
+.can-not-btn-box .division{
+    width: 1rpx;
+    background-color: #C4C4D9;
+}
+/* 修改vant组件的弹窗 */
+.van-popup{
+    border-radius: 12rpx;
+}
+.asset-details-item{
+    padding: 0 30rpx;
+}
+.asset-details-item .title{
+    margin-bottom: 30rpx;
+}

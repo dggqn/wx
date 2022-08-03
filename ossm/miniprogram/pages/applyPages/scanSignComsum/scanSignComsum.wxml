@@ -1,0 +1,36 @@
+<!--pages/applyPages/scanSignComsum/scanSignComsum.wxml-->
+<view class="container public-sign-detail-bg overflow-auto">
+  <view class="consum-content">
+    <view class="consum-list">
+      <view class="list-item" wx:for="{{detailList}}" wx:key="index">
+        <view class="item-title ellipsis-two">{{item.name}}111</view>
+        <view class="item-label flex">
+          <text class="flex-1 label">耗材编号 {{item.modelNo}}</text>
+          <text class="unit">{{item.stockUnit}}</text>
+        </view>
+        <view class="apply-nums flex-align-items-center">
+          <view class="flex-1">数量：{{item.totalCount}}</view>
+          <view class="flex-1">签收数：{{item.receiveCount}}</view>
+<!--          <view class="flex-align-items-center choose-num-box">-->
+<!--            <text>签收数:{{item.receiveCount}}</text>-->
+<!--            <view class="flex-align-items-center operate-box">-->
+<!--              <view class="btn cut img-box">-->
+<!--                <image src="{{aliyunBaseImgUrlPre}}images/cut-btn.png"-->
+<!--                       data-index="{{index}}" data-count="-1" bindtap="receiveCountChange"></image>-->
+<!--              </view>-->
+<!--              <view class="ipt-box" style="width: 100rpx">-->
+<!--                <input class="ipt"  value="{{item.receiveCount}}" data-path="detailList.{{index}}.receiveCount"-->
+<!--                       data-minvalue="0" data-maxvalue="{{item.receiveCount}}" bindinput="viewValueChange"/>-->
+<!--              </view>-->
+<!--              <view class="btn add img-box">-->
+<!--                <image class="img" src="{{aliyunBaseImgUrlPre}}images/add-btn.png"-->
+<!--                       data-index="{{index}}" data-count="1" bindtap="receiveCountChange"></image>-->
+<!--              </view>-->
+<!--            </view>-->
+<!--          </view>-->
+        </view>
+      </view>
+      <view class="bottom-large-btn" bindtap="receiveComsum">签收</view>
+    </view>
+  </view>
+</view>

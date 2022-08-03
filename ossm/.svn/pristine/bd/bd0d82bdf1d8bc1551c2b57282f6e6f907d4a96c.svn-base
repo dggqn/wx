@@ -1,0 +1,38 @@
+.submit-tips{
+  padding-top: 160rpx;
+}
+.submit-tips .iconfont{
+  margin-bottom: 18rpx;
+}
+.submit-tips .iconsubmit-fill{
+  font-size: 166rpx;
+  color: #6c66fa;
+}
+.submit-tips .state{
+  font-size: 38rpx;
+  font-weight: 600;
+  color: #30304C;
+}
+.submit-tips .tips{
+  margin-top: 20rpx;
+  font-size: 28rpx;
+  color: #9090A8;
+  text-align: center;
+}
+.submit-tips  .operation-box{
+  margin-top: 60rpx;
+  padding: 0 156rpx;
+}
+.submit-tips  .operation-box .btn{
+  margin: 0;
+  padding: 0;
+  width: 204rpx;
+  height: 74rpx;
+  line-height: 68rpx;
+  text-align: center;
+  font-size: 28rpx;
+  color: #6C66FA;
+  border-radius: 44rpx;
+  background-color: #fff;
+  border: 1rpx solid #6C66FA;
+}

@@ -1,0 +1,21 @@
+/* pages/notice/noticeDetail/noticeDetail.wxss */
+.detail-container {
+  padding: 40rpx;
+  background: #fff;
+}
+.detail-top .detail-title{
+  color: #30304C;
+  font-size: 44rpx;
+  font-weight: 600;
+}
+.detail-top .detail-time {
+  margin-top: 28rpx;
+  color: #9494C3;
+}
+.detail-content{
+  color: #1D1E30;
+  font-size: 34rpx;
+  line-height: 60rpx;
+  margin-top: 28rpx;
+  text-align: justify;
+}

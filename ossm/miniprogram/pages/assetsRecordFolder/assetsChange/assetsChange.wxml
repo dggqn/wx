@@ -1,0 +1,63 @@
+<view>
+  <van-cell-group>
+    <van-cell title="{{assetsType !== 'scrap'?'发起':'申请'}}人"  value="{{userName}}" />
+    <van-cell
+      wx:if="{{assetsType !== 'scrap'}}"
+      is-link
+      title="接收人*"
+      value="{{receiver.name}}"
+      link-type="navigateTo"
+      url="/pages/assetsRecordFolder/choosePerson/choosePerson"
+    />
+    <view class="assets-change-txra">
+      <view class="title">{{assetsType !== 'scrap'?'变更说明':'报废理由'}}*</view>
+      <textarea class="txra" placeholder="请填写{{assetsType !== 'scrap'?'变更说明':'报废理由'}}" placeholder-class="placeholder-txra" bindinput="changeKeyword"></textarea>
+      <view class="limit">{{remark.length}}/50</view>
+    </view>
+
+
+    <view class="assets-change-txra">
+      <view class="title">{{assetsType !== 'scrap'?'变更':'报废'}}资产</view>
+      <view class="public-list">
+        <view class="list-item flex" wx:for="{{fixedList}}" wx:key="entityId">
+          <view class="item-status">{{item.statusName}}</view>
+<!--          <view-->
+<!--            class="select-box-l flex-align-items-center"-->
+<!--          ><text class="iconfont {{false?'icongou':'iconweixuan'}}"></text></view>-->
+          <view class="item-img img-box">
+            <image class="img" mode="aspectFit" src="{{item.displayImgUrl}}"></image>
+          </view>
+
+          <view class="item-detail flex-1 flex-column">
+            <view class="detail-top">
+              <view class="detail-name ellipsis-two">{{item.name}}</view>
+              <view class="detail-num">
+                <text>资产ID </text>
+                <text>{{item.assetsNo}}</text>
+              </view>
+            </view>
+            <view class="detail-bottom">
+              <!-- <view class="detail-sign-date">签收日期：{{item.signDate}}</view> -->
+              <view class="detail-bottom-item flex">
+                <view class="specifications">规格：</view>
+                <view class="ellipsis-one">{{item.specificationName}}</view>
+              </view>
+              <view class="detail-bottom-item">
+                <text>单位：</text>
+                <text>{{item.stockUnit}}</text>
+              </view>
+            </view>
+          </view>
+          <!-- <view wx:if="{{assetsType !== 'scrap'}}" class="select-box-r flex-align-items-center"><text class="iconfont iconyoujiantou-new-01"></text></view> -->
+        </view>
+
+      </view>
+    </view>
+
+  </van-cell-group>
+
+  <view class="assets-change-operation box-shadow">
+    <button class="btn" bindtap="applySubmit">提交申请（{{fixedList.length}}）</button>
+  </view>
+  <view class="removeFixed"></view>
+</view>

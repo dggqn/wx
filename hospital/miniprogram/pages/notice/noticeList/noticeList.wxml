@@ -1,0 +1,52 @@
+<!--pages/notice/noticeList/noticeList.wxml-->
+<view class="container flex-column">
+  <view class="notice-list-top flex-align-items-center">
+    <view class="top-search flex-1">
+      <input class="search-ipt" placeholder="搜索消息标题或者内容" placeholder-class="placeholder-style"
+             data-path="queryCond.keyword" value="{{queryCond.keyword}}"
+             bindinput="viewValueChange" bindconfirm="initCurrentAndQuery">
+        <text class="iconfont iconsousuo-icon-01"></text>
+      </input>
+    </view>
+    <view class="top-action-sheet">
+      <view bindtap="selectTypes">
+        <text>{{categoryName}}</text>
+        <text class="iconfont iconxiajiantou-new-01"></text>
+      </view>
+      <dropDownEle bind:selectSort="chooseType" id="type-down"></dropDownEle>
+    </view>
+  </view>
+  <view class="has-read-btn">
+    <text class="iconfont iconpin"></text>
+    <text bindtap="readMsg">标记全部已读</text>
+  </view>
+  <!-- 列表 -->
+  <view class="notice-list-items flex-1 overflow-auto">
+    <scroll-view class="scroll-view" scroll-y="true" bindscrolltolower="bindscrolltolower">
+      <view class="list-item" wx:for="{{noticeList}}" wx:key="index">
+        <view class="item-detail" data-index="{{index}}" bindtap="goNoticeDetail">
+          <view class="detail-label {{messageMap[item.categoryCode].code}}"
+            style="background:{{backgroundMap[messageMap[item.categoryCode].name]}}">
+            {{messageMap[item.categoryCode].name}}
+          </view>
+          <view class="detail-content">
+            <view class="content-title">{{item.tittle}}</view>
+            <view class="content-type flex">
+              {{item.content}}
+            </view>
+            <view class="message-time flex-align-items-center">
+              <text class="time flex-1">{{item.sendTime}}</text>
+              <text class="read-flag {{item.readFlag=='1'?'has-read':''}}">{{item.readFlag=='1'?'已读':'未读'}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+       <!-- 空图片 -->
+      <view class="empty-box" wx:if="{{!isLoadingFlag && noticeList.length <= 0}}">
+        <image class="empty-img" src="{{aliyunBaseImgUrlPre}}images/empty.png"></image>
+        <view class="empty-tip">暂无通知</view>
+      </view>
+      <view class="loading" wx:if="{{isLoadingFlag}}">加载中...</view>
+    </scroll-view>
+  </view>
+</view>

@@ -1,0 +1,4 @@
+hospital-minapp.
+
+tj appId:wx6b944a3911ea3d7d
+tj AppSecret:ab7fbc3177cbfe4bfb6ad080ebde3051

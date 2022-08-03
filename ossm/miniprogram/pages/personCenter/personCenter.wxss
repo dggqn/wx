@@ -1,0 +1,130 @@
+/* pages/personCenter/personCenter.wxss */
+.person-center-container{
+  background: #fff;
+}
+.center-top {
+  width: 100%;
+  height: 350rpx;
+  position: relative;
+}
+.center-top .person-base{
+  width: 100%;
+  height: 120rpx;
+  position: absolute;
+  left: 0;
+  top: 70rpx;
+  padding-left: 70rpx;
+  box-sizing: border-box;
+}
+.center-top .person-base .base-img{
+  width: 120rpx;
+  height: 120rpx;
+  margin-right: 24rpx;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.center-top .person-base .base-info{
+  height: 120rpx;
+  padding: 8rpx 0;
+  box-sizing: border-box;
+  justify-content: space-between;
+  color: #FBFBFF;
+}
+.person-base .base-info .name-info .name {
+  font-size: 36rpx;
+  margin-right: 24rpx;
+}
+.person-base .base-info .name-info {
+  margin-top: 25rpx;
+}
+.person-base .base-info .name-info .type {
+  font-size: 24rpx;
+  padding: 3rpx 8rpx;
+  border: 1px solid #FBFBFF;
+  border-radius: 4rpx;
+}
+.person-base .base-info .work-info{
+  font-size: 24rpx;
+}
+.person-base .manage-address {
+  font-size: 24rpx;
+  color: #fff;
+  margin-right: 40rpx;
+  display: flex;
+  align-items: center;
+}
+.person-base .manage-address .iconshezhi {
+  font-size: 34rpx;
+  margin-right: 10rpx;
+}
+
+
+
+
+.person-info .item {
+  width: 100%;
+  padding-left: 120rpx;
+  box-sizing: border-box;
+  font-size: 30rpx;
+  line-height: 100rpx;
+}
+.person-info .item .item-l {
+  display: inline-block;
+  width: 140rpx;
+  text-align: justify;
+  text-align-last: justify;
+  color: #9494C3;
+}
+.person-info .item .item-dot {
+  display: inline-block;
+  width: 10rpx;
+  text-align: left;
+  margin-right: 30rpx;
+  color: #9494C3;
+}
+.person-info .item .item-r {
+  color: #30304C;
+}
+.person-info .item .item-r .iconfont {
+  margin-left: 14rpx;
+}
+.center-bottom{
+  width: 100%;
+  height: 190rpx;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  overflow: hidden;
+}
+
+.sub-btn {
+  display: inline-block;
+  width: 100rpx;
+  height: 60rpx;
+  background: #6C66FA;
+  border-radius: 5rpx;
+  text-align: center;
+  line-height: 60rpx;
+  color: #fff;
+}
+
+/* 底部操作 */
+.collar-bottom .collar-time-limit{
+  height: 54rpx;
+  line-height: 54rpx;
+  text-align: center;
+  background: #6F6F8E;
+  color: #fff;
+}
+.collar-bottom .bottom-operates{
+  height: 96rpx;
+  line-height: 96rpx;
+  color: #fff;
+  text-align: center;
+}
+.collar-bottom .bottom-operates .operate-r{
+  width: 100%;
+  background: #6C66FA;
+  bottom:0;
+  position:fixed;
+}

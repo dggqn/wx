@@ -1,0 +1,219 @@
+<view>
+  <!-- 头部卡片 -->
+  <view class="public-apply-detail-top cargoDetails-type flex-between-center">
+    <view>
+      <view class="cargoDetails-type-title">{{detail.statusName}}</view>
+        <view class="flex cargoDetails-type-details" wx:if="{{detail.statusCode==='checking'}}">
+            <view>等待管理员审核</view>
+        </view>
+        <view class="flex cargoDetails-type-details" wx:if="{{detail.statusCode==='processing'}}">
+            <view>等待供应商处理</view>
+        </view>
+        <view class="flex cargoDetails-type-details" wx:if="{{detail.statusCode==='user_cancel'}}">
+            <view>您已撤消本次申请</view>
+        </view>
+        <view class="flex cargoDetails-type-details" wx:if="{{detail.statusCode==='purchase_refuse'&&detail.purchaseRefuseName}}">
+            <view>您的售后申请已被{{detail.purchaseRefuseName}}驳回</view>
+        </view>
+      <view class="flex cargoDetails-type-details" wx:if="{{detail.deliverymanPhone}}">
+        <view>配送员:</view>
+        <view>
+          <text>{{detail.deliverymanName}}</text>
+          <text>{{detail.deliverymanPhone}}</text>
+        </view>
+      </view>
+    </view>
+    <view class="cargoDetails-type-right flex-center" catchtap="doCall" wx:if="{{detail.deliverymanPhone}}">
+      <text class="iconfont icondianhua"></text>
+    </view>
+  </view>
+
+  <!-- 进度条 -->
+  <view class="cargoDetails-type-steps">
+      <view class="flex-center">
+          <view class="steps-item steps-item-1 {{step>0?'steps-active':''}}">
+            <text wx:if="{{true}}" class="iconfont icongou"></text>
+            <view wx:else class="Dot"></view>
+          </view>
+          <view class="line horizontal {{step>1?'line-active':''}}" wx:if="{{detail.serviceTypeName==='退货'}}"></view>
+          <view class="steps-item steps-item-2 {{step>1?'steps-active':''}}" wx:if="{{detail.serviceTypeName==='退货'}}">
+            <text wx:if="{{step>1}}" class="iconfont icongou"></text>
+            <view wx:else class="Dot"></view>
+          </view>
+          <view class="line horizontal {{step>2?'line-active':''}}" style="{{detail.serviceTypeName==='退货'?'':'width:270rpx'}}"></view>
+          <view class="steps-item steps-item-3 {{step>2?'steps-active':''}}">
+            <text wx:if="{{step>2}}" class="iconfont icongou"></text>
+            <view wx:else class="Dot"></view>
+          </view>
+          <view class="line horizontal {{step>3?'line-active':''}}" style="{{detail.serviceTypeName==='退货'?'':'width:270rpx'}}" ></view>
+          <view class="steps-item steps-item-4 {{step>3?'steps-active':''}}">
+            <text wx:if="{{step>3}}" class="iconfont icongou"></text>
+            <view wx:else class="Dot"></view>
+          </view>
+      </view>
+      <view class="steps-item-font-box flex-between-center">
+          <view class="steps-item-font {{step>=1?'':'not-finished'}}">申请{{detail.serviceTypeName}}</view>
+          <view class="steps-item-font {{step>=2?'':'not-finished'}}" wx:if="{{detail.serviceTypeName==='退货'}}">管理员审核通过</view>
+          <view class="steps-item-font {{step>=3?'':'not-finished'}}">供应商同意</view>
+          <view class="steps-item-font {{step>=4?'':'not-finished'}}">{{detail.serviceTypeName}}完成</view>
+        </view>
+  </view>
+
+
+  <view class="steps-info">
+    <!-- 小卡片 -->
+    <view class="steps-info-card flex-center box-shadow" bindtap="jumpStepsDetails">
+      <view class="steps-info-l flex-center">
+          <view class="steps-active"><text class="iconfont icongou"></text></view>
+          <view class="line vertical"></view>
+      </view>
+      <view class="seize-a-seat"></view>
+      <view class="steps-info-r">
+        <view class="steps-info-r-t flex">
+          <view class="steps-info-r-font">
+            {{detail.remark}}
+          </view>
+          <view class="steps-info-r-icon">
+            <text class="iconfont iconyoujiantou-new-01"></text>
+          </view>
+        </view>
+        <view class="steps-info-r-b">
+          <text>{{detail.logTime}}</text>
+        </view>
+      </view>
+    </view>
+
+
+  <!-- 商品信息 -->
+    <view class="product-information box-shadow">
+        <view class="information-title">商品信息</view>
+
+        <view class="public-assets-list">
+          <!-- 商品信息卡片栏 -->
+            <view class="list-item box-shadow">
+              <view class="item-content  flex">
+                  <view class="content-img img-box">
+                      <image mode="aspectFit" src="{{detail.displayImgUrl}}"></image>
+                  </view>
+                  <view class="content-detail flex-1 flex-direction-between">
+                      <view>
+                          <view class="type ellipsis-two">{{detail.name}}</view>
+                      </view>
+                      <view>
+                        <view class="flex">
+                          <view class="separate">规格:</view>
+                          <view class="ellipsis-one">{{detail.specificationName}}</view>
+                        </view>
+                        <view class="flex-between-center">
+                          <view class="flex content-detail-m-t">
+                            <view class="separate">单位:</view>
+                            <view><text>{{detail.stockUnit}}</text></view>
+                          </view>
+                          <view>申请数量：{{detail.applyHandleCount}}</view>
+                        </view>
+                      </view>
+                  </view>
+              </view>
+
+
+
+            </view>
+
+            <!-- {{detail.serviceTypeName}}完成显示的序列号 -->
+              <view class="serial-number">
+                <view class="serial-number-t flex-space-between" wx:if="{{detail.newSnNo||detail.newBatchNo}}">
+                  <text>换成的{{detail.newSnNo?'序列号':'生产批次'}}</text>
+                  <text>{{detail.newSnNo?detail.newSnNo:detail.newBatchNo}}</text>
+                </view>
+                <view class="serial-number-b flex-space-between" wx:if="{{(detail.snNo&&detail.snNo!=='0')||detail.batchNo}}">
+                    <text>原有的{{detail.snNo&&detail.snNo!=='0'?'序列号':'生产批次'}}</text>
+                    <text>{{detail.snNo&&detail.snNo!=='0'?detail.snNo:detail.batchNo}}</text>
+                </view>
+              </view>
+
+
+            <!-- 商品信息详情 -->
+            <view class="goods-info-details">
+                <view class="goods-details-items flex">
+                  <view class="items-l">{{detail.serviceTypeName}}单号</view>
+                  <view class="items-r">{{detail.ordersNo}}</view>
+                </view>
+                <view class="goods-details-items flex">
+                  <view class="items-l">申请时间</view>
+                  <view class="items-r">{{detail.createTime}}</view>
+                </view>
+                <view class="goods-details-items flex">
+                  <view class="items-l">服务类型</view>
+                  <view class="items-r">{{detail.serviceTypeName}}</view>
+                </view>
+                <view class="goods-details-items flex">
+                  <view class="items-l">{{detail.serviceTypeName}}原因</view>
+                  <view class="items-r">{{detail.reason}}</view>
+                </view>
+                <view class="goods-details-items flex">
+                  <view class="items-l">{{detail.serviceTypeName}}说明</view>
+                  <view class="items-r">{{detail.explaination}}</view>
+                </view>
+                <view class="goods-details-items flex" wx:if="{{detail.imgs.length>0}}">
+                  <view class="items-l">凭证图片</view>
+                  <view class="items-r">
+                      <view class="item-r-box flex">
+                        <image wx:for="{{detail.imgs}}" wx:key="item"
+                          src="{{item}}"
+                          mode="aspectFill"
+                          class="item-r-img"
+                        >
+                        </image>
+                      </view>
+                  </view>
+                </view>
+            </view>
+        </view>
+    </view>
+
+    <!-- {{detail.serviceTypeName}}地址 -->
+    <view>
+      <view class="delivery-detail flex-column">
+        <view class="local-type">{{detail.serviceTypeName}}地址</view>
+        <view class="detail-l flex-1">
+            <view class="detail-status flex">
+                <!-- {{orderBaseInfo.thirdPartyName?'物流公司:'+orderBaseInfo.thirdPartyName+',':''}}
+                {{orderBaseInfo.thirdPartyNo?'快递单号:'+orderBaseInfo.thirdPartyNo+',':''}} -->
+                <view><image class="location-img" src="{{aliyunBaseImgUrlPre}}images/location-img.png" mode="widthFix"></image></view>
+                <view class="flex-direction-between details-box">
+                    <view class="flex">
+                        <view class="logistics-name">{{detail.receiverName}}</view>
+                        <view class="logistics-phono">{{detail.receiverTel}}</view>
+                    </view>
+                    <view class="logistics-address">
+                        <text>{{detail.receiverAddrCodeChn}}{{detail.receiverAddrInfo}}</text>
+                    </view>
+                </view>
+            </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 消除固定定位的影响及抬高页面底部距离 -->
+    <!-- <view class="removeFixed"></view> -->
+  </view>
+</view>
+
+<view class="delete-order-box" wx:if="{{detail.statusCode==='checking'||detail.statusCode==='processing'}}">
+    <button class="delete-order determine" bindtap="confirmReceipShowPopup" >撤销申请</button>
+</view>
+
+<van-popup show="{{ confirmReceiptShow }}" bind:close="confirmReceiptClose">
+    <view class="popup-content-box">
+        <view class="popup-content-herder">
+            <text>提示</text>
+        </view>
+        <view class="popup-content-main">
+            <text>您将撤销本次申请,如您想修改退货方式或退货商品,撤销申请后可在售后期内重新发起申请,确认继续吗?</text>
+        </view>
+        <view class="popup-content-btn-box flex-space-between">
+            <button class="cancel btn" catchtap="cancelReceivingGoods">取消</button>
+            <button class="determine btn bg-blue" catchtap="cancelRefundOrder">确定</button>
+        </view>
+    </view>
+</van-popup>

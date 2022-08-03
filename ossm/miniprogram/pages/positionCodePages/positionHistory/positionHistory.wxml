@@ -1,0 +1,24 @@
+<!--pages/positionCodePages/positionHistory/positionHistory.wxml-->
+<view class="">
+  <block wx:for="{{LocationList}}" wx:key="index">
+    <view class="position-item ">
+      <view class="position-text" style="color: {{item.riskColor}};">
+      {{item.campusName}}-{{item.buildingName}}-{{item.floor}}-{{item.room}}</view>
+      <view class="position-time flex flex-space-between">
+        <view class="flex">
+          <van-icon name="clock" style="margin-right: 5rpx;" size="21rpx"/>{{item.createTime}}
+        </view>
+        <!-- <view style="margin-right: 5rpx;">
+          风险等级：<text style="color: {{item.riskColor}};">{{item.riskName}}</text>
+          <van-icon name="clock" style="margin-right: 5rpx;" />{{item.createTime}} 12:35
+        </view> -->
+      </view>
+    </view>
+    <view class="position-bottom"></view>
+
+  </block>
+  <!-- <view class="codePage-bottom">
+    <image src="{{aliyunBaseImgUrlPre}}images/logo-small.png" style="width: 40rpx;height: 40rpx;vertical-align:middle"></image>
+    <view class="logo-text">上海市第四人民医院</view>
+  </view> -->
+</view>

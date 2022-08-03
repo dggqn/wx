@@ -1,0 +1,207 @@
+page{
+  background-color: #F4F7FF;
+}
+.task-details{
+  padding: 30rpx;
+  background-color: #F4F7FF;
+  color: #30304C;
+}
+.ditails-card{
+  background-color: #fff;
+}
+.card-header{
+  padding: 20rpx;
+  background-color: #E7E7F0;
+  font-size: 28rpx;
+  color: #6F6F8E;
+  border-radius: 8rpx 8rpx 0 0;
+}
+.ditails-card .card-header .state{
+  padding: 6rpx 12rpx;
+  margin-left: 12rpx;
+  font-size: 24rpx;
+  border-radius: 10rpx;
+  color: #fff;
+}
+.ditails-card .card-header .state-grey{
+  background-color: #9090A8;
+}
+.ditails-card .card-header .state-cyan{
+  background-color: #34A4AF;
+}
+.ditails-card .card-header .overview{
+  font-size: 24rpx;
+  color: #30304C;
+}
+.card-info{
+  padding: 20rpx;
+  font-size: 26rpx;
+}
+.card-info-item{
+  margin-right: 70rpx;
+}
+.card-info-item .line{
+  margin-right: 16rpx;
+  width: 12rpx;
+  height: 64rpx;
+  border-radius: 6rpx;
+}
+
+.card-info-item .font{
+  white-space: nowrap;
+}
+.card-info-item .num{
+  font-size: 36rpx;
+  color: #30304C;
+  font-weight: 600;
+}
+.card-info .time{
+  margin-top: 16rpx;
+  font-size: 24rpx;
+  color: #9090A8;
+}
+.main{
+  background-color: #fff;
+  box-shadow: 0px 1px 14px 0px rgba(48, 48, 76, 0.15);
+}
+.content-info{
+  margin-top: 40rpx;
+  padding: 24rpx 30rpx 22rpx 30rpx;
+}
+.content-info .image{
+  margin-right: 20rpx;
+  width: 138rpx;
+  height: 138rpx;
+}
+.content-info-right{
+  font-size: 26rpx;
+  width: 472rpx;
+}
+.content-info-right .title{
+  font-size: 30rpx;
+  font-weight: 600;
+  text-align: justify;
+}
+.content-info-right .small{
+  margin-top: 16rpx;
+}
+.content-info-right .small .ellipsis-one{
+  width: 390rpx;
+}
+.content-info-right .left{
+  width: 60rpx;
+  text-align:justify;
+  text-align-last: justify;
+  white-space: nowrap;
+}
+.asset-id{
+  padding: 0 20rpx;
+  background-color: #FBFBFF;
+}
+.asset-id .title{
+  padding: 24rpx 0 38rpx 0;
+  font-size: 28rpx;
+  font-weight: 600;
+}
+.asset-id .id-box{
+  flex-wrap: wrap;
+}
+.id-box-item{
+  margin-bottom: 36rpx;
+}
+.asset-id .round{
+  margin-right: 8rpx;
+  width: 20rpx;
+  height: 20rpx;
+  border-radius: 50%;
+}
+.asset-id .id-box .id-num{
+  font-weight: 600;
+}
+.button-box{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  padding: 32rpx 0;
+  width: 100%;
+  text-align: center;
+  background-color: #F4F7FF;
+}
+.button-box .btn{
+  margin: 0 auto;
+  width: 546rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  background-color:#6C66FA;
+  color: #fff;
+  border-radius: 100rpx;
+  font-size: 28rpx;
+}
+.button-box .btn::after{
+  border: none;
+}
+.button-box .btn[disabled]{
+  color: #FBFBFF !important;
+  background: #D6D6E7 !important;
+  
+}
+.button-box .btn .iconsaoma-icon{
+  font-size: 30rpx;
+  margin-right: 14rpx;
+}
+.fixed{
+  position: fixed;
+  left: 0;
+  bottom: 150rpx;
+  z-index:1;
+}
+.manual{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
+  background-color: #fff;
+  font-size: 20rpx;
+  font-weight: 600;
+}
+.manual .iconbianzu7{
+  margin-bottom: 6rpx;
+  color: #6C66FA;
+  font-size: 30rpx;
+}
+
+/*未盘----资产ID右侧 */
+.wait_check { background-color: #D6D6E7}
+
+/* 已盘 */
+.checked{background-color: #6C66FA}
+
+/* 盘盈 */
+.gains{background-color: #34A4AF}
+
+/* 盘亏 */
+.loss{background-color: #FFAB5A}
+/* 待定 */
+.pending{background-color: #5EA1F2}
+
+/* 盘点状态颜色 */
+
+.grey{ /* 未盘 */
+  background: #D6D6E7;
+}
+.blue{ /* 已盘 */
+  background-color: #6C66FA;
+}
+.cyan{ /* 待定 */
+  background-color: #5EA1F2;
+}
+.orange{ /* 盘亏 */
+  background-color: #FFAB5A;
+}
+.green{ /* 盘盈 */
+  background-color:#34A4AF;
+}
+/* end */

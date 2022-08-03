@@ -1,0 +1,145 @@
+// pages/repair/repairDetail/repairDetail.js
+import Utils from '../../../utils/utils'
+var app = getApp();
+
+Page({
+
+  /**
+   * 页面的初始数据
+   */
+  data: {
+    aliyunBaseImgUrlPre: Utils.aliyunBaseImgUrlPre,
+    step: 1,
+    Qstate: '',
+    detailData:{},
+    hisData:[]
+  },
+  clickImg: function(e){
+    let id = e.currentTarget.dataset.id
+    console.log(id)
+    var imgUrl = this.data.detailData.fileList[id].url;
+    wx.previewImage({
+      urls: [imgUrl], //需要预览的图片http链接列表，注意是数组
+      current: '', // 当前显示图片的http链接，默认是第一个
+      success: function (res) { },
+      fail: function (res) { },
+      complete: function (res) { },
+    })
+  },
+  goRemark() {
+    wx.navigateTo({
+      url: '../repairFeedback/repairFeedback',
+    })
+  },
+  goDetail() {
+    let that = this
+    let status = that.data.detailData.status
+    if(status == '2'){
+      status = '3'
+      console.log(that.data.detailData.taskId)
+      app.http.post('/assets/app/task/appoint', {
+        taskId: that.data.detailData.taskId, //工单id
+        status: status, //状态
+      }).then(data => {
+        wx.showToast({
+          title: '接受完成',
+          icon: 'success',
+          duration: 1500
+        })
+        setTimeout(() => {
+          wx.navigateBack({
+            delta: 1
+          })
+        }, 1000)
+      })
+    }else if(status == '3' || status == '4'){
+      status = '5'
+      let params = {}
+      params.status = '5'
+      params.taskId = that.data.detailData.taskId
+      let detailStr = JSON.stringify(params);
+      wx.navigateTo({
+        url: '../repairPoint/repairPoint?params='+detailStr,
+      })
+    }
+  },
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+    let detail = JSON.parse(options.itemDetail)
+    console.log(detail)
+    if(detail.image){
+      detail.fileList = Utils.getImageArrByStr(detail.image)
+    }
+    this.setData({
+      detailData:detail
+    })
+    
+    app.http.post('/assets/app/task/queryHisByParams',{
+      taskId: detail.taskId, //工单id
+    }).then(data => {
+      let datalist = []
+      data.forEach((child) => {
+        if(child.image){
+          console.info(child.image);
+          child.fileList = Utils.getImageArrByStr(child.image)
+        }
+        datalist.push(child);
+      });
+      console.info(datalist);
+      this.setData({
+        hisData: datalist
+      })
+    })
+  },
+
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide: function () {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload: function () {
+
+  },
+
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh: function () {
+
+  },
+
+  /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom: function () {
+
+  },
+
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function () {
+
+  }
+})

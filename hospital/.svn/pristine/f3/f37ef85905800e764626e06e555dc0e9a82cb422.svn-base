@@ -1,0 +1,17 @@
+<!--miniprogram/pages/address/addressManage/addressManage.wxml-->
+<view class="container flex-column" style="background: #fff">
+  <view class="address-list flex-1 overflow-auto">
+    <address-cell id="address-cell" bind:refresh="getAddressList"></address-cell>
+    <!-- 空图片 -->
+    <view class="empty-box" wx:if="{{addressList.length <= 0}}">
+      <image class="empty-img" src="{{aliyunBaseImgUrlPre}}images/empty.png"></image>
+      <view class="empty-tip">您还没有收货地址哦！</view>
+    </view>
+  </view>
+  <view class="add-address-box flex-center">
+    <view class="add-address-btn" bindtap="addAddress">
+      <!-- <text class="iconfont "></text> -->
+      <text>新增收货地址</text>
+    </view>
+  </view>
+</view>

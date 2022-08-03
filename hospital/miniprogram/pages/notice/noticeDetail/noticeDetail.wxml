@@ -1,0 +1,13 @@
+<!--pages/notice/noticeDetail/noticeDetail.wxml-->
+<view class="container detail-container overflow-auto">
+  <view class="detail-top">
+    <view class="detail-title">{{notice.tittle}}</view>
+    <view class="detail-time flex">
+      <text class="address flex-1">{{hospitalName}}</text>
+      <text class="time">{{notice.sendTime}}</text>
+    </view>
+  </view>
+  <text class="detail-content">
+    {{notice.content}}
+  </text>
+</view>

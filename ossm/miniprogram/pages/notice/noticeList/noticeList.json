@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "dropDownEle": "../../../components/dropDown/dropDown"
+  },
+  "navigationBarTitleText": "通知"
+}

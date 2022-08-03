@@ -1,0 +1,97 @@
+<!--pages/applyPages/applyRes/updateApply/updateApply.wxml-->
+<view class="container flex-column">
+  <view class="address-info-box">
+    <view class="address-bg linear-bg"></view>
+    <view class="address-info flex-align-items-center" bindtap="chooseAddress">
+      <view class="address-info-l">
+        <text class="iconfont icondizhi"></text>
+      </view>
+      <view wx:if="{{defaultAddress}}" class="address-info-c flex-1">
+        <view class="areas">
+          <text class="default"  wx:if="{{defaultAddress.defaultFlag === true || defaultAddress.defaultFlag === '1'}}">默认</text>
+          <text>{{defaultAddress.addrCodeChn}}</text>
+        </view>
+        <view class="detail">
+          {{defaultAddress.addrInfo}}
+        </view>
+        <view class="person">
+          {{defaultAddress.name}}   {{defaultAddress.tel}}
+        </view>
+      </view>
+      <view wx:else class="address-info-c no-address flex-1" bindtap="chooseAddress">请填写收货地址</view>
+      <view class="address-info-r">
+        <text class="iconfont iconyoujiantou-new-01"></text>
+      </view>
+      <view class="bottom-bg"></view>
+    </view>
+  </view>
+  <view class="update-container flex-1 overflow-auto">
+    <!-- list -->
+    <view class="update-list">
+      <view class="list-item" wx:for="{{showList}}" wx:key="index">
+        <view class="item-top flex">
+          <view class="item-img img-box">
+            <image mode="aspectFit" src="{{item.displayImgUrl || 'https://hospital-assets-image-public.oss-cn-shanghai.aliyuncs.com/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/%E4%B8%8A%E6%B5%B7%E7%AC%AC%E5%9B%9B%E4%BA%BA%E6%B0%91%E5%8C%BB%E9%99%A2/images/default.png'}}"></image>
+          </view>
+          <view class="item-detail flex-1">
+            <view class="item-name">{{item.name}}</view>
+            <view class="item-spec">
+              <view class="spec flex-1">{{item.specificationName}}</view>
+              <view>单位：{{item.stockUnit}}</view>
+            </view>
+            <view class="item-remark">{{item.remark}}</view>
+          </view>
+        </view>
+        <view class="item-bottom">
+          申领数：{{item.totalCount}}
+        </view>
+      </view>
+      <view class="look-more" wx:if="{{applyList.length>showList.length}}" bindtap="showAll">查看更多</view>
+    </view>
+  </view>
+  <!-- 申领理由 -->
+  <view class="apply-reason flex">
+    <view class="reason-l linear-bg">申领理由</view>
+    <view class="reason-r flex-1">
+      <textarea class="reason-textarea" value="{{applyReason}}"
+                data-path="applyReason" bindinput="viewValueChange"
+                placeholder="请填写您申领的原因（选填)"
+                placeholder-class="placeholder-class"></textarea>
+    </view>
+  </view>
+  <view class="confirm-update flex-align-items-center">
+    <view class="update-num flex-1">申领项:{{applyList.length}}</view>
+    <view class="update-btn purple-bg" bindtap="submitApply">
+      提交申领
+    </view>
+  </view>
+  <!-- 选择地址弹窗 -->
+<van-popup
+    show="{{ selectAddressModal }}"
+    position="bottom"
+    round="true"
+    bind:click-overlay="closeAddressModal"
+  >
+  <view class="address-list-box flex-column">
+    <view class="list-top flex-align-items-center">
+      <view class="list-title flex-1">选择收货地址</view>
+      <text class="iconfont iconguanbi-new-01" bindtap="closeAddressModal"></text>
+    </view>
+    <view class="list-center flex-1 overflow-auto">
+      <address-cell id="address-cell" list="{{addressList}}" bind:click="changeDefaultAddress" bind:refresh="getAddressList"></address-cell>
+      <!-- 空图片 -->
+      <view class="empty-box" wx:if="{{addressList.length <= 0}}">
+        <image class="empty-img" src="{{aliyunBaseImgUrlPre}}images/empty.png"></image>
+        <view class="empty-tip">您还没有收货地址哦！</view>
+      </view>
+    </view>
+
+  </view>
+    <view class="add-address-box flex-shink-0 flex-center">
+      <view class="add-address-btn" bindtap="addAddress">
+         <text class="iconfont "></text>
+        <text>新增收货地址</text>
+      </view>
+  </view>
+</van-popup>
+</view>

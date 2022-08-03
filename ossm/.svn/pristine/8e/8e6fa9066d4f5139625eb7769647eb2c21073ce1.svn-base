@@ -1,0 +1,17 @@
+<view class="seleteType">
+    <view class="seleteType-items  box-shadow" data-type="change" bindtap="jumpGoodsDetails">
+      <image class="seleteType-items-img" src="https://hospital-assets-image-public.oss-cn-shanghai.aliyuncs.com/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/%E4%B8%8A%E6%B5%B7%E7%AC%AC%E5%9B%9B%E4%BA%BA%E6%B0%91%E5%8C%BB%E9%99%A2/images/exchange-goods.png" mode="widthFix"></image>
+      <view class="seleteType-items-font">
+        <view class="seleteType-items-title">换货</view>
+        <view class="seleteType-items-details">商品存在质量问题，联系卖家协商换货</view>
+      </view>
+    </view>
+
+    <view class="seleteType-items  box-shadow" data-type="retreat" bindtap="jumpGoodsDetails">
+      <image class="seleteType-items-img" src="https://hospital-assets-image-public.oss-cn-shanghai.aliyuncs.com/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/%E4%B8%8A%E6%B5%B7%E7%AC%AC%E5%9B%9B%E4%BA%BA%E6%B0%91%E5%8C%BB%E9%99%A2/images/return-goods.png" mode="widthFix"></image>
+      <view class="seleteType-items-font">
+        <view class="seleteType-items-title">退货</view>
+        <view class="seleteType-items-details">已收到货，需要退还收到的货物</view>
+      </view>
+    </view>
+</view>

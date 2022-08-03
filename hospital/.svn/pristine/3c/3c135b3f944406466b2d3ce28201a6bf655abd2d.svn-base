@@ -1,0 +1,122 @@
+/* miniprogram/pages/assetsInventory/choosePeople/choosePeople.wxss */
+page{
+  background-color: rgba(244, 247, 255, 1);
+  font-size: 28rpx;
+}
+.choose-people  .choose-search-box{
+  padding: 30rpx 30rpx 0 30rpx;
+  background-color: #fff;
+}
+.choose-people .choose-search-box .choose-search{
+  width: 100%;
+  height: 70rpx;
+}
+.choose-search .search-ipt{
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  border-radius: 0;
+}
+.choose-search .search-ipt::-webkit-input-placeholde{
+  font-size: 28rpx;
+  color: rgba(209, 209, 228, 1);
+}
+.choose-search .search-ipt text{
+  position: absolute;
+  top: 34rpx;
+  right: 20rpx;
+}
+.choose-people .blank{
+  padding-bottom: 20rpx;
+}
+.choose-people .choose-people-list{
+  padding-bottom: 50rpx;
+}
+.list-container .list-items-name{
+  padding: 24rpx 30rpx 16rpx 30rpx;
+}
+.list-container .list-items-name text{
+  color: rgba(28, 58, 98, 1);
+}
+.people-list .list-item{
+  padding: 30rpx;
+  background-color: #fff;
+}
+.choose-btn{
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  padding: 20rpx;
+  width: calc( 100% - 40rpx );
+  background-color: #fff;
+  box-shadow: -3px -3px 14px 0px rgba(126, 145, 195, 0.2);
+}
+.choose-btn .btn{
+  width: 546rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  color: #fff;
+  border-radius: 0;
+  background-color: #6C66FA;
+  border-radius: 100rpx;
+}
+.choose-btn .btn::after{
+  border: none;
+}
+.choose-btn .btn[disabled]{
+  background-color: #D6D6E7;
+  color: #fff;
+}
+.addCollaborators{
+  position: relative;
+  font-size: 28rpx;
+}
+
+.addCollaborators .add-herder{
+  padding: 30rpx;
+  background-color: rgb(244, 247, 255);
+}
+.addCollaborators .add-herder text{
+  color: rgba(28, 58, 98, 1);
+}
+.add-people{
+  margin-bottom: 180rpx;
+}
+.add-people .people-list{
+  padding: 0 30rpx;
+}
+.people-list .list-border{
+  margin:0 30rpx;
+}
+.people-list .list-item .item-l{
+  width: 620rpx;
+  align-items: center;
+  font-size: 30rpx;
+  color: rgba(28, 58, 98, 1);
+}
+.people-list .list-item .item-l image{
+  margin-right: 20rpx;
+  width: 68rpx;
+  height: 68rpx;
+  border-radius: 100%;
+}
+.people-list .list-item .item-l .items-name{
+  font-weight: bold;
+}
+.people-list .list-item .item-r text{
+  color: rgba(28, 58, 98, 1);
+}
+
+.addCollaborators .add-btn{
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 96rpx;
+  background-color: rgba(28, 58, 98, 1);
+}
+.addCollaborators .add-btn button{
+  color: #fff;
+  background-color: rgba(28, 58, 98, 1);
+}

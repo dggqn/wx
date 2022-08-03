@@ -1,0 +1,28 @@
+/* components/calendar/calendar.wxss */
+@import '../../styles/base.wxss';
+.weeks {
+  height: 50rpx;
+  line-height: 50rpx;
+  color: #fff;
+  margin-bottom: 10rpx;
+}
+.day-box{
+  text-align: center;
+  padding: 8rpx 0;
+}
+.day-box .day{
+  display: inline-block;
+  width: 58rpx;
+  height: 58rpx;
+  border-radius: 50%;
+  /* background: pink; */
+  line-height: 58rpx;
+  color: #ABA3FF;
+}
+.day-box .day.current-month-day {
+  color: #fff;
+}
+.day-box .day.selected-day{
+  background: #fff;
+  color: #6C66FA;
+}

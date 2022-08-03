@@ -1,0 +1,136 @@
+<!--pages/repair/repairDeclare/repairDeclare.wxml-->
+<view class="container flex-column">
+  <view class="repair-declare-top">
+    <!-- 扫码，维修单时隐藏-->
+    <view class="top-scan-search flex-align-items-center" wx:if="{{tab === '1'}}">
+      <view class="scan-box img-box" bindtap="showDeclareAsset">
+        <image src="{{aliyunBaseImgUrlPre}}images/scan-icon.png"></image>
+      </view>
+      <view class="search-box flex-1">
+        <input class="search-ipt" placeholder="点击左侧扫码识别资产，或手动输入资产ID" value="{{ID}}" bindblur="IDchange"></input>
+      </view>
+    </view>
+  </view>
+  
+
+  <view class="repair-declare-main flex-1 overflow-auto">
+  
+ 
+    <!-- 我要报修 -->
+    <view class="repair-declare-apply" wx:if="{{tab === '1'}}">
+      <view class="declare-apply-detail">
+         <!-- 维修部门-->
+      <view class="declare-apply-item-title">维修部门</view>
+      <view class="contact-person">
+        <view class="contact-person-item flex flex-align-items-baseline">
+          <view class="flex-1">部门</view>
+          <view  style="flex-grow:2">
+            <picker bindchange="bindPickerChange" value="{{deptIndex}}" range="{{objectDeptArr}}" range-key="departName">
+            <view class="flex-2" wx:if = "{{deptEntityId==''}}">
+              请选择部门
+            </view>
+            <view class="flex-2" wx:else>
+              {{departName}}
+            </view>
+          </picker>
+          </view>
+        </view>
+      </view>
+        <view class="declare-apply-item-title">问题及描述</view>
+        <view class="problem">
+          <view class="problem-selects">
+            <block wx:for="{{issueTextList}}" wx:key='code'>
+              <text class="select-item {{item.active?'active':''}}" bindtap="chooseIssue" data-item="{{item}}">{{item.text}}</text>
+            </block>
+          </view>
+          <view class="declare-reasons">
+            <view class="has-selected">
+              <view class="has-selected-box">
+                <text>可选择上方问题分类</text>
+              </view>
+            </view>
+            <view class="input-reason">
+              <textarea class="input-reason-area" bindblur="issueTextareaChange" value="{{issueTextarea}}"></textarea>
+            </view>
+          </view>
+        </view>
+        <view class="declare-apply-item-title">添加图片（最多三张）</view>
+        <view class="photo-box flex-space-between">
+          <van-uploader preview-size="180rpx" file-list="{{ fileList }}"
+                    accept='image' bind:after-read="afterRead" 
+                    bind:delete="deleteImg" max-count="3">
+          </van-uploader>
+        </view>
+        <view class="declare-apply-item-title">添加语音</view>
+        <view class="photo-box flex-space-between">
+          <view class="up-item">
+            <image class="voice-huatong {{press == false ? 'voiceActive' : ''}}" src="{{aliyunBaseImgUrlPreNew}}1655276559376.png" 
+            bindtouchstart="streamRecord" bindtouchend= "streamRecordEnd"></image>
+            <view wx:if="{{press==true}}" class="voiceSayClass">按住说话</view>
+            <view wx:else="{{press==false}}" class="voiceSayClass">正在说话</view>
+          </view>
+        </view>
+        <view class="up-item">
+          <view class="voice-margin"  wx:for="{{voiceList}}" wx:key="id">
+          <view bindtap="play" class="voice-padding">
+            <image src="{{aliyunBaseImgUrlPreNew}}1655277105532.png"
+            class="voice-icon"></image>
+            <text class="voice-icon1">语音{{index+1}}({{item.time}}秒)</text>
+          </view>
+          <view class="voice-X">
+            <text bindtap="delete" data-key="{{item.id}}">X</text>
+          </view>
+          </view>
+        </view>
+        <hr/>
+      <view class="declare-apply-item-title">联系人</view>
+      <view class="contact-person">
+        <view class="contact-person-item flex flex-align-items-baseline">
+          <view class="flex-1">姓名</view>
+          <input value="{{ContactName}}" bindblur="ContactNameChange" style="flex-grow:2"></input>
+        </view>
+        <view class="contact-person-item flex flex-align-items-baseline">
+          <view class="flex-1">电话</view>
+          <input value="{{phoneNumber}}" bindblur="phoneNumberChange" style="flex-grow:2"></input>
+        </view>
+        <view class="contact-person-item flex flex-align-items-baseline">
+          <view class="flex-1">地址</view>
+          <input value="{{address}}" bindblur="addressChange" style="flex-grow:2"></input>
+        </view>
+      </view>
+      
+      <view class="bottom-btn-view flex" >
+          <button class="bottom-btn1"  size="mini" bindtap="updateDeclare" data-type='btn1' >存草稿</button>
+          <button class="bottom-btn2"  size="mini" bindtap="updateDeclare" data-type='btn2' >提交报修</button>
+        </view>
+      </view>
+    </view>
+    <van-popup show="{{ showAssetFlag }}" round="true" close-on-click-overlay>
+      <view class="declare-asset-popup-box">
+        <view class="asset-title">识别出的资产</view>
+        <view class="public-list">
+          <view class="list-item flex">
+            <view class="item-img img-box">
+              <!-- <image class="img" src="{{aliyunBaseImgUrlPre}}images/logo.png"></image> -->
+              <image class="img" src="{{AssetDetail.displayImgUrl}}"></image>
+            </view>
+            <view class="item-detail flex-1 flex-column">
+              <view class="detail-top">
+                <view class="detail-name">{{AssetDetail.assetName}}</view>
+                <view class="detail-num">资产编号：{{AssetDetail.assetBarcode}}</view>
+              </view>
+              <view class="detail-bottom">
+                <view class="detail-check-person">负责人：{{AssetDetail.aftersalesResponsibleUser}}</view>
+                <view class="detail-sign-date">签收日期：{{AssetDetail.enterDate}}</view>
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class="asset-bottom flex-space-between">
+          <view class="cancel-btn btn" bindtap="cancelChooseAsset">取消</view>
+          <view class="confirm-btn liner-btn btn">确定</view>
+        </view>
+      </view>
+    </van-popup>
+  </view>
+</view>

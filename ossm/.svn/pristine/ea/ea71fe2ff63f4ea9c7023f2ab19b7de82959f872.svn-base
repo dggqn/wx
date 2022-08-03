@@ -1,0 +1,102 @@
+/* pages/repair/repairFeedback/repairFeedback.wxss */
+.feedback-box{
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  padding: 0 70rpx;
+  padding-top: 40rpx;
+  box-sizing: border-box;
+}
+.feedback-box .feedback-tip{
+  font-size:28rpx;
+  font-family:PingFangSC-Regular,PingFang SC;
+  color: #9090A8;
+  line-height:40rpx;
+}
+.feedback-box .slect-title{
+  margin-top: 36rpx;
+}
+.feedback-box .select-solve{
+  font-size: 32rpx;
+  margin-top: 24rpx;
+}
+.feedback-box .select-solve .solve-item{
+  width: 186rpx;
+}
+.feedback-box .select-solve .solve-item .iconfont {
+  font-size: 36rpx;
+  margin-right: 5rpx;
+}
+
+
+.range-box{
+  margin-top: 24rpx;
+}
+.range-box .range-item { 
+  display: inline-block;
+  width: 60rpx;
+  height: 60rpx;
+  margin-right: 36rpx;
+}
+.range-box .range-intro {
+  display: inline-block;
+  color: #9090A8;
+  line-height: 60rpx;
+}
+.not-approve-reasons{
+  margin-top: 24rpx;
+}
+.not-approve-reasons .reason-item {
+  display: inline-block;
+  min-width: 212rpx;
+  height: 58rpx;
+  text-align: center;
+  line-height: 58rpx;
+  background: #E7E7F2;
+  box-sizing: border-box;
+  border-radius: 29rpx;
+  margin-bottom: 40rpx;
+  margin-right: 45rpx;
+  font-size: 24rpx;
+}
+.not-approve-reasons .reason-item.active{
+  border: 2rpx solid #6C66FA;
+  color: #6C66FA;
+  background: #EBE9FF;
+}
+.not-approve-textarea{
+  width: 100%;
+  height: 140rpx;
+  padding: 16rpx;
+  box-sizing: border-box;
+  border: 1rpx solid #C4C4D9;
+  border-radius: 4rpx;
+}
+
+.upload-box {
+  text-align: center;
+  height: 88rpx;
+  line-height: 88rpx;
+  margin-top: 60rpx;
+}
+.upload-box .upload-btn {
+  display: inline-block;
+  height: 100%;
+  width: 468rpx;
+  border-radius: 26rpx;
+  /* background: #E7E7F2; */
+  color: #fff;
+}
+.upload-box  .btn-color-disabled{
+  background: #E7E7F2;
+}
+.upload-box  .btn-color-active{
+  background: #6C66FA;
+}
+
+.upload-box .upload-btn.active{
+  background: #6C66FA;
+}
+
+
+

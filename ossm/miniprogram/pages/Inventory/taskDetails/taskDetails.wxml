@@ -1,0 +1,105 @@
+<view class="task-details">
+  <view class="ditails-card">
+    <view class="card-header box-shadow flex-between-center">
+      <view class="flex-align-items-center">
+        <view>ID: 112333333366</view>
+        <view class="state state-grey">待开始</view>
+        <view wx:if="{{true}}" class="state state-cyan">进行中</view>
+        <view wx:if="{{false}}" class="state state-grey">已完成</view>
+      </view>
+      <view class="overview flex-align-items-center">
+        <text>任务概览</text>
+        <text class="iconfont iconyoujiantou-new-01"></text>
+      </view>
+    </view>
+    <view class="card-info">
+      <view class="flex-align-items-center">
+        <view class="card-info-item flex-align-items-center">
+          <view class="line grey"></view>
+          <view class="flex-column">
+            <text class="font">未盘</text>
+            <text class="num">12</text>
+          </view>
+        </view>
+        <view class="card-info-item flex-align-items-center">
+          <view class="line blue"></view>
+          <view class="flex-column">
+            <text  class="font">已盘</text>
+            <text class="num">0</text>
+          </view>
+        </view>
+        <view class="card-info-item flex-align-items-center">
+          <view class="line green"></view>
+          <view class="flex-column">
+            <text class="font">盘盈</text>
+            <text class="num">0</text>
+          </view>
+        </view>
+        <view class="card-info-item flex-align-items-center">
+          <view class="line orange"></view>
+          <view class="flex-column">
+            <text class="font">盘亏</text>
+            <text class="num">0</text>
+          </view>
+        </view>
+        <view class="card-info-item flex-align-items-center">
+          <view class="line cyan"></view>
+          <view class="flex-column">
+            <text class="font">待定</text>
+            <text class="num">0</text>
+          </view>
+        </view>
+      </view>
+      <view class="time">
+        <text>起止时间：</text>
+        <text>2021-03-19  9:00  至 2021-03-19  19:00</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="main" wx:for="{{[1,1,1]}}">
+    <view class="content-info box-shadow flex">
+      <view><image class="image" src="https://t7.baidu.com/it/u=2316554978,1422991662&fm=193&f=GIF"></image></view>
+      <view class="content-info-right">
+        <view class="title ellipsis-two">戴尔打印机打最多16字内容lkahflksahlfk方式发几遍就撒开北京爱上不该喀什不卡就多也可以两行显示</view>
+        <view class="flex small">
+          <view class="left text-shadow">规格型号</view>
+          <text>：</text>
+          <view class="ellipsis-one">规格型号覅欧安会喀什古拉山口韩国看了哈抗沙鲁克最多可显示12个字</view>
+        </view>
+        <view class="flex">
+          <view class="left text-shadow">单位</view>
+          <text>：</text>
+          <view>台</view>
+        </view>
+      </view>
+    </view>
+
+    <view class="asset-id">
+      <view class="title">资产ID</view>
+      <!-- grey 代表未盘显示的颜色， blue 代表已盘显示的颜色, cyan 代表待定 ， orange 代表盘亏 ， green 代表盘盈-->
+      <view class="id-box flex-space-between">
+        <view class="id-box-item flex-align-items-center"  wx:for="{{[1,1,1,1,1,1,1,1]}}" wx:key="*this">
+          <view class="round  {{colorLsist[index % 5]}}">
+          </view>
+          <view class="id-num">009999987967</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="fixed">
+      <view class="manual">
+        <text class="iconfont iconbianzu7"></text>
+        <text>手动盘点</text>
+      </view>
+  </view>
+
+  <view class="button-box">
+    <button class="btn">
+      <text class="iconfont iconsaoma-icon"></text>
+      <text>扫码盘点</text>
+    </button>
+  </view>
+</view>
+<view class="removeFixed"></view>

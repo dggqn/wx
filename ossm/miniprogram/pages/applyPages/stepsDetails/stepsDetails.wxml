@@ -1,0 +1,69 @@
+<view class="steps-details-box">
+  <view class="steps-details-main box-shadow">
+
+    <!-- 左侧进度条 -->
+    <view class="steps-details-main-l flex-center">
+        <view class="line vertical"></view>
+    </view>
+
+    <view class="steps-details-main-r">
+<!--      <view class="steps-details-items">-->
+<!--        <view class="items-title">-->
+<!--          <text>换货完成</text>-->
+<!--          <text class="iconfont icongou absolute"></text>-->
+<!--          &lt;!&ndash;-->
+<!--            这里我不知道数据是怎么样的，就写了两个解决方案-->
+<!--          <text wx:if="{{conducting === 5}}" class="iconfont icongou absolute"></text>-->
+<!--          <text wx:else class="dot absolute"></text> &ndash;&gt;-->
+<!--        </view>-->
+<!--        <view class="items-content">您已确认收货，换货成功</view>-->
+<!--        <view class="items-time">2021-09-01 12:00:00</view>-->
+<!--      </view>-->
+<!--      <view class="steps-details-items">-->
+<!--        <view class="items-title">-->
+<!--          <text>上门取件</text>-->
+<!--          <text class="dot absolute"></text>-->
+<!--          &lt;!&ndash; <text wx:if="{{conducting === 4}}" class="iconfont icongou absolute"></text>-->
+<!--          <text wx:else class="dot absolute"></text> &ndash;&gt;-->
+<!--        </view>-->
+<!--        <view class="items-content">-->
+<!--          您的服务单已审核通过，配送员（黄良 13700000000）将为您提供上门服务，配送员会在上门前联系您，-->
+<!--          确认上门服务的具体时间，请您保持电话畅通。-->
+<!--        </view>-->
+<!--        <view class="items-time">2021-09-01 12:00:00</view>-->
+<!--      </view>-->
+<!--      <view class="steps-details-items">-->
+<!--        <view class="items-title">-->
+<!--          <text>供应商处理中</text>-->
+<!--          <text class="dot absolute"></text>-->
+<!--          &lt;!&ndash; <text wx:if="{{conducting === 3}}" class="iconfont icongou absolute"></text>-->
+<!--          <text wx:else class="dot absolute"> &ndash;&gt;-->
+<!--        </view>-->
+<!--        <view class="items-content">您的服务单已提交至供应商，待售后审核中</view>-->
+<!--        <view class="items-time">2021-09-01 12:00:00</view>-->
+<!--      </view>-->
+<!--      <view class="steps-details-items">-->
+<!--        <view class="items-title">-->
+<!--          <text>管理员审核通过</text>-->
+<!--          <text class="dot absolute"></text>-->
+<!--          &lt;!&ndash; <text wx:if="{{conducting === 2}}" class="iconfont icongou absolute"></text>-->
+<!--          <text wx:else class="dot absolute"></text> &ndash;&gt;-->
+<!--        </view>-->
+<!--        <view class="items-content">需要做资产变更</view>-->
+<!--        <view class="items-time">2021-09-01 12:00:00</view>-->
+<!--      </view>-->
+
+
+      <view class="steps-details-items" wx:for="{{list}}" wx:key="item">
+        <view class="items-title">
+          <text>{{item.type.name}}</text>
+          <text class="dot absolute"></text>
+          <!-- <text wx:if="{{conducting === 1}}" class="iconfont icongou absolute"></text>
+          <text wx:else class="dot absolute"></text> -->
+        </view>
+        <view class="items-content">{{item.remark}}</view>
+        <view class="items-time">{{item.createTime}}</view>
+      </view>
+    </view>
+  </view>
+</view>

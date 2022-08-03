@@ -1,0 +1,61 @@
+/* miniprogram/pages/address/addressManage/addressManage.wxss */
+.address-list {
+  padding-bottom: 30rpx;
+}
+.address-list .address-item {
+  border-bottom: 1rpx solid #E7E7F2;
+}
+.address-item .item-content {
+  padding: 30rpx 0;
+}
+.address-item .item-content .content-l {
+  padding: 0 30rpx;
+  border-right: 1rpx solid #C4C4D9;
+}
+.item-content .content-l .person-info .person-name {
+  font-size: 28rpx;
+  font-weight: 500;
+  color: #1D1E30;
+}
+.item-content .content-l .person-info .default-address {
+  display: inline-block;
+  padding: 4rpx 8rpx;
+  color: #6C66FA;
+  font-size: 22rpx;
+  margin-left: 20rpx;
+  background: #F0EFFE;
+}
+.item-content .content-l .person-info .person-tel {
+  font-weight: 400;
+  color: #30304C;
+}
+.address-item .item-content .content-l .address-info {
+  margin-top: 8rpx;
+  font-size: 24rpx;
+  color: #9090A8;
+}
+.address-item .item-content .content-r {
+  width: 148rpx;
+  text-align: center;
+}
+.address-item .detail-item-del {
+  height: 100%;
+  width: 106px;
+  color: #fff;
+  background: #DB00BF;
+}
+
+.add-address-box {
+  height: 130rpx;
+  box-shadow: 0px -6px 14px 0px rgba(126, 145, 195, 0.2);
+}
+.add-address-box .add-address-btn {
+  border: 1rpx solid #6C66FA;
+  color: #6C66FA;
+  font-size: 28rpx;
+  padding: 17rpx 47rpx;
+  border-radius: 60rpx;
+}   
+.empty-box {
+  margin-top: 200rpx;
+}

@@ -1,0 +1,33 @@
+/* miniprogram/pages/applyPages/applySuccess/applySuccess.wxss */
+.content-box {
+  padding: 144rpx;
+  padding-bottom: 0;
+  background: #fff;
+}
+.success-box .success-img  {
+  width: 196rpx;
+  height: 196rpx;
+  margin: 0 auto;
+}
+.success-box .tips-box {
+  text-align: center;
+  margin: 18rpx auto;
+  color: #30304C;
+  font-size: 38rpx;
+}
+.success-box .tips-box .look-msg {
+  color: #9090A8;
+  font-size: 28rpx;
+  margin-top: 15rpx;
+}
+.success-box .tips-box .jump-btn {
+  display: inline-block;
+  width: 236rpx;
+  height: 74rpx;
+  line-height: 74rpx;
+  border-radius: 37rpx;
+  font-size: 28rpx;
+  color: #6C66FA;
+  border: 1rpx solid #6C66FA;
+  margin: 40rpx 14rpx;
+}

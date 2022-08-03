@@ -1,0 +1,47 @@
+<view class="operation">
+    <view class="operation-btn flex-align-items-center" bindtap="showStatus">
+        <text wx:if="{{status === '200'}}">待审核{{statusCount>0?'(' + statusCount + ')':''}}</text>
+        <text wx:if="{{status === '201'}}">已审核</text>
+        <text wx:if="{{status === '202'}}">已发起</text>
+        <text wx:if="{{status === '203'}}">已完成</text>
+        <text class="iconfont iconxiajiantou-new-01"></text>
+    </view>
+
+    <view class="operation-list" wx:if="{{showStatusFlag}}">
+        <view class="operation-list-item {{status==='200'?'active':''}}" catchtap="changeStatus" data-status="200">
+            待审核{{statusCount>0?'(' + statusCount + ')':''}}
+        </view>
+        <view class="operation-list-item {{status==='201'?'active':''}}" catchtap="changeStatus" data-status="201">已审核</view>
+        <view class="operation-list-item {{status==='202'?'active':''}}" catchtap="changeStatus" data-status="202">已发起</view>
+        <view class="operation-list-item {{status==='203'?'active':''}}" catchtap="changeStatus" data-status="203">已完成</view>
+    </view>
+</view>
+<view class="card-box" wx:if="{{dataList[0]}}">
+    <view class="backlog-item box-shadow" wx:for="{{dataList}}" wx:key="index" bindtap="jumpDetails" data-id="{{item.entityId}}">
+        <view class="header flex-align-items-center">
+            <image class="img" src="{{item.avatarC || 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fimages%2F20180127%2F5e544a9ea9f74cc2a560ff9c192cb008.jpeg&refer=http%3A%2F%2F5b0988e595225.cdn.sohucs.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1628215539&t=d377cd6c1b83a5a3b64ea4b776247e06'}}"></image>
+            <view class="title">{{item.departNameC + item.realnameC}}提交的资产报废申请</view>
+        </view>
+        <view class="content">
+            <view class="content-item flex">
+                <view class="content-item-l">报废资产数：</view>
+                <view class="content-item-r">{{item.totalCount}}件</view>
+            </view>
+            <view class="content-item flex">
+                <view class="content-item-l">申请理由：</view>
+                <view class="content-item-r">{{item.reason}}</view>
+            </view>
+        </view>
+        <view class="footer flex-between-center">
+            <view class="footer-l">
+                <view>来自资产报废</view>
+                <view class="time">{{item.createTime}}</view>
+            </view>
+            <view class="footer-r">{{item.statusName}}</view>
+        </view>
+    </view>
+</view>
+<view class="no-class-capacity flex-center flex-column" wx:else>
+    <image class="img" src="https://hospital-assets-image-public.oss-cn-shanghai.aliyuncs.com/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/%E4%B8%8A%E6%B5%B7%E7%AC%AC%E5%9B%9B%E4%BA%BA%E6%B0%91%E5%8C%BB%E9%99%A2/images/empty.png"></image>
+    <text>暂无内容</text>
+</view>

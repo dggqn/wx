@@ -1,0 +1,106 @@
+<view class="task-details">
+    <view class="ditails-card">
+        <view class="card-header box-shadow flex-between-center">
+            <view class="flex-align-items-center">
+                <view>ID: {{detail.ordersNo}}</view>
+                <view wx:if="{{detail.statusCode === 'wait_start'}}" class="state state-grey">待开始</view>
+                <view wx:if="{{detail.statusCode === 'checking'}}" class="state state-cyan">进行中</view>
+                <view wx:if="{{detail.statusCode === 'finish'}}" class="state state-grey">已完成</view>
+            </view>
+            <navigator url="../taskDetail/taskDetail?entityId={{entityId}}" class="overview flex-align-items-center">
+                <text>任务概览</text>
+                <text class="iconfont iconyoujiantou-new-01"></text>
+            </navigator>
+        </view>
+        <view class="card-info">
+            <view class="flex-align-items-center">
+                <view class="card-info-item flex-align-items-center" wx:if="{{detail.waitCheckCount>0}}">
+                    <view class="line grey"></view>
+                    <view class="flex-column">
+                        <text class="font">未盘</text>
+                        <text class="num">{{detail.waitCheckCount}}</text>
+                    </view>
+                </view>
+                <view class="card-info-item flex-align-items-center" wx:if="{{detail.checkedCount>0}}">
+                    <view class="line blue"></view>
+                    <view class="flex-column">
+                        <text class="font">已盘</text>
+                        <text class="num">{{detail.checkedCount}}</text>
+                    </view>
+                </view>
+                <view class="card-info-item flex-align-items-center" wx:if="{{detail.gainsCount>0}}">
+                    <view class="line green"></view>
+                    <view class="flex-column">
+                        <text class="font">盘盈</text>
+                        <text class="num">{{detail.gainsCount}}</text>
+                    </view>
+                </view>
+                <view class="card-info-item flex-align-items-center" wx:if="{{detail.lossCount>0}}">
+                    <view class="line orange"></view>
+                    <view class="flex-column">
+                        <text class="font">盘亏</text>
+                        <text class="num">{{detail.lossCount}}</text>
+                    </view>
+                </view>
+                <view class="card-info-item flex-align-items-center" wx:if="{{detail.pendingCount>0}}">
+                    <view class="line cyan"></view>
+                    <view class="flex-column">
+                        <text class="font">待定</text>
+                        <text class="num">{{detail.pendingCount}}</text>
+                    </view>
+                </view>
+            </view>
+            <view class="time">
+                <text>起止时间：</text>
+                <text>{{detail.startTime}} 至 {{detail.endTime}}</text>
+            </view>
+        </view>
+    </view>
+
+    <view class="main" wx:for="{{detail.details}}" wx:key="item">
+        <view class="content-info box-shadow flex">
+            <view>
+                <image class="image" mode="aspectFit" src="{{item.displayImgUrl}}"></image>
+            </view>
+            <view class="content-info-right">
+                <view class="title ellipsis-two">{{item.name}}</view>
+                <view class="flex small">
+                    <view class="left text-shadow">规格</view>
+                    <text>：</text>
+                    <view class="ellipsis-one">{{item.specificationName}}</view>
+                </view>
+                <view class="flex">
+                    <view class="left text-shadow">单位</view>
+                    <text>：</text>
+                    <view>{{item.stockUnit}}</view>
+                </view>
+            </view>
+        </view>
+
+        <view class="asset-id">
+            <view class="title">资产ID</view>
+            <!-- grey 代表未盘显示的颜色， blue 代表已盘显示的颜色, cyan 代表待定 ， orange 代表盘亏 ， green 代表盘盈-->
+            <view class="id-box flex-space-between">
+                <view class="id-box-item flex-align-items-center" wx:for="{{item.assetBarcodeMap}}"
+                           wx:for-index="key" wx:for-item="value" bindtap="toAssetsDetail" data-assetBarcode="{{key}}" >
+                    <view class="round {{value}}">
+                    </view>
+                    <view class="id-num">{{key}}</view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="fixed" wx:if="{{!(detail.statusCode === 'finish'||detail.statusCode==='wait_start')}}" bindtap="manualCheck">
+        <view class="manual box-shadow">
+            <text class="iconfont iconbianzu7"></text>
+            <text>手动盘点</text>
+        </view>
+    </view>
+    <view class="button-box" wx:if="{{!(detail.statusCode === 'finish')}}">
+        <button class="btn" bindtap="scan" disabled="{{detail.statusCode==='wait_start'}}">
+            <text class="iconfont iconsaoma-icon"></text>
+            <text>扫码盘点</text>
+        </button>
+    </view>
+</view>
+<view class="removeFixed"></view>

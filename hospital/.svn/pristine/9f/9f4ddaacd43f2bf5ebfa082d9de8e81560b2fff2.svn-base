@@ -1,0 +1,180 @@
+/* pages/applyPages/hasApplyList/hasApplyList.wxss */
+.van-popup{
+  border-radius: 40rpx;
+}
+.has-apply-top{
+  background: #fff;
+}
+.has-apply-top .top-tabs{
+  color: #6F6F8E;
+  padding: 20rpx 0;
+}
+.has-apply-top .top-tabs .tab{
+  font-size: 30rpx;
+  text-align: center;
+  position: relative;
+}
+.has-apply-top .top-tabs .tab.active {
+  color: #715FFF;
+}
+.has-apply-top .top-tabs .tab .bottom-line{
+  position: absolute;
+  bottom: -12rpx;
+  left: 50%;
+  transform: translate(-50%);
+  width: 40rpx;
+  height: 4rpx;
+  border-top-left-radius: 4rpx;
+  border-top-right-radius: 4rpx;
+  background: #715FFF;
+}
+.has-apply-top .top-search{
+  height: 72rpx;
+  padding: 30rpx 30rpx 20rpx 30rpx;
+}
+.look-choose{
+  height: 70rpx;
+  line-height: 100rpx;
+  text-align: right;
+  font-size: 28rpx;
+  color: #30304C;
+  padding: 0 30rpx;
+}
+
+
+.list-container {
+  padding: 30rpx;
+}
+.scroll-view {
+  height: 100%;
+  overflow: auto;
+}
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
+}
+.list-item{
+  width: 100%;
+  box-sizing: border-box;
+  background: #fff;
+  margin-bottom: 24rpx;
+}
+.list-item .item-top{
+  height: 54rpx;
+  background: #FBFBFF;
+  padding: 0 30rpx;
+  font-size: 24rpx;
+}
+.list-item .item-top .top-id {
+  color: #30304C;
+}
+.list-item .item-top .top-last-time{
+  color: #9090A8;
+}
+.list-item .item-top .top-last-time .last-time-tip{
+  color: #DB00BF;
+  font-size: 20rpx;
+  border: 1rpx solid #DB00BF;
+  border-radius:2rpx;
+  padding: 2rpx 6rpx;
+  margin-right: 8rpx;
+}
+.list-item .item-detail {
+  position: relative;
+  width: 100%;
+  padding: 30rpx 30rpx 80rpx 30rpx;
+  box-sizing: border-box;
+  background: #fff;
+}
+.list-item .item-detail .detail-img {
+  width: 80rpx;
+  height: 80rpx;
+  margin-right: 20rpx;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.item-detail .detail-center .center-top .center-status{
+  color: #5766DE;
+  font-size: 28rpx;
+  font-weight: 600;
+}
+.item-detail .detail-center .center-top .center-total {
+  color: #9090A8;
+  font-size: 24rpx;
+}
+.item-detail .detail-center .center-bottom{
+  color: #322D53;
+  font-size: 24rpx;
+  margin-top: 8rpx;
+}
+.item-detail .detail-btn {
+  width: 128rpx;
+  height: 50rpx;
+  color: #fff;
+  background: #6C66FA;
+  font-size: 24rpx;
+  text-align: center;
+  line-height: 50rpx;
+  border-radius: 4rpx;
+}
+/* 查看详情按钮 */
+.item-detail .detail-operate{
+  font-size: 24rpx;
+  color: #9090A8;
+  border-radius: 4rpx;
+  margin-left: 56rpx;
+  /* background: #6C66FA; */
+}
+.list-item .item-tip{
+  padding: 12rpx 0;
+  margin: 0 30rpx;
+  line-height: 30rpx;
+  color: #938DB2;
+  min-height: 60rpx;
+  border-top: 1rpx solid #E7E7F2;
+  font-size: 24rpx;
+}
+.iconfont.iconshijian-01 {
+  margin-right: 4rpx;
+}
+.flow-path{
+  margin-right: 10rpx;
+  width: 30rpx;
+  height: 30rpx;
+}
+.horizontal-line{
+  margin:0 24rpx;
+  width: calc(100% - 48rpx);
+  height: 1rpx;
+  background-color: #E7E7F2;
+  box-shadow: 3rpx 3rpx 14rpx 0rpx rgba(126, 145, 195, 0.2);
+  border-radius: 4rpx 4rpx 0rpx 0rpx;
+}
+.has-jump-details{
+  width: 50rpx;
+} 
+.public-assets-list .list-item .item-bottom{
+  padding: 19rpx 24rpx;
+  height: 64rpx;
+  background-color: #fff;
+  font-size: 24rpx;
+  color: #6E6E81;
+}
+.public-assets-list .list-item .item-bottom .item-bottom-font{
+  width: 468rpx;
+}
+.item-bottom .ellipsis-one{
+  line-height: 60rpx;
+}
+.public-assets-list .list-item{
+  height: 370rpx;
+}
+.four-hospitals-buttom-box{
+  position:absolute;
+  right: 20rpx;
+  bottom:20rpx;
+}
+/* .four-hospitals-buttom-box .four-hospitals-buttom{
+  background-color: #fff;
+} */

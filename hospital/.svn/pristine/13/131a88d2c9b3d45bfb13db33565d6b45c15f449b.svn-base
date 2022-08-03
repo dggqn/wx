@@ -1,0 +1,108 @@
+<view class="agency-header flex-between-center">
+  <view wx:for="{{tabList}}" wx:key="item" class="agency-header-item {{showTab===item.tabName?'active':''}}" catchtap="changeTab" data-tab="{{item.tabName}}">{{item.tabName}}({{item.tabCount}})</view>
+</view>
+
+<view class="operation">
+  <view class="operation-btn flex-align-items-center" bindtap="showStatus" wx:if="{{showTab === '盘点'}}">
+    <text wx:if="{{status===''}}">全部</text>
+    <text wx:if="{{status==='0'}}">待处理</text>
+    <text wx:if="{{status==='1'}}">已发起</text>
+    <text wx:if="{{status==='2'}}">已完成</text>
+    <text class="iconfont iconxiajiantou-new-01"></text>
+  </view>
+
+  <view class="operation-btn flex-align-items-center" bindtap="showStatus" wx:if="{{showTab === '变更'}}">
+    <text wx:if="{{status==='100'}}">待审核</text>
+    <text wx:if="{{status==='101'}}">待接收</text>
+    <text wx:if="{{status==='102'}}">已审核</text>
+    <text wx:if="{{status==='103'}}">已发起</text>
+    <text wx:if="{{status==='104'}}">已接收</text>
+    <text class="iconfont iconxiajiantou-new-01"></text>
+  </view>
+
+  <view class="operation-list" wx:if="{{showStatusFlag && showTab === '盘点'}}">
+    <view class="operation-list-item {{status===''?'active':''}}" catchtap="changeStatus" data-status="">全部</view>
+    <view class="operation-list-item {{status==='0'?'active':''}}" catchtap="changeStatus" data-status="0">待处理</view>
+    <view class="operation-list-item {{status==='1'?'active':''}}" catchtap="changeStatus" data-status="1">已发起</view>
+    <view class="operation-list-item {{status==='2'?'active':''}}" catchtap="changeStatus" data-status="2">已完成</view>
+  </view>
+
+  <view class="operation-list" wx:if="{{showStatusFlag && showTab === '变更'}}">
+    <view class="operation-list-item {{status==='100'?'active':''}}" catchtap="changeStatus" data-status="100">待审核</view>
+    <view class="operation-list-item {{status==='101'?'active':''}}" catchtap="changeStatus" data-status="101">待接收</view>
+    <view class="operation-list-item {{status==='102'?'active':''}}" catchtap="changeStatus" data-status="102">已审核</view>
+    <view class="operation-list-item {{status==='103'?'active':''}}" catchtap="changeStatus" data-status="103">已发起</view>
+    <view class="operation-list-item {{status==='104'?'active':''}}" catchtap="changeStatus" data-status="104">已接收</view>
+  </view>
+</view>
+
+<view class="card-box">
+  <view class="card" wx:if="{{showTab==='盘点'}}" wx:for="{{dataList}}" wx:key="item">
+    <view class="card-portrait flex-align-items-center">
+      <open-data type='userAvatarUrl' class="card-img"></open-data>
+<!--        <image class="card-img" src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3681880960,455182084&fm=26&gp=0.jpg"></image>-->
+        <view class="title">{{item.title}}</view>
+    </view>
+    <view class="card-info">
+      <view class="card-info-item flex">
+        <view class="info-l">盘点范围：</view>
+        <view class="info-r">{{item.scopeName}}</view>
+      </view>
+      <view class="card-info-item flex">
+        <view class="info-l">盘点开始时间：</view>
+        <view class="info-r">{{item.startTime}}</view>
+      </view>
+      <view class="card-info-item flex">
+        <view class="info-l">备注：</view>
+        <view class="info-r">{{item.remark}}</view>
+      </view>
+    </view>
+    <view class="division"></view>
+    <view class="card-footer flex-between-center">
+      <view>
+        <view>来自盘点</view>
+        <view>{{item.createTime}}</view>
+      </view>
+      <view>
+        <button class="btn" data-entityid="{{item.entityId}}" catchtap="goDetail">去处理</button>
+      </view>
+    </view>
+  </view>
+
+  <view class="backlog-item"  wx:if="{{showTab==='变更'}}" wx:for="{{dataList}}" wx:key="entityId" data-oid="{{item.entityId}}" bindtap="jumpDetails">
+    <view class="header flex-align-items-center">
+      <image class="img" src="{{item.avatarC}}"></image>
+      <view class="title">{{item.departNameC + item.realnameC}}发起的资产变更</view>
+    </view>
+    <view class="content">
+      <view class="content-item flex">
+        <view class="content-item-l">变更资产数：</view>
+        <view class="content-item-r">{{item.totalCount}}件</view>
+      </view>
+      <view class="content-item flex">
+        <view class="content-item-l">接收人：</view>
+        <view class="content-item-r">{{item.realnameR}}</view>
+      </view>
+      <view class="content-item flex">
+        <view class="content-item-l">备注：</view>
+        <view class="content-item-r">{{item.remark}}</view>
+      </view>
+    </view>
+    <view class="footer flex-between-center">
+      <view class="footer-l">
+        <view>来自资产变更</view>
+        <view class="time">{{item.createTime}}</view>
+      </view>
+      <view class="footer-r">{{item.statusName}}</view>
+    </view>
+  </view>
+</view>
+
+
+
+
+<view class="no-class-capacity flex-center flex-column" wx:if="{{tabList.size>0}}">
+  <image class="img" src="https://hospital-assets-image-public.oss-cn-shanghai.aliyuncs.com/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/%E4%B8%8A%E6%B5%B7%E7%AC%AC%E5%9B%9B%E4%BA%BA%E6%B0%91%E5%8C%BB%E9%99%A2/images/empty.png"></image>
+  <text>暂无内容</text>
+</view>
+

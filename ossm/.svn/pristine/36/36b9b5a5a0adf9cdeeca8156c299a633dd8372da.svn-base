@@ -1,0 +1,78 @@
+<view class="container overflow-auto">
+  <!-- <view class="public-apply-detail-top flex-align-items-center">
+    <view class="detail-top-l flex-1">
+      <view class="top-l-status">我的位置码</view>
+      <view class="top-l-tip">风险等级：{{LocationUserInfo.riskName}}</view>
+    </view>
+    <view class="detail-top-r flex-1">
+      <view class="top-r-id">{{LocationUserInfo.personName}}</view>
+      <view class="top-r-date">ID:{{LocationUserInfo.personIdcard}}</view>
+    </view>
+  </view>
+  <view class="codePage-main flex-column flex-center">
+    <view class="card code-box flex-column flex-center">
+      <van-count-down time="{{ time }}" format="mm 分 ss 秒" />
+      <view class="img-box flex-column flex-center" style="width: 610rpx;height: 610rpx;">
+        <canvas style="width: 250px; height: 250px;" canvas-id="myQrcode"></canvas>
+      </view>
+    </view>
+    <view class="card operation-box">
+      <view class="flex flex-center" style="width: 610rpx;" bindtap="goHistory">
+        <van-icon name="notes-o" />个人历史位置查询
+      </view>
+    </view>
+  </view> -->
+  <view hidden="{{ reqHidden }}">
+    <view class="flex flex-center flex-column">
+      <view class="massage-item flex flex-center flex-column">
+        <van-icon name="checked" size="120rpx" color="{{LocationUserInfo.riskColor}}" />
+        <text class="title-text">申报成功，感谢使用!</text>
+      </view>
+      <view class="btn-bottom">
+        <van-button type="primary" round color="#6C66FA" bindtap="goHistory">个人历史位置查询</van-button>
+      </view>
+    </view>
+  </view>
+  <view hidden="{{ !reqHidden }}">
+    <view class="flex flex-center flex-column">
+      <view class="massage-item flex flex-center flex-column">
+        <van-icon name="clear" size="120rpx" color="{{LocationUserInfo.riskColor}}"/>
+        <text class="title-text">申报失败，请重试!</text>
+      </view>
+    </view>
+  </view>
+  <view class="codePage-bottom">
+    <image src="{{aliyunBaseImgUrlPre}}images/logo-small.png" style="width: 40rpx;height: 40rpx;vertical-align:middle"></image>
+    <view class="logo-text">上海市第四人民医院</view>
+  </view>
+</view>
+
+<van-overlay show="{{ showRegister }}">
+  <view class="card register-box">
+    <view class="register-title flex flex-center" style="margin: 60rpx;">
+      <view style="font-size: 42rpx;">人员注册</view>
+    </view>
+    <view class="radio-box flex" style="margin-top: 0rpx;">
+      <view class="radio-lable" style="margin-left: 40rpx;font-size: 32rpx;">身份：</view>
+      <view class="radio-main">
+        <van-radio-group class="flex" value="{{ identity }}" direction="horizontal" bind:change="identityChange">
+          <van-radio name="3" class="radio-item">患者</van-radio>
+          <van-radio name="2" class="radio-item">陪护</van-radio>
+          <van-radio name="1" class="radio-item">随访</van-radio>
+        </van-radio-group>
+      </view>
+    </view>
+    <view style="margin-top:20rpx;">
+      <van-field value="{{ realName }}" error="{{haveName}}" label="姓名" placeholder="请输入您的真实姓名" bind:change="realNameChange" />
+      <van-field value="{{ ID_number }}" error-message="{{ID_numberError}}" label="身份证号" placeholder="中国居民身份证" bind:change="ID_numberChange" />
+      <van-field value="{{ phone }}" error-message="{{phoneError}}" label="手机号" placeholder="请输入您的手机号" bind:change="phoneChange" />
+      <van-field value="{{ orgName }}" error-message="" label="单位名称" placeholder="您目前所在单位" bind:change="orgNameChange" />
+      <van-field value="{{ aimDept }}" error="" label="访问科室" placeholder="您将访问的科室" bind:change="aimDeptChange" />
+      <van-field value="{{ ecPerson }}" error-message="" label="紧急联系人" placeholder="无法联系到您时使用" bind:change="ecPersonChange" />
+      <van-field value="{{ ecPhone }}" error-message="" label="紧急联系电话" placeholder="紧急联系人的电话号码" bind:change="ecPhoneChange" />
+    </view>
+    <view class="flex f-r" style="padding: 0rpx 30rpx 0rpx;">
+      <van-button type="primary" color="#6C66FA" bindtap="submitRegister">提交注册</van-button>
+    </view>
+  </view>
+</van-overlay>

@@ -1,0 +1,54 @@
+<view class="assets-record-nav flex-between-center">
+  <view 
+    class="nav-item {{navActive==='inventory'?'nav-item-active':''}}"
+    data-type="inventory"
+    bindtap="flagClass"
+  >盘点(1)</view>
+
+  <view
+    class="nav-item {{navActive==='change'?'nav-item-active':''}}"
+    data-type="change"
+    bindtap="flagClass"
+  >变更(1)</view>
+
+  <view
+    class="nav-item {{navActive==='scrap'?'nav-item-active':''}}"
+    data-type="scrap"
+    bindtap="flagClass"
+  >报废(1)</view>
+</view>
+
+<van-dropdown-menu class="sort-dropdown">
+    <van-dropdown-item value='{{0}}' options="{{assetsSortOption}}" bind:change="sort" />
+</van-dropdown-menu>
+
+
+<view class="backlog-list" wx:if="{{navActive==='change'}}">
+  <view class="backlog-item" wx:for="{{[1,2,3]}}" wx:key="*this" bindtap="jumpDetails">
+    <view class="header flex-align-items-center">
+      <image class="img" src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fpic1.zhimg.com%2F50%2Fv2-0d8cc8191171ac9a9b802d3ec5dc6b0b_hd.jpg&refer=http%3A%2F%2Fpic1.zhimg.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1626589692&t=513757aabc23375a23bae11a8cdf8f65"></image>
+      <view class="title">儿科李一丰发起的资产变更</view>
+    </view>
+    <view class="content">
+      <view class="content-item flex">
+        <view class="content-item-l">变更资产数：</view>
+        <view class="content-item-r">1件</view>
+      </view>
+      <view class="content-item flex">
+        <view class="content-item-l">接收人：</view>
+        <view class="content-item-r">张三</view>
+      </view>
+      <view class="content-item flex">
+        <view class="content-item-l">备注：</view>
+        <view class="content-item-r">我要调离至上海分院，需要将资产转移给张三，请批准</view>
+      </view>
+    </view>
+    <view class="footer flex-between-center">
+      <view class="footer-l">
+        <view>来自资产变更</view>
+        <view class="time">2021-03-19 10:00</view>
+      </view>
+      <view class="footer-r">审批中</view>
+    </view>
+  </view>
+</view>

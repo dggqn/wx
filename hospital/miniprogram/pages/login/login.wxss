@@ -1,0 +1,59 @@
+/* pages/login/login.wxss */
+.logo-box {
+  /* padding-top: 121rpx; */
+  padding: 1rpx;
+}
+
+.logo-box .logo-img {
+  width: 128rpx;
+  height: 128rpx;
+  margin: 0 auto;
+}
+
+.logo-bottom {
+  position: fixed;
+  bottom: 45rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.logo-bottom .logo-text {
+  height: 40rpx;
+  line-height: 40rpx;
+  font-size: 28rpx;
+  color: #6C66FA;
+  text-align: center;
+  margin-top: 0rpx;
+  vertical-align: middle;
+}
+
+.login-btn {
+  width: 468rpx;
+  height: 88rpx;
+  line-height: 88rpx;
+  text-align: center;
+  background: rgba(108, 102, 250, 1);
+  border-radius: 16rpx;
+  font-size: 28rpx;
+  color: #FBFBFF;
+  /*margin: 90rpx auto;*/
+  margin-bottom: 20rpx;
+}
+
+.scan-box {
+  position: fixed;
+  right: 0;
+  bottom: 130rpx;
+  width: 120rpx;
+  height: 120rpx;
+  background: #fff;
+  border-radius: 50%;
+}
+
+.scan-box .scan {
+  width: 48rpx;
+  height: 48rpx;
+}

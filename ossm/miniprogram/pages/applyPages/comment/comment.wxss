@@ -1,0 +1,92 @@
+.comment{
+  line-height:30px;
+  background-color: #fff;
+}
+.container-header{
+  margin-top: 52rpx;
+  line-height: 1.5;
+  text-align: center;
+}
+.container-main{
+  padding-top: 50rpx;
+  padding-left: 180rpx;
+}
+.container-header .company-name{
+  font-size: 28rpx;
+  color: #9090A8;
+}
+.container-header .font{
+  font-size: 40rpx;
+  color: #30304C;
+  font-weight: 600;
+}
+.container-rate{
+  display: flex;
+  flex-direction: column;
+}
+.container-rate .rate-title{
+  margin-bottom: 12rpx;
+  width: 362rpx;
+  font-size: 28rpx;
+  color: #30304C;
+}
+.container-rate .rate-title .rate-type{
+  color: #9090A8;
+}
+.txra-box{
+  padding: 60rpx 82rpx;
+}
+.txra-box .textarea-class{
+  padding:24rpx;
+  width: calc( 100% - 48rpx);
+  height: 100px;
+  background-color: #F4F7FF;
+}
+.txra-box .limit{
+  display: flex;
+  justify-content: flex-end;
+  padding: 12rpx 24rpx;
+  background-color: #F4F7FF;
+  color: #9090A8;
+}
+.content-btn-box{
+  margin: 0 auto;
+  width: 546rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  background-color: #6C66FA;
+  color: #fff;
+  border-radius: 50rpx;
+  font-size: 28rpx;
+}
+.content-btn-box .content{
+  color: #5EA1F2;
+  font-weight: 600;
+}
+.submit-header{
+  margin-top: 144rpx;
+}
+.submit-header .iconsubmit-fill{
+    margin-bottom: 50rpx;
+    font-size: 156rpx;
+    color: #6c66fa;
+}
+.submit-header .title{
+  font-size: 38rpx;
+  color: #30304C;
+  font-weight: 600;
+}
+.btn-box{
+  margin-top: 60rpx;
+}
+.btn-box .btn{
+  margin: 28rpx;
+  width: 204rpx;
+  height: 74rpx;
+  line-height: 74rpx;
+  border: 1rpx solid #6C66FA;
+  background-color: #fff;
+  border-radius: 50rpx;
+  font-size: 28rpx;
+  color: #6C66FA;
+}

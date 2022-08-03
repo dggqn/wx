@@ -1,0 +1,68 @@
+<!--pages/applyPages/scanSignAssets/scanSignAssets.wxml-->
+<view class="container flex-column">
+  <view class="assets-box">
+    <view class="assets-img">
+      <!-- <image class="img" src="{{aliyunBaseImgUrlPre}}images/index-top.png" mode="aspectFit"></image> -->
+      <image class="img" mode="aspectFit" src="{{asset.displayImgUrl?asset.displayImgUrl:aliyunBaseImgUrlPre+'images/person-center-top.png'}}"></image>
+    </view>
+  </view>
+  <view class="assets-content-box" wx:if="{{!isEmpty}}">
+    <view class="assets-content">
+      <view class="content-item">
+        <view class="item-l">资产ID</view>
+        <view class="item-r">{{asset.assetBarcode}}</view>
+      </view>
+      <view class="content-item">
+        <view class="item-l">资产名称</view>
+        <view class="item-r">{{asset.name}}</view>
+      </view>
+      <view class="content-item">
+        <view class="item-l">资产类别</view>
+        <view class="item-r">{{asset.categoryName}}</view>
+      </view>
+      <view class="content-item">
+        <view class="item-l">SN号</view>
+        <view class="item-r">{{asset.snNo}}</view>
+      </view>
+      <view class="content-item">
+        <view class="item-l">价格(元)</view>
+        <view class="item-r">{{asset.marketPrice/100}}</view>
+      </view>
+      <view class="content-item">
+        <view class="item-l">型号</view>
+        <view class="item-r">{{asset.specificationName}}</view>
+      </view>
+
+      <view class="content-item">
+        <view class="item-l">状态</view>
+        <view class="item-r">{{asset.status.name}}</view>
+      </view>
+
+      <view class="content-item" wx:if="{{asset.positionType.code=='user'}}">
+        <view class="item-l">所属人</view>
+        <view class="item-r">{{asset.ownerUname}}</view>
+      </view>
+      <view class="content-item" wx:if="{{asset.positionType.code=='stockroom'}}">
+        <view class="item-l">所在仓库</view>
+        <view class="item-r">{{asset.stockroomName}}</view>
+      </view>
+      <view class="bottom-large-btn" wx:if="{{asset.canSign}}" bindtap="receiveAsset">签收</view>
+      <view class="sign-tip" wx:if="{{asset.canSign}}">
+        <text>请在签收前仔细阅读</text>
+        <text class="tip">《设备使用注意事项》</text>
+      </view>
+      <view class="sign-tip" wx:if="{{!asset.canSign}}">
+        <text class="tip">{{asset.errorMsg}}</text>
+      </view>
+
+    </view>
+  </view>
+
+  <view class="empty-box" wx:if="{{isEmpty}}">
+    <view class="emppty-content">
+      <view class="empty-img-box">
+      </view>
+      <view class="empty-tip">未找到相关领用物品</view>
+    </view>
+  </view>
+</view>

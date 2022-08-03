@@ -1,0 +1,48 @@
+<view class="container flex-column">
+<!-- 顶部tab栏 -->
+  <view class="agency-header flex-between-center">
+    <view wx:for="{{tabList}}" wx:key="item" class="agency-header-item {{showTab===item.code?'active':''}}" catchtap="changeTab" data-tab="{{item.code}}">
+      {{item.name}}
+    </view>
+  </view>
+  <!-- 搜索 -->
+  <!-- <view class="apply-res-top flex-align-items-center">
+    <view class="top-search flex-1">
+      <input class="search-ipt" placeholder="搜索" placeholder-class="placeholder-style" bindinput="keywordChange" bindconfirm="initCurrentAndSelectModelList" value="{{queryCond.keyword}}">
+      <text class="iconfont iconsousuo-icon-01" bindtap="initCurrentAndSelectModelList"></text>
+      </input>
+    </view>
+  </view> -->
+  <!-- 列表 -->
+  <view class="flex-1 container-list">
+    <view class="public-list" style="padding: 0">
+      <scroll-view-my class="scroll-view-my" scroll-y="true" bindscrolltolower="bindscrolltolower">
+        <!-- <view class="list-item-title">
+          <text>我的收藏</text>
+        </view> -->
+        <block  wx:for="{{queryListData}}" wx:key='index'>
+          <view class="list-item flex" bindtap="Taskdetail" data-itemDetail="{{item}}">
+            <view class="item-img img-box">
+              <image class="img" mode="aspectFit" src="{{item.displayImgUrl?item.displayImgUrl:aliyunBaseImgUrlPre+'images/default.png'}}"></image>
+            </view>
+            <view class="item-detail flex-1 flex-column">
+              <view class="detail-top">
+                <view class="detail-name">{{item.name}}</view>
+                <view class="detail-num">联系人：{{item.linkman}}</view>
+              </view>
+              <view class="detail-bottom">
+                <view class="choose-norm flex-align-items-center">
+                  <view class="flex-1 choose-norm-unit">截止时间：{{item.closeTime}}</view>
+                  <view class="choose-norm-btn img-box" data-model="{{item}}" bindtap="chooseSpecPopup">
+                    <!-- <image src="{{aliyunBaseImgUrlPre}}images/add-btn.png"></image> -->
+                  </view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </block>
+      </scroll-view-my>
+    </view>
+  </view>
+
+</view>

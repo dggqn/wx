@@ -1,0 +1,52 @@
+<view class="container flex-column comment">
+  <view wx:if="{{!successFlag || param.detailShow}}">
+    <view class="container-header">
+      <view class="company-name">{{commentInfo.supplierName}}</view>
+      <view class="font">请您对{{paramJson.type==='refund'?'售后':'采购'}}服务进行评价</view>
+    </view>
+    <view class="container-main">
+      <view class="container-rate">
+        <view class="flex-between-center rate-title"><text>服务态度</text><text class="rate-type">{{starText[commentInfo.attitude]}}</text></view>
+        <van-rate color="#FFAB5A" readonly="{{param.detailShow}}" void-icon="star" void-color="#D6D6E7" size="33px" value="{{ commentInfo.attitude }}" data-desc="attitude" bind:change="onChange" />
+      </view>
+      <view class="container-rate" wx:if="{{paramJson.type==='receipt'}}">
+        <view class="flex-between-center rate-title"><text>商品包装</text><text class="rate-type">{{starText[commentInfo.packaging]}}</text></view>
+        <van-rate color="#FFAB5A" readonly="{{param.detailShow}}" void-icon="star" void-color="#D6D6E7" size="33px" value="{{ commentInfo.packaging }}" data-desc="packaging" bind:change="onChange"/>
+        
+      </view>
+      <view class="container-rate" wx:if="{{paramJson.type==='receipt'}}">
+        <view class="flex-between-center rate-title"><text>送货速度</text><text class="rate-type">{{starText[commentInfo.deliverySpeed]}}</text></view>
+        <van-rate color="#FFAB5A" readonly="{{param.detailShow}}" void-icon="star" void-color="#D6D6E7" size="33px" value="{{ commentInfo.deliverySpeed }}" data-desc="deliverySpeed" bind:change="onChange" />
+        
+      </view>
+      <view class="container-rate" wx:if="{{paramJson.type==='refund'}}">
+        <view class="flex-between-center rate-title"><text>处理速度</text><text class="rate-type">{{starText[commentInfo.handleSpeed]}}</text></view>
+        <van-rate color="#FFAB5A" readonly="{{param.detailShow}}"  void-icon="star" void-color="#D6D6E7" size="33px" value="{{ commentInfo.handleSpeed }}" data-desc="handleSpeed" bind:change="onChange" />
+      </view>
+    </view>
+    <view class="txra-box">
+      <textarea
+      disabled="{{param.detailShow}}"
+      placeholder="说说您对本次服务的体验,以便获得更好的服务～～" class="textarea-class"
+      placeholder-style="color:#9090A8"
+      confirm-type="done" bindconfirm="doneConfirm" 
+      value="{{commentInfo.remark}}"
+      bindinput="changeRemark">
+      </textarea>
+      <view class="limit">{{param.detailShow?'':remark.length + '/100'}}</view>
+    </view>
+    <view wx:if="{{submitButtonShow}}">
+      <button class="content-btn-box" bindtap="submitComment">提交</button>
+    </view>
+  </view>
+  <view wx:if="{{successFlag}}">
+      <view class="submit-header flex-column flex-center">
+        <view class="iconfont iconsubmit-fill"></view>
+        <view class="title">评价成功</view>
+      </view> 
+      <view class="btn-box flex-center">
+        <button class="btn" bindtap="goIndex">返回首页</button>
+        <button class="btn" bindtap="showDetail">查看评价</button>
+      </view>
+  </view>
+</view>

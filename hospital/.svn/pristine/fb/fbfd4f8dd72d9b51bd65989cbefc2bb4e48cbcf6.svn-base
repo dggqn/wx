@@ -1,0 +1,35 @@
+<!--index.wxml-->
+<view class="container flex-column">
+  <view class="flex-1 overflow-auto">
+    <applyEle wx:if="{{activeTab==='apply'}}"></applyEle>
+    <supplyEle wx:if="{{activeTab==='supply'}}"></supplyEle>
+    <statisticEle wx:if="{{activeTab==='statistic'}}"></statisticEle>
+    <agencyEle wx:if="{{activeTab==='unfinishedTask'}}"></agencyEle>
+  </view>
+  <view class="flex index-tabs">
+    <view class="tab flex-1 {{activeTab==='apply'?'active':''}}"
+    data-tab="apply"
+    bindtap="changeTab">
+      <text class="iconfont iconbaoxiu-01"></text>
+      <text>申请</text>
+    </view>
+    <view class="tab flex-1 {{activeTab==='unfinishedTask'?'active':''}}"
+    data-tab="unfinishedTask"
+    bindtap="changeTab">
+      <text class="iconfont iconbianzu18-01-01-01"></text>
+      <text>待办</text>
+    </view>
+    <view class="tab flex-1 {{activeTab==='supply'?'active':''}}"
+    data-tab="supply"
+    bindtap="changeTab">
+      <text class="iconfont iconwuzi-icon-01-01"></text>
+      <text>物资</text>
+    </view>
+    <view class="tab flex-1 {{activeTab==='statistic'?'active':''}}"
+    data-tab="statistic"
+    bindtap="changeTab">
+      <text class="iconfont iconbianzu20-01-01-01"></text>
+      <text>统计</text>
+    </view>
+  </view>
+</view>

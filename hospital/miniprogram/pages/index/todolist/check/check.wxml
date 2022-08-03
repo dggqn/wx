@@ -1,0 +1,56 @@
+
+<view class="operation">
+    <view class="operation-btn flex-align-items-center" bindtap="showStatus">
+        <text wx:if="{{status===''}}">全部</text>
+        <text wx:if="{{status==='0'}}">待处理</text>
+        <text wx:if="{{status==='1'}}">已发起</text>
+        <text wx:if="{{status==='2'}}">已完成</text>
+        <text class="iconfont iconxiajiantou-new-01"></text>
+    </view>
+    <view class="operation-list" wx:if="{{showStatusFlag}}">
+        <view class="operation-list-item {{status===''?'active':''}}" catchtap="changeStatus" data-status="">全部</view>
+        <view class="operation-list-item {{status==='0'?'active':''}}" catchtap="changeStatus" data-status="0">待处理</view>
+        <view class="operation-list-item {{status==='1'?'active':''}}" catchtap="changeStatus" data-status="1">已发起</view>
+        <view class="operation-list-item {{status==='2'?'active':''}}" catchtap="changeStatus" data-status="2">已完成</view>
+    </view>
+</view>
+
+<view class="card-box" wx:if="{{dataList.length > 0}}">
+    <view class="card box-shadow" wx:for="{{dataList}}" wx:key="item">
+        <view class="card-portrait flex-align-items-center">
+            <open-data type='userAvatarUrl' class="card-img"></open-data>
+            <view class="title">{{item.title}}</view>
+        </view>
+        <view class="card-info">
+            <view class="card-info-item flex">
+                <view class="info-l">盘点范围：</view>
+                <view class="info-r">{{item.stockName}}</view>
+            </view>
+            <view class="card-info-item flex">
+                <view class="info-l">盘点开始时间：</view>
+                <view class="info-r">{{item.startTime}}</view>
+            </view>
+            <view class="card-info-item flex">
+                <view class="info-l">备注：</view>
+                <view class="info-r">{{item.remark}}</view>
+            </view>
+        </view>
+        <view class="division"></view>
+        <view class="card-footer flex-between-center">
+            <view>
+                <view>来自盘点</view>
+                <view>{{item.createTime}}</view>
+            </view>
+            <view>
+                <button class="btn" wx:if="{{item.status.code === 'checking'}}" data-entityid="{{item.entityId}}" catchtap="goDetail">去处理</button>
+                <button class="btn" wx:else data-entityid="{{item.entityId}}" style="width: auto;" catchtap="goDetail">查看详情</button>
+            </view>
+        </view>
+    </view>
+</view>
+
+<view class="no-class-capacity flex-center flex-column" wx:else>
+    <image class="img" src="https://hospital-assets-image-public.oss-cn-shanghai.aliyuncs.com/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/%E4%B8%8A%E6%B5%B7%E7%AC%AC%E5%9B%9B%E4%BA%BA%E6%B0%91%E5%8C%BB%E9%99%A2/images/empty.png"></image>
+    <text>暂无内容</text>
+</view>
+

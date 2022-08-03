@@ -1,0 +1,28 @@
+/* pages/collarRecords/collarRecords.wxss */
+@import "../../styles/base.wxss";
+@import "../../styles/public.wxss";
+.collar-records-top{
+  background: #fff;
+}
+.collar-records-top .top-search{
+  height: 72rpx;
+  padding: 30rpx 30rpx 20rpx 30rpx;
+}
+.collar-records-center {
+  height: 100rpx;
+  line-height: 100rpx;
+  text-align: right;
+  color: #30304C;
+}
+.collar-records-center .type {
+  margin-right: 15rpx;
+}
+
+.time-list .time{
+  font-size: 28rpx;
+  color: #30304C;
+  padding-bottom: 24rpx;
+}
+.public-list,.public-list-box{
+  background-color: initial;
+}

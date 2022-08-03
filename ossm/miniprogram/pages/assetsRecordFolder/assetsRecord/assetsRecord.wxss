@@ -1,0 +1,108 @@
+page{
+  --dropdown-menu-background-color:#F4F7FF;
+  --width:56rpx;
+  background-color:var(--dropdown-menu-background-color);
+}
+.assets-record-nav{
+  padding: 0 40rpx;
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #6F6F8E;
+  background-color: #fff;
+}
+.assets-record-nav .nav-item{
+  padding: 18rpx 30rpx;
+}
+.assets-record-nav .nav-item-active{
+  position: relative;
+  color: #6C66FA;
+}
+.assets-record-nav .nav-item-active::after{
+  content: '';
+  position: absolute;
+  top: 90%;
+  left: 35%;
+  width: 30%;
+  height: 4rpx;
+  background-color: #715fff;
+  border-radius: 20rpx;
+}
+.sort-dropdown{
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 40rpx;
+  background-color: #F4F7FF;
+  font-size: 32rpx;
+  color: #30304C;
+}
+.main{
+  padding: 0 30rpx;
+}
+.assets-record-info .info-header{
+  padding: 15rpx 12rpx;
+  font-size: 28rpx;
+  color: #1C3A62;
+  background-color: rgba(54, 75, 103, .1);
+}
+.assets-record-info{
+  margin-bottom: 20rpx;
+}
+.assets-record-info-r{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 10rpx;
+  background-color: #fff;
+}
+.assets-record-info-r .title{
+  margin-bottom: 20rpx;
+  font-size: 30rpx;
+  font-weight: 600;
+  color: rgba(28, 58, 98, 1);
+}
+.assets-record-info-r .assets-id{
+  font-size: 26rpx;
+  color: rgba(28, 58, 98, .5);
+}
+.czh-steps-vertical-box{
+  height: 180rpx;
+}
+.czh-steps-vertical{
+  width: 160rpx;
+  padding: 18rpx 16rpx;
+  background-color: #f8f9fe;
+}
+.public-list{
+  padding: 0;
+}
+.public-list .list-item .item-detail .detail-top .detail-name{
+  font-size: 28rpx;
+}
+.public-list .list-item{
+  border-color: #ddd;
+}
+.public-list .list-item .item-img{
+  margin-right:26rpx;
+  width: 120rpx;
+  height: 120rpx;
+}
+.public-list .list-item .item-detail .detail-top .detail-num{
+  font-size: 24rpx;
+}
+.public-list .list-item-unit{
+  font-size: 24rpx;
+  color: #9494C3;
+}
+.public-list .list-item .item-status{
+  background-color: #C16257;
+}
+.limt{
+  white-space: nowrap;
+}
+.limt-font{
+  width: 374rpx;
+}
+/* .czh-steps-vertical .czh-steps-vertical-item{
+  
+} */
+

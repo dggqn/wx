@@ -1,0 +1,53 @@
+/* pages/positionCodePages/positionHistory/positionHistory.wxss */
+.card {
+  background: #fff;
+  border-radius: 16rpx;
+  box-shadow: 3rpx 3rpx 14rpx 0 rgba(126, 145, 195, 0.2);
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.position-item {
+  /* margin: 0rpx 24rpx 20rpx 24rpx; */
+  flex-wrap: wrap;
+  align-items: flex-end;
+  padding: 0rpx 30rpx;
+}
+
+.position-item .position-text {
+  margin-top: 15rpx;
+  font-size: 30rpx;
+  /* font-weight: 700; */
+  color: #6C66FA;
+}
+
+.position-item .position-time {
+  color: #9090A8;
+  margin-top: 5rpx;
+}
+
+.position-bottom {
+  margin-top: 5rpx;
+  border-bottom: 1rpx solid #eeeeee;
+  box-sizing: border-box;
+}
+
+.codePage-bottom {
+  position: fixed;
+  bottom: 45rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.codePage-bottom .logo-text {
+  height: 40rpx;
+  line-height: 40rpx;
+  font-size: 28rpx;
+  color: #6C66FA;
+  text-align: center;
+  margin-top: 0rpx;
+  vertical-align: middle;
+}

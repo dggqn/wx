@@ -1,0 +1,191 @@
+<view class="post-sale-header-bC"></view>
+<view class="post-sale">
+    <!-- 顶部栏卡片 -->
+    <view class="post-sale-card box-shadow">
+        <view class="post-sale-card-header flex-space-between">
+            <text wx:if="{{detail.assetBarcode&&detail.assetBarcode!=='0'}}">资产ID:{{detail.assetBarcode}}</text>
+            <text wx:if="{{detail.snNo&&detail.snNo!=='0'}}">序列号:{{detail.snNo}}</text>
+            <text wx:if="{{detail.batchNo&&detail.batchNo!=='0'}}">批次号:{{detail.batchNo}}</text>
+        </view>
+        <view class="list-item">
+            <view class="item-content  flex">
+                <view class="content-img img-box">
+                    <image mode="aspectFit" src="{{detail.displayImgUrl}}"></image>
+                </view>
+                <view class="content-detail flex-1 flex-direction-between">
+                    <view>
+                        <view class="type ellipsis-two">{{detail.name}}</view>
+                    </view>
+                    <view>
+                        <view class="flex">
+                            <view class="separate">规格:</view>
+                            <view class="ellipsis-one">{{detail.specificationName}}</view>
+                        </view>
+                        <view class="flex-between-center content-detail-m-t-box">
+                            <view class="flex content-detail-m-t">
+                                <view class="separate">单位:</view>
+                                <view>
+                                    <text>{{detail.stockUnit}}</text>
+                                </view>
+                            </view>
+                            <view>×{{detail.purchaseCount}}</view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+
+        <view class="flex-between-center post-sale-num">
+            <view>{{selectedServiceType.name}}数量</view>
+            <view>
+                <van-stepper button-size="51rpx" value="{{ detail.applyHandleCount }}" bind:change="stepperChange" min="1"
+                             max="{{detail.purchaseCount}}"/>
+            </view>
+        </view>
+    </view>
+</view>
+        <!-- 下面cell单元 -->
+<view class="post-sale-cell">
+    <!-- 服务类型 -->
+    <view class="sale-cell-item flex">
+        <view class="sale-cell-item-l">*服务类型</view>
+        <view class="flex-space-between flex-1" bindtap="serviceTypeShowPopup">
+            <view>{{selectedServiceType.name?selectedServiceType.name:'请选择'}}</view>
+            <text class="iconfont iconyoujiantou-new-01"></text>
+        </view>
+    </view>
+    <view class="sale-cell-item flex">
+        <view class="sale-cell-item-l">*{{selectedServiceType.name}}原因</view>
+        <view class="flex-space-between flex-1" bindtap="postSaleShowPopup">
+            <view>{{detail.reason?detail.reason:'请选择'}}</view>
+            <text class="iconfont iconyoujiantou-new-01"></text>
+        </view>
+    </view>
+
+    <!--详细描述  -->
+    <view class="sale-cell-item flex">
+        <view class="sale-cell-item-l">详细描述</view>
+        <view class="flex-1 txta">
+            <textarea class="sale-cell-item-reason" placeholder-class="placeholder-txta" maxlength="100" value="{{detail.explaination}}" placeholder="请填写您要{{selectedServiceType.name}}的理由，有助于更好的帮您解决问题（选填）" bind:input="explainationChange">
+
+            </textarea>
+            <view style="display:flex;justify-content: flex-end; color:#6E6E81">
+                <text>{{detail.explaination.length?detail.explaination.length:0}}/100</text>
+            </view>
+        </view>
+    </view>
+
+    <!-- 上传凭证 -->
+    <view class="sale-cell-item">
+        <view class="sale-cell-item-l">上传凭证（最多三张）</view>
+        <view class="flex upload-img">
+            <van-uploader
+                    preview-size="180rpx"
+                    file-list="{{ fileList }}"
+                    accept='image'
+                    max-count='3'
+                    bind:after-read="afterRead"
+                    bind:delete="deleteImg"
+            />
+            <view class="sale-cell-item-img" wx:if="{{fileList.length === 0}}">
+            </view>
+            <view class="sale-cell-item-img" wx:if="{{fileList.length <= 1}}"></view>
+        </view>
+    </view>
+
+    <!-- 提交按钮 -->
+</view>
+<!-- 地址 -->
+<view style="margin-top: 24rpx;">
+    <view class="delivery-detail flex" bindtap="chooseAddress">
+        <view class="detail-l flex-1">
+            <view class="detail-status flex">
+                <!-- {{orderBaseInfo.thirdPartyName?'物流公司:'+orderBaseInfo.thirdPartyName+',':''}}
+                {{orderBaseInfo.thirdPartyNo?'快递单号:'+orderBaseInfo.thirdPartyNo+',':''}} -->
+                <view>
+                    <image class="location-img" src="{{aliyunBaseImgUrlPre}}images/location-img.png"
+                            mode="widthFix"></image>
+                </view>
+                <view class="flex-direction-between details-box">
+                    <view class="flex">
+                        <view class="logistics-name">{{addressInfo.name}}</view>
+                        <view class="logistics-phono">{{addressInfo.tel}}</view>
+                    </view>
+                    <view class="logistics-address">
+                        <text>{{addressInfo.addrInfo}}</text>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+
+<view class="delete-order-box">
+    <button class="delete-order determine" bindtap="pushApply">提交申请</button>
+</view>
+
+<view class="removeFixed"></view>
+
+        <!-- 弹出框 -->
+<van-popup
+        show="{{ postSaleshow }}"
+        round
+        position="bottom"
+        custom-style="height: 40%"
+        bind:close="postSaleClose"
+>
+    <van-picker columns="{{ postSaleColumns }}" show-toolbar 
+        bind:cancel="postSaleCancel" 
+        bind:confirm="postSaleConfirm" 
+        bind:change="postSaleChange"
+    />
+</van-popup>
+
+        <!-- 弹出框 -->
+<van-popup
+        show="{{ serviceTypeShow }}"
+        round
+        position="bottom"
+        custom-style="height: 40%"
+        bind:close="serviceTypeClose"
+>
+    <van-picker
+        columns="{{ serviceTypeColumns }}"
+        value-key="name"
+        show-toolbar
+        bind:change="serviceTypeChange"
+        bind:cancel="serviceTypeCancel" 
+        bind:confirm="serviceTypeConfirm" 
+    />
+</van-popup>
+
+
+        <!-- 选择地址弹窗 -->
+<van-popup
+        show="{{ selectAddressModal }}"
+        position="bottom"
+        round="true"
+        bind:click-overlay="closeAddressModal"
+>
+    <view class="address-list-box flex-column">
+        <view class="list-top flex-align-items-center">
+            <view class="list-title flex-1">选择收货地址</view>
+            <text class="iconfont iconguanbi-new-01" bindtap="closeAddressModal"></text>
+        </view>
+        <view class="list-center flex-1 overflow-auto">
+            <address-cell id="address-cell" list="{{addressList}}" bind:click="changeAddressInfo" bind:refresh="getAddressList"></address-cell>
+            <!-- 空图片 -->
+            <view class="empty-box" wx:if="{{addressList.length <= 0}}">
+                <image class="empty-img" src="{{aliyunBaseImgUrlPre}}images/empty.png"></image>
+                <view class="empty-tip">您还没有收货地址哦！</view>
+            </view>
+        </view>
+
+    </view>
+    <view class="add-address-box flex-shink-0 flex-center">
+        <view class="add-address-btn" bindtap="addAddress">
+            <text class="iconfont "></text>
+            <text>新增收货地址</text>
+        </view>
+    </view>
+</van-popup>

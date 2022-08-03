@@ -1,0 +1,73 @@
+/* pages/AntiEpidemicPages/AntiEpidemic-applyList/AntiEpidemic-applyList.wxss */
+.radius-bg {
+  height: 206rpx;
+  width: 100%;
+  background: linear-gradient(to right,#6C66FA,#AC9FFD);
+  border-bottom-left-radius: 50rpx;
+  border-bottom-right-radius: 50rpx;
+  position: fixed;
+  top: 0rpx;
+}
+.apply-list-container{
+  padding: 0 30rpx;
+  margin-top: 28rpx;
+  margin-bottom: 30rpx;
+  position: relative;
+}
+.apply-list-container .apply-list-title{
+  font-size: 28rpx;
+  color: #30304C;
+}
+.apply-list-container .list-item{
+  margin-top: 24rpx;
+  background: #fff;
+  box-shadow: 3px 3px 14px 0px rgba(126, 145, 195, 0.2);
+}
+.apply-list-container .list-item .item-top{
+  font-size: 24rpx;
+  color: #30304C;
+  background: #FBFBFF;
+  padding: 0 30rpx;
+  line-height: 54rpx;
+}
+.apply-list-container .list-item .item-top .item-time{
+  color: #9090A8;
+}
+.apply-list-container .list-item .item-center{
+  padding: 30rpx;
+}
+.apply-list-container .list-item .item-center .center-l .center-l-head{
+  width: 80rpx;
+  height: 80rpx;
+  margin-right: 20rpx;
+  border-radius: 40rpx;
+  overflow: hidden;
+}
+.list-item .item-center .center-detail .detail-status{
+  color: #5766DE;
+  font-size: 28rpx;
+  font-weight: 600;
+}
+.list-item .item-center .center-detail .detail-num{
+  font-size: 24rpx;
+  color: #9090A8;
+}
+.list-item .item-center .center-detail .detail-intro{
+  color: #363651;
+  font-size: 24rpx;
+  margin-top: 8rpx;
+}
+.list-item .item-center .center-r .detail-operate{
+  font-size: 24rpx;
+  color: #9090A8;
+  border-radius: 4rpx;
+  /* background: #6C66FA; */
+}
+.list-item .item-bottom{
+  font-size: 24rpx;
+  border-top: 1rpx solid #eee;
+  padding: 0 30rpx;
+  padding-top: 12rpx;
+  padding-bottom: 20rpx;
+  color: #9090A8;
+}

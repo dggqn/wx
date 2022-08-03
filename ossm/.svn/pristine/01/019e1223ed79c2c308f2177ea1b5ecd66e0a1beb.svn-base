@@ -1,0 +1,99 @@
+/* pages/notice/noticeList/noticeList.wxss */
+.has-read-btn {
+  height: 90rpx;
+  line-height: 90rpx;
+  padding: 0 30rpx;
+  box-sizing: border-box;
+  color: #D1D1E2;
+  font-size: 28rpx;
+  text-align: right;
+}
+.has-read-btn .iconfont.iconpin {
+  margin-right: 10rpx;
+}
+.notice-list-top{
+  padding: 20rpx 30rpx;
+  background: #fff
+}
+.notice-list-top .top-search{
+  height: 72rpx
+}
+.notice-list-top .top-action-sheet {
+  color: #30304C;
+  margin-left: 36rpx;
+  font-size: 28rpx;
+  position: relative;
+}
+.iconfont.iconxiajiantou-new-01 {
+  margin-left: 10rpx;
+}
+
+.notice-list-items{
+  padding: 0 24rpx;
+}
+.notice-list-items .list-item{
+  margin-bottom: 28rpx;
+  padding-left: 108rpx;
+  box-sizing: border-box;
+}
+.notice-list-items .list-item .item-detail{
+  width: 100%;
+  padding: 28rpx;
+  background:rgba(255,255,255,1);
+  box-shadow:3rpx 3rpx 14rpx 0 rgba(126,145,195,0.2);
+  border-radius:0 16rpx 16rpx 16rpx;
+  box-sizing: border-box;
+  position: relative;
+}
+.notice-list-items .list-item .item-detail .detail-label {
+  width: 108rpx;
+  height: 84rpx;
+  line-height: 84rpx;
+  color: #fff;
+  text-align: center;
+  /*line-height: 84rpx;*/
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform: translate(-100%);
+  background: #485995;
+  border-radius: 16rpx 0 0 16rpx;
+}
+.notice-list-items .list-item .item-detail .detail-label.delivery_assets{
+  background: #5EA1F2;
+}
+.notice-list-items .list-item .item-detail .detail-label.collar{
+  background: #5766DE;
+}
+.item-detail .detail-content .content-title{
+  color: #30304C;
+  font-size: 32rpx;
+  margin-bottom: 12rpx;
+}
+.item-detail .detail-content .content-type{
+  line-height:33rpx;
+  color: #6F6F8E;
+  font-size: 24rpx;
+  margin-top: 4rpx;
+}
+.detail-content .content-type .type-label{
+  width: 150rpx;
+}
+.detail-content .message-time{
+  margin-top: 30rpx;
+  font-size: 24rpx;
+  color: #9494C3;
+}
+.detail-content .message-time .read-flag{
+  padding: 4rpx 12rpx;
+  color: #6C66FA;
+  border: 1rpx solid #6C66FA;
+  border-radius: 4rpx;
+}
+.detail-content .message-time .read-flag.has-read {
+  color: #9494C3;
+  border: 1rpx solid #9494C3;
+}
+.empty-box {
+  padding-top: 200rpx;
+}

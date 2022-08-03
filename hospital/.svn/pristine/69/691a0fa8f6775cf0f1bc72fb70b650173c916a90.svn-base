@@ -1,0 +1,348 @@
+<!--pages/applyPages/hasApplyList/hasApplyList.wxml-->
+<view class="container flex-column">
+    <view class="has-apply-top">
+        <view class="top-tabs flex">
+            <view data-tab='apply' class="tab flex-1" bindtap="changeTab">
+                <text class="apply {{tab==='apply'?'active':''}}">申领单</text>
+                <text wx:if="{{tab==='apply'}}" class="bottom-line"></text>
+            </view>
+            <view data-tab='receive' class="tab flex-1" bindtap="changeTab">
+                <text class="tab {{tab==='receive'?'active':''}}">领取单</text>
+                <text wx:if="{{tab==='receive'}}" class="bottom-line"></text>
+            </view>
+            <view data-tab='deliver' class="tab flex-1" bindtap="changeTab">
+                <text class="tab {{tab==='deliver'?'active':''}}">发货单</text>
+                <text wx:if="{{tab==='deliver'}}" class="bottom-line"></text>
+            </view>
+            <view data-tab='receipt' class="tab flex-1" bindtap="changeTab">
+                <text class="tab {{tab==='receipt'?'active':''}}">签收单</text>
+                <text wx:if="{{tab==='receipt'}}" class="bottom-line"></text>
+            </view>
+            <view data-tab='afterSales' class="tab flex-1" bindtap="changeTab">
+                <text class="tab {{tab==='afterSales'?'active':''}}">售后单</text>
+                <text wx:if="{{tab==='afterSales'}}" class="bottom-line"></text>
+            </view>
+        </view>
+        <view class="top-search">
+            <input class="search-ipt" data-path="queryCond.keyword" value="{{queryCond.keyword}}"
+                   bindinput="viewValueChange" bindconfirm="initCurrentAndQuery"
+                   placeholder="请输入物品名称或编号" placeholder-class="placeholder-style">
+                <text class="iconfont iconsousuo-icon-01" bindtap="search"></text>
+            </input>
+        </view>
+    </view>
+    <view class="look-choose" wx:if="{{tab==='receive' || tab==='deliver'}}">
+        <!--    <text wx:if="{{tab==='apply'}}" bindtap="applyCalendar">申领日历</text>-->
+        <text wx:if="{{tab==='receive'}}" bindtap="receiveStatusChange">
+            <text class="iconfont {{queryCond.status=='wait_receive'?'iconbianzu16-01':'iconbianzu8-01'}}">只看待领取</text>
+        </text>
+        <text wx:if="{{tab==='deliver'}}" bindtap="deliverStatusChange">
+            <text class="iconfont {{queryCond.status=='wait_receive'?'iconbianzu16-01':'iconbianzu8-01'}}">只看待领取</text>
+        </text>
+        <!--    <text wx:if="{{tab==='receipt'}}" bindtap="applyCalendar">签收日历</text>-->
+    </view>
+
+    <view class="flex-1 overflow-auto list-container">
+        <scroll-view wx:if="{{tab==='receive'}}" class="scroll-view" scroll-y="true"
+                     bindscrolltolower="bindscrolltolower">
+            <view class="list-item box-shadow" data-item="{{item}}" wx:for="{{list}}" wx:key="item"
+                  data-entityid="{{item.entityId}}" bindtap="goReceiveDetail">
+                <view class="item-top flex-align-items-center">
+                    <view class="top-id flex-1">ID:{{item.ordersNo}}</view>
+                    <view class="top-last-time">
+                        <text class="last-time-tip" wx:if="{{item.expirationRemark}}">{{item.expirationRemark}}</text>
+                        <text class="iconfont iconshijian-01"></text>
+                        <text>{{item.timeShowStr}}</text>
+                    </view>
+                </view>
+                <view class="item-detail flex-align-items-center">
+                    <view class="detail-img img-box">
+                        <open-data type='userAvatarUrl' class="img"></open-data>
+                    </view>
+                    <view class="detail-center flex-1">
+                        <view class="center-top">
+                            <text class="center-status {{item.statusCode==='expired'?'color-bright-red':''}}">{{item.statusName}}</text>
+                            <text class="center-total">(共{{item.detailCount}}项)</text>
+                        </view>
+                        <view class="center-bottom">
+                            {{item.stockroomName}} 仓库领取
+                        </view>
+                    </view>
+                    <view class="detail-operate">
+                        <text>{{item.statusCode == 'wait_receive' ? '去签收' : '查看详情'}}</text>
+                        <text class="iconfont iconyoujiantou-new-01"></text>
+                    </view>
+                </view>
+                <view class="item-tip" wx:if="{{item.statusCode=='wait_receive' && item.expirationHour>0}}">
+                    请尽快至仓库签收物品，若{{item.expirationHour}}小时后未签收,该领取单将过期
+                </view>
+            </view>
+            <view class="no-class-capacity flex-center flex-column" wx:if="{{list==null || list.length==0}}">
+                <image class="img" src="https://hospital-assets-image-public.oss-cn-shanghai.aliyuncs.com/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/%E4%B8%8A%E6%B5%B7%E7%AC%AC%E5%9B%9B%E4%BA%BA%E6%B0%91%E5%8C%BB%E9%99%A2/images/empty.png"></image>
+                <text>暂无内容</text>
+            </view>
+        </scroll-view>
+        <!-- <view class="has-apply-list"> -->
+        <scroll-view wx:if="{{tab==='apply'}}" class="scroll-view" scroll-y="true"
+                     bindscrolltolower="bindscrolltolower">
+            <view class="list-item box-shadow" data-item="{{item}}" wx:for="{{list}}" wx:key="index"
+                  data-entityid="{{item.entityId}}" bindtap="goApplyDetail">
+                <view class="item-top flex-align-items-center">
+                    <view class="top-id flex-1">ID:{{item.ordersNo}}</view>
+                    <view class="top-last-time">
+                        <text class="iconfont iconshijian-01"></text>
+                        <text>{{item.applyTimeShowStr}}</text>
+                    </view>
+                </view>
+                <view class="item-detail flex-align-items-center">
+                    <view class="detail-img img-box">
+                        <open-data type='userAvatarUrl' class="img"></open-data>
+                    </view>
+                    <view class="detail-center flex-1">
+                        <view class="center-top">
+                            <text class="center-status">{{item.progressDesc}}</text>
+                            <!--                <text class="center-total">(共{{item.detailCount}}件)</text>-->
+                        </view>
+                        <view class="center-bottom">
+                            共{{item.detailCount}}项
+                            <!--                {{item.progressDesc}}-->
+                        </view>
+                    </view>
+                    <view class="detail-operate">
+                        <text>查看详情</text>
+                        <text class="iconfont iconyoujiantou-new-01"></text>
+                    </view>
+                </view>
+                <!-- 非取消进度条 -->
+                <view class="public-collor-step flex-align-items-center" wx:if="{{item.statusCode !== 'canceled'}}">
+                    <view class="step-rate flex-shink-1" style="width:{{item.receiveRate}}%"></view>
+                    <view class="step-num flex-shink-0">
+                        {{item.receiveRate}}%
+                    </view>
+                </view>
+                <!-- 已取消进度条 -->
+                <view class="public-collor-step flex-align-items-center" wx:else>
+                    <view class="step-rate step-cancel-rate">
+                    </view>
+                </view>
+            </view>
+            <view class="no-class-capacity flex-center flex-column" wx:if="{{list==null || list.length==0}}">
+                <image class="img" src="https://hospital-assets-image-public.oss-cn-shanghai.aliyuncs.com/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/%E4%B8%8A%E6%B5%B7%E7%AC%AC%E5%9B%9B%E4%BA%BA%E6%B0%91%E5%8C%BB%E9%99%A2/images/empty.png"></image>
+                <text>暂无内容</text>
+            </view>
+        </scroll-view>
+        <!-- </view> -->
+        <!-- <view wx:if="{{tab==='deliver'}}" class="has-apply-list"> -->
+        <scroll-view wx:if="{{tab==='deliver'}}" class="scroll-view" scroll-y="true"
+                     bindscrolltolower="bindscrolltolower">
+            <view class="list-item box-shadow" data-item="{{item}}" wx:for="{{list}}" wx:key="item"
+                  data-entityid="{{item.entityId}}" bindtap="goDeliverDetail">
+                <view class="item-top flex-align-items-center">
+                    <view class="top-id flex-1">ID:{{item.ordersNo}}</view>
+                    <view class="top-last-time">
+                        <text class="iconfont iconshijian-01"></text>
+                        <text>{{item.createTime}}</text>
+                    </view>
+                </view>
+                <view class="item-detail flex-align-items-center">
+                    <view class="detail-img img-box">
+                        <open-data type='userAvatarUrl' class="img"></open-data>
+                    </view>
+                    <view class="detail-center flex-1">
+                        <view class="center-top">
+                            <text class="center-status">{{item.statusName}}</text>
+                            <text class="center-total">(共{{item.detailCount}}项)</text>
+                        </view>
+                        <view class="center-bottom">
+                            供应商({{item.supplierName}})派送
+                        </view>
+                    </view>
+                    <view class="detail-operate">
+                        <text>{{item.statusCode == 'wait_receive' ? '去签收' : '查看详情'}}</text>
+                        <text class="iconfont iconyoujiantou-new-01"></text>
+                    </view>
+                </view>
+                <view class="item-tip">
+                    供应商({{item.supplierName}})已经将货物发出,
+                    {{item.thirdPartyName ? '物流公司:' + item.thirdPartyName + ',' : ''}}
+                    {{item.thirdPartyNo ? '快递单号:' + item.thirdPartyNo + ',' : ''}}
+                    请保持手机畅通
+                </view>
+            </view>
+            <view class="no-class-capacity flex-center flex-column" wx:if="{{list==null || list.length==0}}">
+                <image class="img" src="https://hospital-assets-image-public.oss-cn-shanghai.aliyuncs.com/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/%E4%B8%8A%E6%B5%B7%E7%AC%AC%E5%9B%9B%E4%BA%BA%E6%B0%91%E5%8C%BB%E9%99%A2/images/empty.png"></image>
+                <text>暂无内容</text>
+            </view>
+        </scroll-view>
+        <scroll-view wx:if="{{tab==='receipt'}}" class="scroll-view" scroll-y="true"
+                     bindscrolltolower="bindscrolltolower">
+            <view class="list-item box-shadow" data-item="{{item}}" wx:for="{{list}}" wx:key="item"
+                  data-entityid="{{item.entityId}}" bindtap="goReceiptDetail">
+                <view class="item-top flex-align-items-center">
+                    <view class="top-id flex-1">ID:{{item.ordersNo}}</view>
+                    <view class="top-last-time">
+                        <text class="iconfont iconshijian-01"></text>
+                        <text>{{item.createTime}}</text>
+                    </view>
+                </view>
+                <view class="item-detail flex-align-items-center">
+                    <view class="detail-img img-box">
+                        <open-data type='userAvatarUrl' class="img"></open-data>
+                    </view>
+                    <view class="detail-center flex-1">
+                        <view class="center-top">
+                            <text class="center-status">{{item.statusName}}</text>
+                            <text class="center-total">(共{{item.detailCount}}项)</text>
+                        </view>
+                        <view class="center-bottom">
+                            {{item.receiptType.code == 'receive' ? item.stockroomName + ' 签收' : ''}}
+                            {{item.receiptType.code == 'deliver' ? item.supplierName + ' 派送' : ''}}
+                        </view>
+                    </view>
+                    <view class="detail-operate">
+                        <text class="iconfont iconyoujiantou-new-01"></text>
+                    </view>
+                    <view class="item-bottom flex-space-between flex-between-center">
+                        <view class="four-hospitals-buttom-box">
+                            <button 
+                                data-json="{{item}}" 
+                                data-type="receipt"
+                                wx:if="{{!item.commentFlag && item.receiptType.code === 'deliver' && item.statusCode==='receipted'}}"
+                                catchtap="comment"  
+                                class="four-hospitals-buttom bg-blue">
+                                评价
+                            </button>
+                            <button 
+                                data-json="{{item}}" 
+                                data-type="receipt" 
+                                wx:if="{{item.commentFlag}}"
+                                catchtap="loadComment" 
+                                class="four-hospitals-buttom bg-blue">
+                                查看评价
+                            </button>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view class="no-class-capacity flex-center flex-column" wx:if="{{list==null || list.length==0}}">
+                <image class="img" src="https://hospital-assets-image-public.oss-cn-shanghai.aliyuncs.com/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/%E4%B8%8A%E6%B5%B7%E7%AC%AC%E5%9B%9B%E4%BA%BA%E6%B0%91%E5%8C%BB%E9%99%A2/images/empty.png"></image>
+                <text>暂无内容</text>
+            </view>
+        </scroll-view>
+
+        <!-- 售后单 -->
+        <scroll-view wx:if="{{tab==='afterSales'}}" class="scroll-view" scroll-y="true"
+                     bindscrolltolower="bindscrolltolower">
+            <view class="public-assets-list">
+                <!-- 要在这下面的list-item开始循环，因为这里的CSS样式是用的签收单详情里面的样式，层级不能变 -->
+                <view class="list-item" data-item="{{item}}" wx:for="{{list}}" wx:key="item"
+                      data-entityid="{{item.entityId}}" bindtap="goRefundDetail">
+                    <view class="item-title flex-space-between">
+                        <view class="flex-1 title-name">ID:{{item.ordersNo}}</view>
+                        <view>
+                            <!-- 上门换货 -->
+                            <view>
+                                <view class="flex-center">
+                                    <image
+                                            class="flow-path"
+                                            src="{{item.serviceTypeCode==='exchange'?aliyunBaseImgUrlPre+'images/exchange-goods.png':aliyunBaseImgUrlPre+'images/return-goods.png'}}"
+                                            mode="widthFix"
+                                    ></image>
+                                    <text>{{item.statusName}}</text>
+                                </view>
+                            </view>
+                        </view>
+                        <view class="title-num" wx:if="{{item.assetBarcode}}">资产编号: {{item.assetBarcode}}</view>
+                    </view>
+                    <!-- {{item.statusCode=='receipted'?'assets-has-sign-item':''}} -->
+                    <view class="item-content  flex">
+                        <view class="content-img img-box">
+                            <image mode="aspectFit" src="{{item.displayImgUrl}}"></image>
+                        </view>
+                        <view class="content-detail flex-1 flex-direction-between">
+                            <view>
+                                <view class="type ellipsis-two">{{item.name}}</view>
+                            </view>
+                            <view>
+                                <view class="flex">
+                                    <view class="separate">规格:</view>
+                                    <view class="ellipsis-one">{{item.specificationName}}</view>
+                                </view>
+                                <view class="flex content-detail-m-t">
+                                    <view class="separate">单位:</view>
+                                    <view>
+                                        <text>{{item.stockUnit}}</text>
+                                    </view>
+                                </view>
+                            </view>
+                        </view>
+
+                        <view class="flex-center has-jump-details">
+                            <text class="iconfont iconyoujiantou-new-01"></text>
+                        </view>
+                        <!--评价-->
+                        <view class="item-bottom flex-space-between flex-between-center">
+                            <view class="four-hospitals-buttom-box">
+                                <button 
+                                    data-json="{{item}}" 
+                                    data-type="refund"
+                                    wx:if="{{(!item.commentFlag && (item.statusCode==='return_finish' || item.statusCode==='exchange_finish'))}}"
+                                    catchtap="comment"  
+                                    class="four-hospitals-buttom bg-blue">
+                                    评价
+                                </button>
+                                <button 
+                                    data-json="{{item}}" 
+                                    data-type="refund" 
+                                    wx:if="{{item.commentFlag}}"
+                                    catchtap="loadComment" 
+                                    class="four-hospitals-buttom bg-blue">
+                                    查看评价
+                                </button>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="horizontal-line"></view>
+
+                    <!-- 不同状态下显示不同的元素 -->
+                    <!-- 确认收货与已驳回 -->
+                    <view class="item-bottom flex-space-between flex-between-center">
+                        <view class="ellipsis-one item-bottom-font">{{item.remark}}</view>
+                        <view>
+                            <button
+                                    class="four-hospitals-buttom bg-blue" data-entityid="{{item.entityId}}"
+                                    catchtap="confirmReceipShowPopup"
+                                    wx:if="{{item.statusCode==='wait_home_exchange'}}">确认收货
+                            </button>
+
+                            <button
+                                    class="four-hospitals-buttom bg-blue"
+                                    catchtap="reSubmit" data-entityid="{{item.entityId}}"
+                                    wx:if="{{item.statusCode==='purchase_refuse'||item.statusCode==='supplier_refuse'||item.statusCode==='user_cancel'}}">重新提交
+                            </button>
+                        </view>
+                    </view>
+                </view>
+                <view class="no-class-capacity flex-center flex-column" wx:if="{{list==null || list.length==0}}">
+                    <image class="img" src="https://hospital-assets-image-public.oss-cn-shanghai.aliyuncs.com/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/%E4%B8%8A%E6%B5%B7%E7%AC%AC%E5%9B%9B%E4%BA%BA%E6%B0%91%E5%8C%BB%E9%99%A2/images/empty.png"></image>
+                    <text>暂无内容</text>
+                </view>
+            </view>
+        </scroll-view>
+    </view>
+
+    <van-popup show="{{ confirmReceiptShow }}" bind:close="confirmReceiptClose">
+        <view class="popup-content-box">
+            <view class="popup-content-herder">
+                <text>提示</text>
+            </view>
+            <view class="popup-content-main">
+                <text>您是否确认收货</text>
+            </view>
+            <view class="popup-content-btn-box flex-space-between">
+                <button class="cancel btn" catchtap="cancelReceivingGoods">取消</button>
+                <button class="determine btn bg-blue" catchtap="confirmReceive">确定</button>
+            </view>
+        </view>
+    </van-popup>
+</view>

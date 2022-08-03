@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "applyEle": "./apply/apply",
+    "supplyEle": "./supply/supply",
+    "agencyEle": "./todolist/todolist",
+    "statisticEle": "./statistic/statistic"
+  }
+}

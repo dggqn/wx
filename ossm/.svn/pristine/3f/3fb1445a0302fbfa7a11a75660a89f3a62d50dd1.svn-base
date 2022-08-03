@@ -1,0 +1,130 @@
+/* pages/applyPages/signInvoiceDetail/signInvoiceDetail.wxss */
+page{
+    font-size: 24rpx;
+}
+.sign-detail-main{
+    padding: 0 30rpx;
+    padding-bottom: 30rpx;
+}
+.delivery-info {
+    margin-top: 28rpx;
+    border-radius: 28rpx;
+    overflow: hidden;
+}
+.delivery-info .delivery-top{
+    height: 54rpx;
+    line-height: 54rpx;
+    color: #9494C3;
+    font-size: 24rpx;
+    padding: 0 30rpx;
+    background: #FBFBFF;
+}
+.main-tabs{
+    margin-top: 40rpx;
+}
+.main-tabs .tab {
+    display: inline-block;
+    width: 170rpx;
+    height: 58rpx;
+    text-align: center;
+    line-height: 58rpx;
+    color: #30304C;
+    border: 2rpx solid #E7E7F2;
+    border-radius: 28rpx;
+    margin-right: 16rpx;
+    box-sizing: border-box;
+}
+.main-tabs .tab.active{
+    border: 2rpx solid #6C66FA;
+    color: #6C66FA;
+    font-size: 24rpx;
+}
+
+.collar-steps {
+    height: 130rpx;
+    background: #fff;
+}
+.collar-steps .step-box {
+    text-align: center;
+    position: relative;
+}
+.collar-steps .step-box .step{
+    width: 40rpx;
+    height: 40rpx;
+    text-align: center;
+    line-height: 40rpx;
+    border-radius: 50%;
+    background: #6C66FA;
+    color: #fff;
+    font-size: 24rpx;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1000;
+}
+.collar-steps .step-box::before{
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 18rpx;
+    width: 50%;
+    height: 4rpx;
+    background: #6C66FA;
+}
+.collar-steps .step-box:first-child::before{
+    display: none;
+}
+.collar-steps .step-box::after{
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 18rpx;
+    height: 4rpx;
+    width: 50%;
+    background: #6C66FA;
+}
+.collar-steps .step-box:last-child::after {
+    display: none;
+}
+.step-text{
+    font-size: 24rpx;
+    color: #6C66FA;
+    margin-top: 5rpx;
+}
+
+/* 底部操作 */
+.collar-bottom .collar-time-limit{
+    height: 54rpx;
+    line-height: 54rpx;
+    text-align: center;
+    background: #6F6F8E;
+    color: #fff;
+}
+.collar-bottom .bottom-operates{
+    height: 96rpx;
+    line-height: 96rpx;
+    color: #fff;
+    text-align: center;
+}
+.collar-bottom .bottom-operates .operate-l{
+    background: #6C66FA
+}
+.collar-bottom .bottom-operates .operate-r{
+    background: #485995
+}
+
+
+.operate-btn{
+    display: inline-block;
+    width: 128rpx;
+    height: 50rpx;
+    background: #5EA1F2;
+    line-height: 50rpx;
+    text-align: center;
+    border-radius: 4rpx;
+    color: #fff;
+    font-size: 24rpx;
+}
+.content-btn-box .content{
+    color: #5EA1F2;
+    font-weight: 600;
+}

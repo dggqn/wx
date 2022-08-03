@@ -1,0 +1,57 @@
+<!-- 申领单 -->
+<view class="radius-bg"></view>
+<view class="apply-list-container">
+  <!-- <view class="apply-list-title flex">
+      <view class="flex-1">我的填报记录</view>
+      <navigator url="/pages/applyPages/hasApplyList/hasApplyList">
+        <text>更多</text>
+        <text class="iconfont iconyoujiantou-new-01"></text>
+      </navigator>
+    </view> -->
+  <view class="list-item" wx:for="{{SupplyApplicationList}}" wx:key='item'>
+    <view class="item-top flex">
+      <view class="item-id flex-1">ID: {{item.taskId}}</view>
+      <view class="item-time"><text class="iconfont iconshijian-01"></text>{{item.createTime}}</view>
+    </view>
+    <view class="item-center flex-align-items-center" data-itemDetail="{{item}}" bindtap="goApplyDetail">
+      <view class="center-l flex-1 flex">
+        <view class="center-l-head img-box">
+          <open-data type='userAvatarUrl' class="img"></open-data>
+        </view>
+        <view class="center-detail flex-1 flex-shink-1">
+          <view class="detail-t">
+            <!--              <text class="detail-status">{{item.statusName}}</text>-->
+            <text class="detail-status">{{item.taskName}}</text>
+            <!--              <text class="detail-num">(共{{item.detailCount}}项)</text>-->
+          </view>
+          <view class="detail-intro">
+            数量 : {{item.amount}}
+            <!--              {{item.progressDesc}}-->
+          </view>
+          <view class="detail-intro">
+            科室 : {{item.deptName}}
+          </view>
+          <view class="detail-intro">
+            联系人 : {{item.linkman}}-{{item.linktel}}
+          </view>
+        </view>
+      </view>
+      <view class="center-r" wx:if="{{status == 1}}">
+        <view class="detail-operate">
+          <text>编辑</text>
+          <text class="iconfont iconyoujiantou-new-01"></text>
+        </view>
+      </view>
+    </view>
+    <!-- 已取消进度条 -->
+    <!-- <view class="public-collor-step flex-align-items-center">
+      <view class="step-rate step-cancel-rate">
+      </view>
+    </view> -->
+  </view>
+  <!-- 空图片 -->
+  <view class="empty-box" wx:if="{{!isLoadingFlag && SupplyApplicationList.length <= 0}}">
+    <image class="empty-img" src=""></image>
+    <view class="empty-tip">暂无记录</view>
+  </view>
+</view>

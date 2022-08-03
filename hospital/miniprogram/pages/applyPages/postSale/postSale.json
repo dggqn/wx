@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "address-cell": "../../../components/addressCell/addressCell"},
+  "navigationBarTitleText": "申请售后",
+  "navigationBarBackgroundColor": "#FFFFFF"
+}

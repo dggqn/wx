@@ -1,0 +1,36 @@
+<!--pages/repair/repairPoint/repairPoint.wxml-->
+<view class="container overflow-auto">
+  <view class="repair-main">
+      <!-- 我要报修 -->
+    <view class="repair-declare-apply">
+    <!-- 问题及描述 -->
+    <view class="repair-title">备注</view>
+    <view class="repair-reasons">
+      <view class="text-desc">
+        <textarea class="input-reason-area" bindblur="issueTextareaChange" value="{{comment}}"></textarea>
+      </view>
+      <view class="img-desc flex" wx:if="{{detailData.fileList}}">
+        <view class="img-desc-item img-box" bindtap='clickImg' data-id="0">
+          <image src="{{detailData.fileList[0].url}}"></image>
+        </view>
+        <view class="img-desc-item img-box" bindtap='clickImg' data-id="1">
+          <image src="{{detailData.fileList[1].url}}"></image>
+        </view>
+        <view class="img-desc-item img-box" bindtap='clickImg' data-id="2">
+          <image src="{{detailData.fileList[2].url}}"></image>
+        </view>
+      </view>
+    </view>
+    <view class="declare-apply-item-title">添加图片（最多三张）</view>
+        <view class="photo-box flex-space-between">
+          <van-uploader preview-size="180rpx" file-list="{{ fileList }}"
+                    accept='image' bind:after-read="afterRead" 
+                    bind:delete="deleteImg" max-count="3">
+          </van-uploader>
+        </view>
+      </view>
+      <view class="bottom-large-btn" bindtap="goDetail">
+        <text class="operate-btn">驳回</text>
+      </view>
+  </view>
+</view>

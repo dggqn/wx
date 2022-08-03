@@ -1,0 +1,57 @@
+<!--miniprogram/pages/assetsTransfer/assetsDetail/taskDetail.wxml-->
+<view class="container flex-column">
+    <view class="info-box flex-1 overflow-auto">
+        <block>
+            <view class="info-item-list">
+                <view class="info-item-box">
+                    <view class="info-item flex-align-items-center">
+                        <view class="item-l flex-1">ID:{{detail.ordersNo}}</view>
+                        <view class="item-r"> {{detail.statusName}} </view>
+                    </view>
+                </view>
+                <view class="info-item-box">
+                    <view class="info-item flex-align-items-center">
+                        <view class="item-l flex-1">盘点单名称</view>
+                        <view class="item-r"> {{detail.orderName}} </view>
+                    </view>
+                </view>
+                <view class="info-item-box">
+                    <view class="info-item flex-align-items-center">
+                        <view class="item-l flex-1">盘点负责人</view>
+                        <view class="item-r"> {{detail.realName}} </view>
+                    </view>
+                </view>
+                <view class="info-item-box">
+                    <view class="info-item flex-align-items-center">
+                        <view class="item-l flex-1">盘点范围</view>
+                        <view class="item-r"> {{detail.scope==='company'?'公司':detail.stockName}} </view>
+                    </view>
+                </view>
+                <view class="info-item-box">
+                    <view class="info-item flex-align-items-center">
+                        <view class="item-l flex-1">计划起止时间</view>
+                        <view class="item-r"> {{detail.startTime}}至{{detail.endTime}} </view>
+                    </view>
+                </view>
+                <view class="info-item-box" wx:if="{{detail.realEndTime}}">
+                    <view class="info-item flex-align-items-center">
+                        <view class="item-l flex-1">实际结束时间</view>
+                        <view class="item-r"> {{detail.realEndTime}}</view>
+                    </view>
+                </view>
+                <view class="info-item-box">
+                    <view class="info-item flex-align-items-center">
+                        <view class="item-l flex-1">自助盘点</view>
+                        <view class="item-r"> {{detail.selfCheckFlag?'是':'否'}} </view>
+                    </view>
+                </view>
+                <view class="info-item-box">
+                    <view class="info-item flex-align-items-center">
+                        <view class="item-l flex-1">盘点说明</view>
+                        <view class="item-r"> {{detail.remark}} </view>
+                    </view>
+                </view>
+            </view>
+        </block>
+    </view>
+</view>

@@ -1,0 +1,71 @@
+<!--pages/personCenter /personCenter.wxml-->
+<view class="container person-center-container">
+  <view class="center-top img-box">
+    <image src="{{aliyunBaseImgUrlPre}}images/person-center-top.png"></image>
+    <view class="person-base flex-align-items-center">
+       <open-data type='userAvatarUrl' class="base-img img-box" >
+        <image class="img" src="{{aliyunBaseImgUrlPre}}images/logo.png"></image>
+      </open-data>
+      <view class="base-info flex-1 flex-column">
+        <view class="name-info">
+          <text class="name">{{userInfo.realName}}</text>
+        </view>
+        <!-- <view class="work-info">{{userInfo.orgName}}</view> -->
+      </view>
+      <navigator class="manage-address" url="/pages/address/addressManage/addressManage">
+        <text class="iconfont iconshezhi"></text>
+        <text>收货地址管理</text>
+      </navigator>
+    </view>
+  </view>
+  <view class="person-info">
+    <view class="item">
+      <text class="item-l">科室</text>
+      <text class="item-dot">:</text>
+      <text class="item-r">{{userDeptNames}}</text>
+    </view>
+    <view class="item">
+      <text class="item-l">职务</text>
+      <text class="item-dot">:</text>
+      <text class="item-r">{{userInfo.position}}</text>
+    </view>
+    <view class="item">
+      <text class="item-l">工号</text>
+      <text class="item-dot">:</text>
+      <text class="item-r">{{userInfo.workNo}}</text>
+    </view>
+    <!-- <view class="item">
+      <text class="item-l">工龄</text>
+      <text class="item-dot">:</text>
+      <text class="item-r">待定</text>
+    </view> -->
+    <view class="item">
+      <text class="item-l">手机号码</text>
+      <text class="item-dot">:</text>
+      <text class="item-r">{{userInfo.userMobile}}</text>
+    </view>
+    <view class="item">
+      <text class="item-l">办公地点</text>
+      <text class="item-dot">:</text>
+      <text class="item-r">{{userDeptAddress}} <!--<text class="iconfont iconbianji1-01"></text>--></text>
+    </view>
+    <view class="item">
+      <text class="item-l" style="width:300rpx">点击订阅通知消息</text>
+      <text class="item-dot">:</text>
+      <!-- <switch color="#6C66FA" checked="{{messageFlag}}" bindchange="changeMessageFlag"/> -->
+      <text class="sub-btn" bindtap="subscribeMessage">订阅</text>
+    </view>
+<!--    <view class="item">-->
+<!--      <text class="sub-btn" bindtap="logout">切换账号</text>-->
+<!--    </view>-->
+  </view>
+  <!-- 底部按钮 -->
+  <view class="collar-bottom">
+    <view class="bottom-operates flex">
+      <view class="flex-1 operate-r" bindtap="logout">切换账号</view>
+    </view>
+  </view>
+<!--  <view class="center-bottom img-box">-->
+<!--    <image src="{{aliyunBaseImgUrlPre}}images/person-center-bottom.png"></image>-->
+<!--  </view>-->
+</view>

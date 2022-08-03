@@ -1,0 +1,58 @@
+/* pages/applyPages/scanSignComsum/scanSignComsum.wxss */
+.consum-content {
+  padding: 40rpx;
+}
+.consum-content .consum-list {
+  padding: 32rpx;
+  box-sizing: border-box;
+  background: #fff;
+  border-radius: 40rpx;
+}
+.consum-content .consum-list .list-item{
+  padding: 32rpx;
+  box-sizing: border-box;
+  border: 1rpx solid #6F6F8E;
+  background: #FBFBFF;
+  border-radius: 4rpx 4rpx 0 0;
+  margin-bottom: 24rpx;
+}
+.consum-list .list-item .item-title{
+  padding: 0;
+  height: 86rpx;
+  font-size: 32rpx;
+  font-weight: 500;
+  line-height: 1.4;
+}
+.consum-list .list-item .item-label{
+  color: #6F6F8E;
+  font-size: 24rpx;
+  margin-top: 12rpx;
+}
+.consum-list .list-item .item-label .unit {
+  color: #9494C3;
+}
+.consum-list .list-item .apply-nums {
+  color: #9494C3;
+  font-size: 24rpx;
+  margin-top: 27rpx;
+}
+.apply-nums .choose-num-box .btn{
+  width: 50rpx;
+  height: 50rpx;
+}
+.apply-nums .choose-num-box .operate-box{
+  margin-left: 12rpx;
+}
+.apply-nums .choose-num-box .ipt-box {
+  width: 45rpx;
+  height: 50rpx;
+  text-align: center;
+  line-height: 50rpx;
+  margin: 0 12rpx;
+}
+.apply-nums .choose-num-box .ipt-box .ipt{
+  width: 100%;
+  height: 100%;
+  font-size: 30rpx;
+  color: #464646;
+}

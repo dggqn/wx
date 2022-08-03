@@ -1,0 +1,15 @@
+<view class="submit-tips">
+  <view class="flex-column flex-center">
+    <text class="iconfont iconsubmit-fill"></text>
+    <text class="state">提交成功</text>
+  </view>
+
+  <view class="tips">{{type}}申请已提交成功，请留意审批结果</view>
+
+  <view class="operation-box flex-between-center">
+    <navigator url= '/pages/index/index?currentTab=supply'>
+      <button class="btn">返回详情页</button>
+    </navigator>
+      <button class="btn" bindtap="jumpDetails">查看进度</button>
+  </view>
+</view>

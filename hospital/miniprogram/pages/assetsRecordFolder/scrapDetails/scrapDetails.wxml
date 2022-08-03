@@ -1,0 +1,184 @@
+<view class="details-header flex-align-items-center">
+  <view class="header-content flex-between-center">
+    <view>
+      <view class="header-content flex-between-center">
+        <view class="header-content-l flex-align-items-center">
+          <image class="img" src="{{data.avatar}}"></image>
+          <view class="title">{{data.departName + data.realname}}发起的资产报废</view>
+        </view>
+      </view>
+    </view>
+    <view class="header-content-r">{{data.statusName}}</view>
+  </view>
+</view>
+
+<view class="details-introduce">
+  <view class="introduce">
+    <view class="info">报废资产数量：{{data.totalCount}}</view>
+    <view class="introduce-instructions ellipsis-two">报废理由：{{data.remark || data.reason}}</view> 
+  </view>
+</view>
+
+<view class="assets-change-txra">
+  <view class="title">报废资产</view>
+  <view class="public-list">
+    <view class="list-item flex" wx:for="{{data.changeDetails}}" wx:key="detailId">
+      <view class="item-img img-box">
+        <image class="img" mode="aspectFit" src="{{item.imgUrl}}"></image>
+      </view>
+
+      <view class="item-detail flex-1 flex-column">
+        <view class="detail-top">
+          <view class="detail-name ellipsis-two">{{item.modelName}}</view>
+        </view>
+        <view class="detail-bottom">
+          <view class="detail-num">
+            <text>资产ID </text>
+            <text>{{item.assetBarcode}}</text>
+          </view>
+          <!-- <view class="detail-sign-date">签收日期：{{item.signDate}}</view> -->
+          <view class="detail-bottom-item flex">
+            <view class="specifications">规格：</view>
+            <view class="ellipsis-one">{{item.specificationName}}</view>
+          </view>
+          <view class="detail-bottom-item">
+            <text>单位：</text>
+            <text>{{item.stockUnit}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class="change-steps">
+  <view style="display:flex;">
+    <view class="title {{logType === 'check' ? 'title-active':''}}" bind:tap="changeLogTypeCheck">审批记录</view>
+    <view class="title {{logType !== 'check' ? 'title-active':''}}"  bind:tap="changeLogTypeChange">报废记录</view>
+  </view>
+  <view class="czh-steps-vertical flex-column">
+    <view wx:if="{{logType === 'check'}}">
+      <view class="czh-steps-vertical-item flex" wx:for="{{checkLogList}}" wx:key="item">
+          <view class="czh-steps-left" wx:if="{{item.actionTypeCode !== 'finish'}}">
+            <image class="img" src="{{item.createAvatarUrl}}"></image>
+            <text class="iconfont {{item.actionType.code !== 'refuse'?'icongou-02':'iconcha-01'}}"></text>
+            <view class="line {{item.approvalRemark ? 'long':'short'}}" wx:if="{{index !== checkLogList.length - 1}}"></view>
+          </view>
+          <view class="introduce" wx:if="{{item.actionTypeCode !== 'finish'}}">
+            <view class="czh-steps-right-info">
+              <view class="czh-steps-right-info-item1 flex-between-center">
+                <text class="state" style="color:{{index ===  checkLogList.length - 1 ? '#6C66FA':''}}">{{item.actionType.name}}</text>
+                <text class="time"><text>{{item.createTime}}</text></text>
+              </view>
+              <view class="czh-steps-right-info-item2">
+                {{item.createUname}}
+              </view>
+              <view class="czh-steps-right-info-item3" wx:if="{{item.approvalRemark}}">
+                <view class="title">审批说明</view>
+                <view class="change-record-item">
+                  <view class="details">{{item.approvalRemark}}</view>
+                </view>
+              </view>
+              <view></view>
+            </view>
+          </view>
+          <view class="czh-steps-left" wx:if="{{item.actionTypeCode === 'finish'}}">
+            <image class="img" src="{{aliyunBaseImgUrlPre}}images/through.png"></image>
+            <view class="line {{item.approvalRemark ? 'long':'short'}}" wx:if="{{index !== checkLogList.length - 1}}"></view>
+          </view>
+          <view class="introduce flex-align-items-center" wx:if="{{item.actionTypeCode === 'finish'}}">
+            <view class="czh-steps-right-info">
+              <view class="czh-steps-right-info-item1 flex-between-center">
+                <text class="state" style="color:{{index ===  checkLogList.length - 1 ? '#6C66FA':''}}">{{item.actionType.name}}</text>
+              </view>
+            </view>
+          </view>
+      </view>
+    </view>
+    <view wx:if="{{logType === 'change'}}">
+      <view class="czh-steps-vertical-item flex" wx:for="{{data.changeLogList}}" wx:key="entityId">
+        <view class="czh-steps-left" wx:if="{{item.actionTypeCode !== 'finish'}}">
+          <image class="img" src="{{item.avatar}}"></image>
+          <text class="iconfont {{item.actionTypeObj.code !== 'refuse'?'icongou-02':'iconcha-01'}}"></text>
+          <view class="line {{item.userRemark ? 'long':'short'}}" wx:if="{{index !== data.changeLogList.length - 1}}"></view>
+        </view>
+        <view class="introduce" wx:if="{{item.actionTypeCode !== 'finish'}}">
+          <view class="czh-steps-right-info">
+            <view class="czh-steps-right-info-item1 flex-between-center">
+              <text class="state" style="color:{{index ===  data.changeLogList.length - 1 ? '#6C66FA':''}}">{{item.actionTypeObj.name}}</text>
+              <text class="time">{{item.createTime}}</text>
+            </view>
+            <view class="czh-steps-right-info-item2">{{item.createUname}}</view>
+            <view class="czh-steps-right-info-item3" wx:if="{{item.userRemark}}">
+              <view class="title">审批说明</view>
+              <view class="change-record-item">
+                <view class="details">{{item.userRemark}}</view>
+              </view>
+            </view>
+            <view></view>
+          </view>
+        </view>
+        <view class="czh-steps-left" wx:if="{{item.actionTypeCode === 'finish'}}">
+          <image class="img" src="{{aliyunBaseImgUrlPre}}images/through.png"></image>
+          <view class="line {{item.approvalRemark ? 'long':'short'}}" wx:if="{{index !== data.changeLogList.length - 1}}"></view>
+        </view>
+        <view class="introduce flex-align-items-center" wx:if="{{item.actionTypeCode === 'finish'}}">
+          <view class="czh-steps-right-info">
+            <view class="czh-steps-right-info-item1 flex-between-center">
+              <text class="state" style="color:{{index ===  data.changeLogList.length - 1 ? '#6C66FA':''}}">{{item.actionTypeObj.name}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<!-- 只有状态为审批中才会显示 -->
+<view>
+  <view class="removeFixed"></view>
+  <view class="footer-btn-box flex-between-center">
+      <button class="btn"  wx:if="{{showScrapCancel}}" bindtap="showCancelDialog">取消申请</button>
+      <button class="btn" data-type="refuse" wx:if="{{data.taskId}}" bindtap="directorRefuseShow">驳回审批</button>
+      <button class="btn blue" data-type="pass" wx:if="{{data.taskId}}" bindtap="directorPassShow">通过审批</button>
+  </view>
+</view>
+<van-popup show="{{ cancelDialogShow }}" bind:close="cancelDialogClose">
+  <view class="trouble-list-popup">
+    <view class="trouble-list-popup-item1">
+      提示
+    </view>
+    <view class="trouble-list-popup-item2">
+      确定要取消报废申请吗？
+    </view>
+    <view class="trouble-list-popup-item3 flex">
+      <button bindtap="cancelDialogClose" class="btn">取消</button>
+      <button bindtap="cancelOrder" class="btn blue">确认</button>
+    </view>
+  </view>
+</van-popup>
+
+
+<!-- 主管点击驳回与通过审批框 -->
+<van-popup show="{{ directorShow }}" bind:close="directorClose" bind:after-enter="loadingTextarea">
+  <view class="trouble-list-popup">
+    <view class="director-list-popup-item1 {{directorType === '通过'?'blue':'red'}}">
+      确定要{{directorType}}审批吗？
+    </view>
+    <view class="director-list-popup-item2">
+      <textarea
+        wx:if="{{showTextarea}}"
+        class="txra"
+        placeholder="请填写{{directorType === '通过'?'批准意见':'审批驳回说明'}}(选填)"
+        placeholder-class="placeholder-txra"
+        value="{{directorRemark}}" data-path="directorRemark"
+        bindinput="viewValueChange"
+      ></textarea>
+    </view>
+    <view class="trouble-list-popup-item3 trouble-list-popup-item-approve flex-align-items-center">
+      <button bindtap="directorClose" class="btn">取消</button>
+      <view class="line"></view>
+      <button bindtap="submitDirector" class="btn blue">确认</button>
+    </view>
+  </view>
+</van-popup>

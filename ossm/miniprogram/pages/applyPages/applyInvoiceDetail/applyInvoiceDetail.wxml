@@ -1,0 +1,187 @@
+<!--pages/applyPages/applyInvoiceDetail/applyInvoiceDetail.wxml-->
+<view class="container flex-column">
+<!-- 状态 -->
+  <view>
+    <view class="public-apply-detail-top flex-align-items-center">
+      <view class="detail-top-l flex-1">
+        <view class="top-l-status">{{orderInfo.progressDesc?orderInfo.progressDesc:orderInfo.statusName}}</view>
+<!--        <view class="top-l-tip">{{orderInfo.statusName}}</view>-->
+      </view>
+      <view class="detail-top-r flex-1">
+        <view class="top-r-id">ID:{{orderInfo.ordersNo}}</view>
+        <view class="top-r-date">创建日期：{{orderInfo.applyTime}}</view>
+      </view>
+    </view>
+
+    <view class="address-info-box">
+      <view class="address-bg linear-bg"></view>
+      <view class="address-info flex-align-items-center" wx:if="{{orderInfo.addrSnapshot}}">
+        <view class="address-info-l">
+          <text class="iconfont icondizhi"></text>
+        </view>
+        <view class="address-info-c flex-1">
+          <view class="person">
+            <text class="name">{{orderInfo.addrSnapshot.name}}</text>
+            <text class="tel">  {{orderInfo.addrSnapshot.tel}}</text>
+            <!-- <text class="default">默认</text> -->
+          </view>
+          <view class="address-detail">
+            {{orderInfo.addrSnapshot.addrCodeChn + orderInfo.addrSnapshot.addrInfo}}
+          </view>
+        </view>
+        <view class="address-info-l">
+          <!-- <text class="iconfont iconyoujiantou-new-01"></text> -->
+        </view>
+      </view>
+    </view>
+  </view>
+  <!-- 切换栏 -->
+  <view class="top-tabs flex">
+    <view class="tab flex-1" data-tab='all' bindtap="chanegTab">
+      <view class="tab {{tab==='all'?'active':''}}">全部</view>
+      <view class="tab-num">({{orderInfo.detailStatusCountMap['all']}})</view>
+      <text wx:if="{{tab==='all'}}" class="bottom-line"></text>
+    </view>
+    <view class="tab flex-1" data-tab='wait_handle' bindtap="chanegTab">
+      <view class="tab {{tab==='wait_handle'?'active':''}}">准备中</view>
+      <view class="tab-num">({{orderInfo.detailStatusCountMap['wait_handle']}})</view>
+      <text wx:if="{{tab==='wait_handle'}}" class="bottom-line"></text>
+    </view>
+    <view class="tab flex-1" data-tab='wait_receive' bindtap="chanegTab">
+      <view class="tab {{tab==='wait_receive'?'active':''}}">待领取</view>
+      <view class="tab-num">({{orderInfo.detailStatusCountMap['wait_receive']}})</view>
+      <text wx:if="{{tab==='wait_receive'}}" class="bottom-line"></text>
+    </view>
+    <view class="tab flex-1" data-tab='received' bindtap="chanegTab">
+      <view class="tab {{tab==='received'?'active':''}}">已签收</view>
+      <view class="tab-num">({{orderInfo.detailStatusCountMap['received']}})</view>
+      <text wx:if="{{tab==='received'}}" class="bottom-line"></text>
+    </view>
+<!--    <view class="tab flex-1" data-tab='canceling' bindtap="chanegTab">-->
+<!--      <view class="tab {{tab==='canceling'?'active':''}}">取消中</view>-->
+<!--      <view class="tab-num">({{orderInfo.detailStatusCountMap['canceling']}})</view>-->
+<!--      <text wx:if="{{tab==='canceling'}}" class="bottom-line"></text>-->
+<!--    </view>-->
+    <view class="tab flex-1" data-tab='canceled' bindtap="chanegTab">
+      <view class="tab {{tab==='canceled'?'active':''}}">已取消</view>
+      <view class="tab-num">({{orderInfo.detailStatusCountMap['canceled']}})</view>
+      <text wx:if="{{tab==='canceled'}}" class="bottom-line"></text>
+    </view>
+  </view>
+  <!-- list -->
+  <view class="flex-1 detail-list overflow-auto">
+    <view class="list-container">
+    <!-- 准备中 - status-prepare，
+         待领取 - status-wait,
+         已签收 - status-signed,
+         已取消 - status-cancel
+     -->
+      <view class="list-item box-shadow {{item.statusCode==='wait_handle'?'status-prepare':''}} {{item.statusCode==='wait_receive'?'status-wait':''}} {{item.statusCode==='received'?'status-signed':''}} {{item.statusCode==='canceled'?'status-cancel':''}}" wx:for="{{detailList}}" wx:key="index" hidden="{{tab!='all' && item.statusCode!=tab}}">
+        <view class="item-top flex-align-items-center">
+          <view class="item-name flex-1">{{item.name}}</view>
+          <view class="item-status">
+            <text class="dot"></text>
+            <text>{{item.statusName}}</text>
+          </view>
+        </view>
+        <view class="item-center flex">
+          <view class="item-img img-box">
+            <image mode="aspectFit" src="{{item.displayImgUrl?item.displayImgUrl:aliyunBaseImgUrlPre+'images/default.png'}}"></image>
+          </view>
+          <view class="item-content flex-1">
+            <view class="content-title">
+              <view class="flex-1 spec">{{item.specificationName}}</view>
+              <view class="unit">单位：{{item.stockUnit}}</view>
+            </view>
+            <view class="content-params">
+              <text></text>
+            </view>
+            <view class="content-remark" style="margin-top: 20rpx;">
+              {{item.remark}}
+            </view>
+            <view class="item-btn" wx:if="{{item.statusCode=='wait_handle'}}">
+              <text class="operate" data-entityid="{{item.entityId}}" bindtap="cancelApplyDetail">取消领用</text>
+            </view>
+            <view class="item-btn" wx:if="{{item.statusCode=='wait_receive'}}">
+              <text class="operate" data-data="{{item}}" bindtap="goReceive">去签收</text>
+            </view>
+          </view>
+        </view>
+        <view class="item-bottom flex">
+          <text class="bottom-status flex-1">{{item.progress.name}}</text>
+          <text class="bottom-num" style="padding-right: 50px;">申领数：{{item.totalCount}}</text>
+          <text class="bottom-num">签收数：{{item.receiveCount}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+   <!-- 申领理由 -->
+   <view class="apply-reason flex">
+      <view class="reason-l">申领说明</view>
+      <view class="reason-r flex-1">{{orderInfo.remark}}</view>
+    </view>
+  <view class="footer-box">
+   <text class="detail-footer-btn" bindtap="setApplyTemplate">设为申领模板</text>
+  </view>
+  <!-- 设为申领模板 -->
+  <van-popup
+    show="{{ applyTemplateShow }}"
+    position="bottom"
+    round="true"
+    bind:click-overlay="closeSpecModal"
+  >
+    <view class="template-container flex-column">
+      <text class="iconfont iconguanbi-new-01" bindtap="closeSpecModal"></text>
+      <view class="tip">
+        将以下申领项设置为申领模板
+      </view>
+      <view class="template-title">
+        <view class="template-title-tip">模板名称</view>
+        <input class="template-title-input" placeholder="请输入模板模板名称，10字以内"
+               value="{{applyTemplate.templateName}}" data-path="applyTemplate.templateName" bindinput="viewValueChange"/>
+      </view>
+      <view class="template-list flex-1 overflow-auto">
+        <view class="list-item flex" wx:for="{{applyTemplate.detailList}}" wx:key="index">
+          <view class="item-img img-box">
+            <image mode="aspectFit" src="{{item.displayImgUrl?item.displayImgUrl:aliyunBaseImgUrlPre+'images/default.png'}}"></image>
+          </view>
+          <view class="flex-1 item-box">
+            <view class="item-title ellipsis-two">{{item.name}}</view>
+            <view class="item-spec flex-align-items-center">
+              <text class="spec ellipsis-one flex-1">{{item.specificationName}}</text>
+              <text style="font-size: 24rpx;">单位：{{item.stockUnit}}</text>
+            </view>
+            <view class="item-remark">{{item.remark}}</view>
+            <view class="item-num flex" style="margin-top: 6px">
+              <view class="flex-1"></view>
+              <view class="item-num-r flex-align-items-center">
+                <view class="item-num-cut img-box"
+                      data-minvalue="0" data-path="applyTemplate.detailList.{{index}}.totalCount" data-count="-1" bindtap="commomCountChange">
+                  <image class="img" src="{{aliyunBaseImgUrlPre}}images/cut-btn.png"/>
+                </view>
+                <input type="number" class="item-num-ipt" style="width: 90rpx"
+                       value="{{item.totalCount}}" data-path="applyTemplate.detailList.{{index}}.totalCount"
+                       data-minvalue="0" bindinput="viewValueChange"
+                />
+                <view class="item-num-add img-box"
+                      data-minvalue="0" data-path="applyTemplate.detailList.{{index}}.totalCount" data-count="1" bindtap="commomCountChange">
+                  <image class="img" src="{{aliyunBaseImgUrlPre}}images/add-btn.png"/>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="template-foot flex-align-items-center">
+        <view class="flex-1 foot-num">
+          申请项：{{applyTemplate.detailList.length}}
+        </view>
+        <view class="btn-box">
+          <button class="btn cancel" bindtap="closeSpecModal">取消</button>
+          <!-- 激活状态添加类名active -->
+          <button class="btn confirm active" disabled="{{applyTemplate.templateName === ''}}"  bindtap="saveTemplate">确定</button>
+        </view>
+      </view>
+    </view>
+  </van-popup>
+</view>

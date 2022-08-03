@@ -1,0 +1,43 @@
+<!--miniprogram/pages/IdentityCode/IdentityCode.wxml-->
+<view class="container">
+	<view class="code-box">
+		<view class="person-info flex-align-items-center">
+			<open-data type='userAvatarUrl' class="person-info-head img-box">
+				<image class="img" src="{{aliyunBaseImgUrlPre}}images/logo.png"></image>
+			</open-data>
+			<view class="person-info-name">{{userInfo.realName}}</view>
+			<!-- <view class="person-info-type">
+        <text>普通用户</text>
+      </view> -->
+		</view>
+		<view class="work-info">
+			<view class="work-info-item">
+				<text class="item-label">科室：</text>
+				<text class="item-value">{{userDeptNames}}</text>
+			</view>
+			<view class="work-info-item">
+				<text class="item-label">职务：</text>
+				<text class="item-value">{{userInfo.position}}</text>
+			</view>
+			<view class="work-info-item">
+				<text class="item-label">工号：</text>
+				<text class="item-value">{{userInfo.workNo}}</text>
+			</view>
+		</view>
+		<view class="qr-code-info">
+			<!-- <view class="qr-code-box img-box">
+					<image src="{{aliyunBaseImgUrlPre}}images/logo.png"></image>
+				</view> -->
+			<canvas class="qr-code-box img-box" style="width: 200px; height: 200px;" canvas-id="myQrcode">
+
+			</canvas>
+
+			<view class="qr-code-tip">
+				签收物品前请出示身份二维码
+			</view>
+			<view class="qr-code-refresh">
+				每1分钟自动刷新
+			</view>
+		</view>
+	</view>
+</view>

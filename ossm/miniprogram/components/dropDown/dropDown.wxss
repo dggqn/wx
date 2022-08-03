@@ -1,0 +1,31 @@
+/* components/dropDown/dropDown.wxss */
+.drop-down-box {
+  position: absolute;
+  top: 80rpx;
+  right: -10rpx;
+  background: #3D3D61;
+  padding: 0 30rpx;
+  z-index: 1000;
+  border-radius: 4rpx;
+}
+.drop-down-box .arrow{
+  position: absolute;
+  width: 30rpx;
+  height: 30rpx;
+  background: #3D3D61;
+  transform: rotate(45deg);
+  right: 40rpx;
+  top: -10rpx;
+  z-index: 1001;
+}
+.drop-down-box .drop-down-item{
+  min-width: 220rpx;
+  height: 104rpx;
+  line-height: 104rpx;
+  text-align: center;
+  border-bottom: 1rpx solid #6F6F8E;
+  color: #FBFBFF;
+}
+.drop-down-box .drop-down-item:last-child{
+  border-bottom: 0;
+}

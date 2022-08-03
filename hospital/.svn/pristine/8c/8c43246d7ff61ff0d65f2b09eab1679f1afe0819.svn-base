@@ -1,0 +1,91 @@
+<!--pages/applyPages/signInvoiceDetail/signInvoiceDetail.wxml-->
+<view class="sign-detail-container container flex-column overflow-auto">
+  <!-- 状态 -->
+  <view class="public-apply-detail-top flex-align-items-center">
+    <view class="detail-top-l flex-1">
+      <view class="top-l-status">部分交付</view>
+      <view class="top-l-tip">您已领取部分物品</view>
+    </view>
+    <view class="detail-top-r flex-1">
+      <view class="top-r-id">ID:20116666666</view>
+      <view class="top-r-date">创建日期：2020/05/30</view>
+    </view>
+  </view>
+  <view class="sign-detail-main">
+    <!-- 物流详情 -->
+    <view class="delivery-info">
+      <view class="delivery-top">
+        物流详情
+      </view>
+      <view class="delivery-detail flex" bindtap="goDeliveryDetail">
+        <view class="detail-l flex-1">
+          <view class="detail-status">
+            上海浦东新区浦东新区888号 已发出仓库上海浦东新区浦东新区888号 已发出仓库
+          </view>
+          <view class="detail-time">12月19日0:00-12月24日23:59</view>
+        </view>
+        <view class="detail-r">
+
+        </view>
+      </view>
+    </view>
+    <!-- tab -->
+    <view class="main-tabs">
+      <text class="tab active">耗材（0）</text>
+      <text class="tab">资产（0）</text>
+    </view>
+    <!-- 耗材列表 -->
+    <view class="consum-container"  wx:if="{{false}}">
+      <view class="public-consum-item consum-has-sign-item">
+        <view class="item-title flex">
+          <text class="flex-1">耗材明细</text>
+          <text>签收总数：10</text>
+        </view>
+        <view class="item-content">
+          <view class="content-title flex">
+            <view class="content-name flex-1">材料名称</view>
+            <view class="content-spec">规格</view>
+            <view class="content-num">领用数量</view>
+          </view>
+          <view class="content-list">
+            <view class="list-item flex">
+              <view class="content-name flex-1">中性笔</view>
+              <view class="content-spec">大的</view>
+              <view class="content-num">12</view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <!-- 资产容器 -->
+    <view class="assets-container" wx:if="{{true}}">
+      <view class="public-assets-total flex">
+        <view class="flex-1">资产明细</view>
+        <view>领用总数：1</view>
+      </view>
+      <view class="public-assets-list">
+        <view class="list-item" wx:for="{{[1,2,3,4]}}" wx:key="index">
+          <view class="item-title flex">
+            <view class="flex-1 title-name">笔记本</view>
+            <view class="title-num">资产编号: 12203399</view>
+          </view>
+          <view class="item-content assets-has-sign-item flex">
+            <view class="content-img img-box">
+              <image src="{{aliyunBaseImgUrlPre}}images/logo.png"></image>
+            </view>
+            <view class="content-detail flex-1 flex-column">
+              <view class="detail-top">
+                <view>
+                  <text class="type">12英寸</text>
+                  <text class="type">4G</text>
+                  <text class="type">12英寸</text>
+                </view>
+                <view>office</view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,32 @@
+<!--pages/applyPages/deliveryDetail/deliveryDetail.wxml-->
+<view class="container">
+  <view class="delivery-box">
+    <view class="receipt-address">
+      <view class="address-top">
+        发货单 ID:20116666666
+      </view>
+      <view class="address-detail ellipsis-one">
+        <text class="address-detail-left">收货地址：</text>
+        <text>贵州省遵义市道真仡佬族苗族贵州省遵义市道真仡佬族苗族贵州省遵义市道真仡佬族苗族</text>
+      </view>
+    </view>
+    <view class="delivery-step-box">
+      <view class="step flex {{index===0?'active' : ''}}" wx:for="{{[1,2,3,4,5]}}" :key="{{item}}">
+        <view class="step-time">
+          <view class="date">01-10</view>
+          <view class="time">19:00</view>
+        </view>
+        <view class="step-dot-box">
+          <view class="step-dot"></view>
+        </view>
+        <view class="step-detail flex-1">
+          <view class="detail-status">已签收</view>
+          <view class="detail-intro">
+            <text>[遵义市]快件已在道真一区签收 签收人：张三，电话：</text>
+            <text class="tel">12131311133</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

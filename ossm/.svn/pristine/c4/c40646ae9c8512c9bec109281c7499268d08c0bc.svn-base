@@ -1,0 +1,60 @@
+<!--components/calendar/calendar.wxml-->
+<view>
+  <view class="weeks flex">
+    <view class="flex-1 day-box" wx:for="{{weeks}}" wx:key="index">
+      {{item}}
+    </view>
+  </view>
+  <view class="dates">
+    <view class="flex" wx:for="{{[1,2,3,4,5,6]}}" wx:for-index="tr" wx:key="tr" wx:for-item="trItem">
+      <view class="flex-1 day-box" wx:for="{{dates}}" wx:for-index="td"  wx:key="td" 
+        wx:for-item="tdItem" wx:if="{{trItem===1&&td<7}}">
+        <text 
+        class="day {{tdItem.currentMonth?'current-month-day':''}} {{tdItem.currentMonth&&tdItem.day==selectedDay?'selected-day':''}}"
+        data-day="{{tdItem}}"
+        bindtap="changeDay"
+        >{{tdItem.day}}</text>
+      </view>
+      <view class="flex-1 day-box" wx:for="{{dates}}" wx:for-index="td"  wx:key="td" 
+        wx:for-item="tdItem" wx:if="{{trItem===2&&td>=7&&td<2*7}}">
+        <text 
+        class="day {{tdItem.currentMonth?'current-month-day':''}} {{tdItem.currentMonth&&tdItem.day==selectedDay?'selected-day':''}}"
+        data-day="{{tdItem}}"
+        bindtap="changeDay"
+        >{{tdItem.day}}</text>
+      </view>
+      <view class="flex-1 day-box" wx:for="{{dates}}" wx:for-index="td"  wx:key="td" 
+        wx:for-item="tdItem" wx:if="{{trItem===3&&td>=2*7&&td<3*7}}">
+        <text
+         class="day {{tdItem.currentMonth?'current-month-day':''}} {{tdItem.currentMonth&&tdItem.day==selectedDay?'selected-day':''}}"
+         data-day="{{tdItem}}"
+         bindtap="changeDay"
+         >{{tdItem.day}}</text>
+      </view>
+     <view class="flex-1 day-box" wx:for="{{dates}}" wx:for-index="td"  wx:key="td" 
+        wx:for-item="tdItem" wx:if="{{trItem===4&&td>=3*7&&td<4*7}}">
+        <text
+         class="day {{tdItem.currentMonth?'current-month-day':''}} {{tdItem.currentMonth&&tdItem.day==selectedDay?'selected-day':''}}"
+         data-day="{{tdItem}}"
+         bindtap="changeDay"
+         >{{tdItem.day}}</text>
+      </view>
+      <view class="flex-1 day-box" wx:for="{{dates}}" wx:for-index="td"  wx:key="td" 
+        wx:for-item="tdItem" wx:if="{{trItem===5&&td>=4*7&&td<5*7}}">
+        <text 
+        class="day {{tdItem.currentMonth?'current-month-day':''}} {{tdItem.currentMonth&&tdItem.day==selectedDay?'selected-day':''}}"
+        data-day="{{tdItem}}"
+        bindtap="changeDay"
+        >{{tdItem.day}}</text>
+      </view>
+      <view class="flex-1 day-box" wx:for="{{dates}}" wx:for-index="td"  wx:key="td" 
+        wx:for-item="tdItem" wx:if="{{trItem===6&&td>=5*7&&td<6*7}}">
+        <text
+         class="day {{tdItem.currentMonth?'current-month-day':''}} {{tdItem.currentMonth&&tdItem.day==selectedDay?'selected-day':''}}"
+         data-day="{{tdItem}}"
+         bindtap="changeDay"
+         >{{tdItem.day}}</text>
+      </view>
+    </view>
+  </view>
+</view>

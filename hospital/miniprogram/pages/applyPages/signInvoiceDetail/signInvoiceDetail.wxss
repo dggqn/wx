@@ -1,0 +1,59 @@
+/* pages/applyPages/signInvoiceDetail/signInvoiceDetail.wxss */
+.sign-detail-container {
+  padding-bottom: 30rpx;
+}
+.sign-detail-main{
+  padding: 0 30rpx;
+}
+.delivery-info {
+  margin-top: 28rpx;
+  border-radius: 28rpx;
+  overflow: hidden;
+}
+.delivery-info .delivery-top{
+  height: 54rpx;
+  line-height: 54rpx;
+  color: #9494C3;
+  font-size: 24rpx;
+  padding: 0 30rpx;
+  background: #FBFBFF;
+}
+.delivery-info .delivery-detail {
+  padding: 30rpx;
+  background: #fff;
+  box-sizing: border-box;
+}
+.delivery-detail .detail-l .detail-status{
+  color: #30304C;
+  line-height:40rpx;
+}
+.delivery-detail .detail-l .detail-time {
+  font-size: 24rpx;
+  color: #D1D1E2;
+  margin-top: 22rpx;
+}
+.delivery-detail .detail-r {
+  width: 80rpx;
+}
+
+.main-tabs{
+  margin-top: 40rpx;
+}
+.main-tabs .tab {
+  display: inline-block;
+  width: 170rpx;
+  height: 58rpx;
+  text-align: center;
+  line-height: 58rpx;
+  color: #30304C;
+  border: 2rpx solid #E7E7F2;
+  border-radius: 28rpx;
+  margin-right: 16rpx;
+  box-sizing: border-box;
+}
+.main-tabs .tab.active{
+  border: 2rpx solid #6C66FA;
+  color: #6C66FA;
+  font-size: 24rpx;
+}
+

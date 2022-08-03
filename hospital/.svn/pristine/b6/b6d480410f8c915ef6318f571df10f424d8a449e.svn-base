@@ -1,0 +1,18 @@
+<!--miniprogram/pages/applyPages/applySuccess/applySuccess.wxml-->
+<view class="container flex-column">
+  <view class="content-box flex-1">
+    <view class="success-box">
+      <view class="success-img img-box">
+        <image class="img" src="{{aliyunBaseImgUrlPre}}images/success-img.png"></image>
+      </view>
+      <view class="tips-box">
+        <view class="success-msg">提交成功！</view>
+        <view class="look-msg">申领单已提交成功，请留意领取通知</view>
+        <view class="flex-align-items-center">
+          <text class="jump-btn" bindtap="goIndex">返回首页</text>
+          <text class="jump-btn" bindtap="lookApplyDetail">查看申领单</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

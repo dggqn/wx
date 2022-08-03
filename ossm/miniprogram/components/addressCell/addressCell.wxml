@@ -1,0 +1,23 @@
+<!--components/addressCell/addressCell.wxml-->
+<view class="address-item"  wx:for="{{list}}" wx:key="index" wx:for-item="item">
+  <van-swipe-cell right-width="{{ 106 }}">
+    <view class="item-content flex-align-items-center" >
+      <view class="content-l flex-1" data-item="{{item}}" bindtap="clickEvent">
+        <view class="person-info">
+          <text class="person-name">{{item.name}}</text>
+          <text class="person-tel">  {{item.tel}}</text>
+          <text class="default-address" wx:if="{{item.defaultFlag && item.defaultFlag === '1'}}">默认</text>
+        </view>
+        <view class="address-info">
+          {{item.addrCodeChn}}{{item.addrInfo}}
+        </view>
+      </view>
+      <view class="content-r" data-addrid="{{item.entityId}}" bindtap="modifyAddress">
+        <text class="iconfont iconbianji-pc_huaban1"></text>
+      </view>
+    </view>
+    <view slot="right" data-addrid="{{item.entityId}}" class="detail-item-del flex-center" bindtap="deleteAddress">
+      删除
+    </view>
+  </van-swipe-cell>
+</view>

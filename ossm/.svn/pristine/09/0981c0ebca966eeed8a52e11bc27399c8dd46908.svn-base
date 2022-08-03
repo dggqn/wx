@@ -1,0 +1,30 @@
+page{
+  background-color: #F4F7FF;
+}
+.seleteType{
+  padding: 32rpx 30rpx;
+}
+.seleteType-items{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 55rpx 37rpx;
+  margin-bottom: 32rpx;
+  background-color: #fff;
+  border-radius: 16px;
+}
+.seleteType-items-img{
+  margin-right: 29rpx;
+  width: 82rpx;
+}
+.seleteType-items-title{
+  margin-bottom: 8rpx;
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #30304C;
+}
+.seleteType-items-details{
+  margin-top: 8rpx;
+  font-size: 24rpx;
+  color: #312E50;
+}

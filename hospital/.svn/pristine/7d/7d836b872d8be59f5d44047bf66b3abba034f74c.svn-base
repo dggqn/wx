@@ -1,0 +1,41 @@
+<!--pages/login/login.wxml-->
+<!-- 输入手机号弹窗-star-->
+<van-dialog use-slot title="验证您的手机号" show="{{ dialog_inputPhoneNumber }}" show-cancel-button bind:close="onClose" bind:confirm="inputPhoneNumber">
+  <van-cell-group>
+    <van-field model:value="{{ phoneNumber }}" placeholder="请输入手机号" border="{{ false }}" type="number" maxlength="11" />
+  </van-cell-group>
+</van-dialog>
+<!-- 输入手机号弹窗-end -->
+
+<view class="container" wx:if='!isLogined'>
+  <view>
+    <view style="padding-left: 56rpx;padding-top: 96rpx;font-size: 28rpx;">申领物品·管理资产·高效协同</view>
+    <view style="padding-left: 56rpx;padding-bottom: 120rpx;font-size: 54rpx;color: #6C66FA;">欧爽让办公如此高效</view>
+  </view>
+  <view>
+    <image style="width: 100%;" src="{{aliyunBaseImgUrlPre}}images/login-center.png"></image>
+  </view>
+  <!-- <view class="logo-box">
+    <button class="login-btn" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">
+      微信授权登录
+    </button>
+  </view> -->
+  <view class="logo-box">
+    <!-- <button class="login-btn" bindtap="showDialog" data-toDo="location">
+      扫描位置码
+    </button> -->
+    <button class="login-btn" bindtap="showDialog" data-toDo="login">
+      <!-- 微信授权登录 -->
+      用户登录
+    </button>
+  </view>
+  <view class="logo-bottom">
+    <image src="{{aliyunBaseImgUrlPre}}images/logo-small.png" style="width: 40rpx;height: 40rpx;vertical-align:middle"></image>
+    <view class="logo-text">{{hospitalName}}</view>
+  </view>
+  <!-- 扫码 -->
+  <view class="scan-box box-shadow flex-center" bindtap="showDialog" data-toDo="location">
+    <image class="scan" src='{{aliyunBaseImgUrlPre}}images/scan-icon.png'></image>
+  </view>
+  <sog-user-info-dialog class="wxc-dialog" wx:if="{{showUserInfoDialog}}" bind:myevent=''></sog-user-info-dialog>
+</view>

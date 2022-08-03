@@ -1,0 +1,77 @@
+<!--pages/AntiEpidemicPages/DistributionPage/Distribution-ApplyList/Distribution-ApplyList.wxml-->
+<!-- 申领单 -->
+<view class="radius-bg"></view>
+<view class="apply-list-container">
+  <view class="list-item" wx:for="{{queryListData}}" wx:key='item'>
+    <view class="item-top flex">
+      <view class="item-id flex-1">ID:{{item.taskId}}</view>
+      <view class="item-time"><text class="iconfont iconshijian-01"></text>{{item.createTime}}</view>
+    </view>
+    <view class="item-center flex-align-items-center">
+      <view class="center-l flex-1 flex">
+        <!-- <view class="center-l-head img-box">
+          <open-data type='userAvatarUrl' class="img"></open-data>
+        </view> -->
+        <view class="center-detail">
+          <van-icon name="location" color="#5EA1F2" />
+        </view>
+        <view class="center-detail flex-1 flex-shink-1">
+          <view class="detail-t">
+            <text class="detail-status">{{item.deptName}}-{{item.reAddress}}</text>
+          </view>
+          <view class="detail-intro">
+            {{supplyName}} * {{item.amount}}
+          </view>
+
+          <view class="detail-intro">
+            联系人 : {{item.linkman}}-{{item.linktel}}
+            <block wx:if="{{item.receiverPerson}}">
+            签收人: {{item.receiverPerson}}
+            </block>
+          </view>
+        </view>
+
+      </view>
+      <view class="center-r">
+        <view class="detail-operate">
+          <block wx:if="{{item.receiverTime && item.receiverPerson}}">
+            <van-button disabled type="default" size="mini" data-itemDetail="{{item}}">已签收</van-button>
+          </block>
+          <block wx:else="">
+            <van-button type="primary" size="mini" data-itemDetail="{{item}}" bindtap="showDialog">确认签收</van-button>
+          </block>
+        </view>
+      </view>
+    </view>
+    <!-- 已取消进度条 -->
+    <!-- <view class="public-collor-step flex-align-items-center">
+      <view class="step-rate step-cancel-rate">
+      </view>
+    </view> -->
+  </view>
+</view>
+<view style="width: 100%;height: 130rpx;"></view>
+<!-- 申领按钮 -->
+<view class="confirm-update flex-align-items-center" wx:if="{{TaskStatus != 4}}">
+  <view class="update-btn purple-bg" bindtap="Finish">
+    结束任务
+  </view>
+</view>
+
+<!-- 确认签收人弹窗-star-->
+<van-dialog use-slot title="确认签收" show="{{ dialog_Name }}" show-cancel-button bind:close="onNameClose" bind:confirm="Sign">
+  <view style="margin-left: 44rpx;">
+    <van-cell-group>
+      <van-field model:value="{{ Address }}" placeholder="地址显示失败" disabled />
+      <van-field model:value="{{ Goods }}" placeholder="物品显示失败" disabled />
+      <van-field label="签收人：" model:value="{{ Receiver }}" placeholder="请输入签收人名称" />
+    </van-cell-group>
+  </view>
+
+</van-dialog>
+<!-- 确认签收人弹窗-end -->
+<!-- 确认结束任务弹窗-star-->
+<van-dialog  title="您已经完成所有配送" message="是否结束该任务？" show="{{ dialog_Finish }}" show-cancel-button bind:close="onClose" bind:confirm="FinishTask"></van-dialog>
+<van-dialog  title="结束任务" message="您确定要结束该任务吗？" show="{{ dialog_Finish_YN }}" show-cancel-button bind:close="onClose" bind:confirm="FinishTask_YN"></van-dialog>
+
+<!-- 确认结束任务弹窗-end -->
